@@ -19,7 +19,8 @@
     "format": "pnpm run format:fix",
     "typecheck:node": "tsgo -p tsconfig.node.json",
     "typecheck:app": "tsgo -p tsconfig.app.json",
-    "typecheck": "run-p typecheck:*"
+    "typecheck": "run-p typecheck:*",
+    "check": "run-p typecheck format:check lint:check --aggregate-output -l"
   },
   "dependencies": {
     "next": "15.3.4",
