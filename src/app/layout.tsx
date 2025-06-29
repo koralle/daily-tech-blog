@@ -1,17 +1,15 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 interface RootLayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="ja">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;
