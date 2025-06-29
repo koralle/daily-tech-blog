@@ -1,0 +1,25 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: Format with Prettier
+      run: |
+        pnpm prettier {staged_files} --write --config .prettierrc.mjs
+      stage_fixed: true
+
+    - name: Lint with Oxlint
+      run: |
+        pnpm run lint:check
+
+    - name: Typecheck with tsc (app)
+      glob:
+        - 'src/**/*.ts'
+        - 'src/**/*.tsx'
+      run: |
+        pnpm run typecheck:app
+
+    - name: Typecheck with tsc (node)
+      glob:
+        - '.prettierrc.mjs'
+        - 'next.config.ts'
+      run: |
+        pnpm run typecheck:node
