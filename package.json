@@ -10,7 +10,10 @@
     "lint": "next lint",
     "format:check": "prettier . -c",
     "format:fix": "prettier . -w",
-    "format": "pnpm run format:fix"
+    "format": "pnpm run format:fix",
+    "typecheck:node": "tsgo -p tsconfig.node.json",
+    "typecheck:app": "tsgo -p tsconfig.app.json",
+    "typecheck": "run-p typecheck:*"
   },
   "dependencies": {
     "next": "15.3.4",
