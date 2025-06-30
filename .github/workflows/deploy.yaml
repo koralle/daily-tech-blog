@@ -21,7 +21,7 @@ jobs:
       - name: Build
         id: build
         if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
-        run: opennextjs-cloudflare build
+        run: pnpm opennextjs-cloudflare build
 
       - name: Deploy to Cloudflare Workers
         id: deploy
@@ -30,4 +30,4 @@ jobs:
           environment: production
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: opennextjs-cloudflare deploy
+          command: pnpm opennextjs-cloudflare deploy
