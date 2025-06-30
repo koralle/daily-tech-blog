@@ -8,18 +8,14 @@ pre-commit:
 
     - name: Lint with Oxlint
       run: |
-        pnpm run lint:check
+        pnpm run lint:fix
+      stage_fixed: true
 
-    - name: Typecheck with tsc (app)
+    - name: Typecheck with tsgo
       glob:
-        - 'src/**/*.ts'
-        - 'src/**/*.tsx'
-      run: |
-        pnpm run typecheck:app
-
-    - name: Typecheck with tsc (node)
-      glob:
+        - 'next-env.d.ts'
+        - '**/*.ts'
+        - '**/*.tsx'
         - '.prettierrc.mjs'
-        - 'next.config.ts'
       run: |
-        pnpm run typecheck:node
+        pnpm run typecheck
