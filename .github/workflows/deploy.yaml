@@ -1,0 +1,34 @@
+name: Deploy to Cloudflare Workers
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+    types: [closed]
+
+jobs:
+  deploy-to-cloudflare-workers:
+    runs-on: ubuntu-latest
+    outputs:
+      should_deploy: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Setup
+        uses: ./.github/composite-actions/cache-and-install
+
+      - name: Build
+        id: build
+        if: github.event.pull_request.merged == true && github.base_ref == "main"
+        run: |
+          opennextjs-cloudflare build
+
+      - name: Deploy to Cloudflare Workers
+        id: deploy
+        uses: cloudflare/wrangler-action@v3.14.1
+        with:
+          environment: production
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: opennextjs-cloudflare deploy

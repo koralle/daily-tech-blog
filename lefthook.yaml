@@ -2,6 +2,12 @@ pre-commit:
   parallel: true
   jobs:
     - name: Format with Prettier
+      glob:
+        - 'next-env.d.ts'
+        - '**/*.ts'
+        - '**/*.tsx'
+        - '.prettierrc.mjs'
+        - 'next.config.ts'
       run: |
         pnpm prettier {staged_files} --write --config .prettierrc.mjs
       stage_fixed: true
