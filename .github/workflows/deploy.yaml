@@ -20,9 +20,8 @@ jobs:
 
       - name: Build
         id: build
-        if: github.event.pull_request.merged == true && github.base_ref == "main"
-        run: |
-          opennextjs-cloudflare build
+        if: ${{ github.event.pull_request.merged == true && github.base_ref == ''main' }}
+        run: opennextjs-cloudflare build
 
       - name: Deploy to Cloudflare Workers
         id: deploy
