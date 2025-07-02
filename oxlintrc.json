@@ -31,14 +31,15 @@
   },
   "overrides": [
     {
-      "files": ["src/*.ts", "src/*.tsx"],
+      "files": ["src/*.ts", "src/*.tsx", "mdx-components.tsx"],
       "rules": {
         "max-lines-per-function": ["error", { "max": 50 }],
-        "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "pascalCase": true } }]
+        "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "pascalCase": true } }],
+        "oxc/no-rest-spread-properties": "off"
       }
     },
     {
-      "files": ["src/app/*.tsx"],
+      "files": ["src/app/*.tsx", "mdx-components.tsx"],
       "rules": {
         "import/no-default-export": "off",
         "react/react-in-jsx-scope": "off",
