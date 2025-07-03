@@ -20,6 +20,9 @@ importers:
       rehype-pretty-code:
         specifier: ^0.14.1
         version: 0.14.1(shiki@3.7.0)
+      shiki:
+        specifier: ^3.7.0
+        version: 3.7.0
     devDependencies:
       '@mdx-js/loader':
         specifier: ^3.1.0
