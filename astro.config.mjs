@@ -1,3 +1,4 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
@@ -6,19 +7,13 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://daily-tech-blog.pages.dev',
+  site: 'https://example.com',
   integrations: [mdx(), sitemap()],
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true
+    },
 
-  markdown: {
-    shikiConfig: {
-      theme: 'github-dark',
-      wrap: true
-    }
-  },
-
-  build: {
-    format: 'file'
-  },
-
-  adapter: cloudflare()
+    imageService: 'cloudflare'
+  })
 });

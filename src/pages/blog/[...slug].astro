@@ -1,55 +1,21 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+import { render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
+    params: { slug: post.id },
+    props: post
   }));
 }
-
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
-<Layout title={post.data.title}>
-  <main>
-    <article>
-      <h1>{post.data.title}</h1>
-      <time datetime={post.data.pubDate.toISOString()}>
-        {post.data.pubDate.toLocaleDateString('ja-JP')}
-      </time>
-      <Content />
-    </article>
-    <nav>
-      <a href="/">← ホームに戻る</a>
-    </nav>
-  </main>
-</Layout>
-
-<style>
-  article {
-    margin-bottom: 2rem;
-  }
-  
-  h1 {
-    border-bottom: 2px solid #eee;
-    padding-bottom: 0.5rem;
-  }
-  
-  time {
-    display: block;
-    margin-bottom: 1rem;
-    color: #666;
-  }
-  
-  nav {
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
-  }
-</style>
+<BlogPost {...post.data}>
+  <Content />
+</BlogPost>

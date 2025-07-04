@@ -23,6 +23,13 @@ export default {
         plugins: ['@prettier/plugin-oxc'],
         parser: 'oxc-ts'
       }
+    },
+    {
+      files: ['**/*.astro'],
+      options: {
+        plugins: ['prettier-plugin-astro'],
+        parser: 'astro'
+      }
     }
   ]
 };
