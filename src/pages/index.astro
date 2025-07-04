@@ -4,25 +4,27 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <h1>🧑‍💻 技術ブログへようこそ</h1>
-  <p>
-    このサイトでは、日々の技術学習で得た知識や気づきを記録しています。
-    プログラミング、開発ツール、新しい技術トレンドなど、様々なトピックについて書いています。
-  </p>
-  <p>
-    <a href="https://astro.build/">Astro</a> を使って構築されており、
-    高速でモダンな静的サイトとして動作します。
-  </p>
-  <p>サイトの主な機能：</p>
-  <ul>
-    <li>Markdown/MDX で書かれた技術記事</li>
-    <li>レスポンシブデザイン</li>
-    <li>高速な静的サイト生成</li>
-    <li>SEO 最適化</li>
-    <li>RSS フィード対応</li>
-  </ul>
-  <p>
-    <a href="/blog">ブログ記事一覧</a>から最新の記事をご覧ください。
-    技術的な質問やフィードバックがありましたら、お気軽にお声かけください。
-  </p>
+  <div class="prose prose-lg max-w-none">
+    <h1 class="text-4xl md:text-5xl font-bold mb-6 text-custom-black">🧑‍💻 技術ブログへようこそ</h1>
+    <p class="text-lg mb-4 leading-relaxed">
+      このサイトでは、日々の技術学習で得た知識や気づきを記録しています。
+      プログラミング、開発ツール、新しい技術トレンドなど、様々なトピックについて書いています。
+    </p>
+    <p class="mb-4 leading-relaxed">
+      <a href="https://astro.build/" class="text-accent hover:text-accent-dark transition-colors">Astro</a> を使って構築されており、
+      高速でモダンな静的サイトとして動作します。
+    </p>
+    <p class="mb-2 font-medium">サイトの主な機能：</p>
+    <ul class="mb-6 space-y-1 pl-6">
+      <li>Markdown/MDX で書かれた技術記事</li>
+      <li>レスポンシブデザイン</li>
+      <li>高速な静的サイト生成</li>
+      <li>SEO 最適化</li>
+      <li>RSS フィード対応</li>
+    </ul>
+    <p class="text-lg">
+      <a href="/blog" class="text-accent hover:text-accent-dark transition-colors font-medium">ブログ記事一覧</a
+      >から最新の記事をご覧ください。 技術的な質問やフィードバックがありましたら、お気軽にお声かけください。
+    </p>
+  </div>
 </Layout>

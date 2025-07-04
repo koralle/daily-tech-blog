@@ -3,36 +3,33 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="プロフィール | Daily Tech Blog" description="Daily Tech Blogの作者について">
-  <h1>プロフィール</h1>
-  <p>
-    このブログでは、日々の技術学習で得た知識や経験を記録し、共有しています。
-  </p>
-  
-  <h2>技術分野</h2>
-  <ul>
-    <li>Web開発（フロントエンド・バックエンド）</li>
-    <li>JavaScript / TypeScript</li>
-    <li>React / Next.js / Astro</li>
-    <li>Node.js</li>
-    <li>データベース設計・運用</li>
-    <li>クラウドインフラ</li>
-  </ul>
-  
-  <h2>このブログについて</h2>
-  <p>
-    技術的な学習内容、新しいツールやライブラリの検証結果、
-    開発過程で遭遇した問題とその解決方法などを記録しています。
-  </p>
-  <p>
-    記事に対するご質問やフィードバックは、いつでもお気軽にお寄せください。
-  </p>
-  
-  <h2>使用技術</h2>
-  <p>このサイトは以下の技術を使用して構築されています：</p>
-  <ul>
-    <li><strong>Astro</strong> - 静的サイトジェネレーター</li>
-    <li><strong>Tailwind CSS</strong> - CSSフレームワーク</li>
-    <li><strong>MDX</strong> - Markdown + JSX</li>
-    <li><strong>Cloudflare Pages</strong> - ホスティング</li>
-  </ul>
+  <div class="prose prose-lg max-w-none">
+    <h1 class="text-4xl md:text-5xl font-bold mb-6 text-custom-black">プロフィール</h1>
+    <p class="text-lg mb-6 leading-relaxed">このブログでは、日々の技術学習で得た知識や経験を記録し、共有しています。</p>
+
+    <h2 class="text-3xl font-bold mb-4 mt-8 text-custom-black">技術分野</h2>
+    <ul class="mb-8 space-y-2 pl-6">
+      <li>Web開発（フロントエンド・バックエンド）</li>
+      <li>JavaScript / TypeScript</li>
+      <li>React / Next.js / Astro</li>
+      <li>Node.js</li>
+      <li>データベース設計・運用</li>
+      <li>クラウドインフラ</li>
+    </ul>
+
+    <h2 class="text-3xl font-bold mb-4 mt-8 text-custom-black">このブログについて</h2>
+    <p class="mb-4 leading-relaxed">
+      技術的な学習内容、新しいツールやライブラリの検証結果、 開発過程で遭遇した問題とその解決方法などを記録しています。
+    </p>
+    <p class="mb-8 leading-relaxed">記事に対するご質問やフィードバックは、いつでもお気軽にお寄せください。</p>
+
+    <h2 class="text-3xl font-bold mb-4 mt-8 text-custom-black">使用技術</h2>
+    <p class="mb-4 leading-relaxed">このサイトは以下の技術を使用して構築されています：</p>
+    <ul class="space-y-2 pl-6">
+      <li><strong class="text-custom-black">Astro</strong> - 静的サイトジェネレーター</li>
+      <li><strong class="text-custom-black">Tailwind CSS</strong> - CSSフレームワーク</li>
+      <li><strong class="text-custom-black">MDX</strong> - Markdown + JSX</li>
+      <li><strong class="text-custom-black">Cloudflare Pages</strong> - ホスティング</li>
+    </ul>
+  </div>
 </Layout>
