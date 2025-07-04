@@ -9,7 +9,7 @@ type Props = CollectionEntry<'blog'>['data'];
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<Layout title={title} description={description} lang="en">
+<Layout title={title} description={description}>
   <style>
     main {
       width: calc(100% - 2em);
@@ -60,7 +60,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
           {
             updatedDate && (
               <div class="last-updated-on">
-                Last updated on <FormattedDate date={updatedDate} />
+                最終更新: <FormattedDate date={updatedDate} />
               </div>
             )
           }
