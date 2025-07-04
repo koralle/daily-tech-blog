@@ -10,8 +10,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-  <article class="container-content w-full max-w-5xl mx-auto cq-mobile:p-2 cq-mobile-lg:p-4 cq-tablet:p-6 cq-tablet-lg:p-8 cq-laptop:p-10 cq-desktop:p-12">
-    <div class="hero-image w-full mb-6 cq-mobile-lg:mb-8 cq-tablet:mb-12 cq-laptop:mb-16">
+  <article class="[container-type:inline-size] [container-name:content] w-full max-w-5xl mx-auto p-2 [@container(min-width:480px)]:p-4 [@container(min-width:768px)]:p-6 [@container(min-width:1024px)]:p-8 [@container(min-width:1280px)]:p-10 [@container(min-width:1440px)]:p-12">
+    <div class="hero-image w-full mb-6 [@container(min-width:480px)]:mb-8 [@container(min-width:768px)]:mb-12 [@container(min-width:1280px)]:mb-16">
       {
         heroImage && (
           <Image 
@@ -19,27 +19,27 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             height={510} 
             src={heroImage} 
             alt="" 
-            class="block mx-auto rounded-lg cq-tablet:rounded-xl shadow-lg aspect-[16/9] cq-tablet:aspect-[21/9] object-cover w-full max-w-4xl" 
+            class="block mx-auto rounded-lg [@container(min-width:768px)]:rounded-xl shadow-lg aspect-[16/9] [@container(min-width:768px)]:aspect-[21/9] object-cover w-full max-w-4xl" 
           />
         )
       }
     </div>
     <div class="prose w-full max-w-4xl mx-auto text-custom-gray-dark">
-      <div class="title mb-6 cq-mobile-lg:mb-8 cq-tablet:mb-12 py-4 cq-tablet:text-center leading-tight">
-        <div class="date mb-3 cq-mobile-lg:mb-4 text-custom-gray text-sm cq-mobile-lg:text-base cq-tablet:text-lg">
+      <div class="title mb-6 [@container(min-width:480px)]:mb-8 [@container(min-width:768px)]:mb-12 py-4 [@container(min-width:768px)]:text-center leading-tight">
+        <div class="date mb-3 [@container(min-width:480px)]:mb-4 text-custom-gray text-sm [@container(min-width:480px)]:text-base [@container(min-width:768px)]:text-lg">
           <FormattedDate date={pubDate} />
           {
             updatedDate && (
-              <div class="last-updated-on italic mt-1 cq-mobile-lg:mt-2">
+              <div class="last-updated-on italic mt-1 [@container(min-width:480px)]:mt-2">
                 最終更新: <FormattedDate date={updatedDate} />
               </div>
             )
           }
         </div>
-        <h1 class="text-2xl cq-mobile-lg:text-3xl cq-tablet:text-4xl cq-tablet-lg:text-5xl cq-laptop:text-6xl font-bold mb-3 cq-mobile-lg:mb-4 cq-tablet:mb-6 text-custom-black leading-tight">{title}</h1>
+        <h1 class="text-2xl [@container(min-width:480px)]:text-3xl [@container(min-width:768px)]:text-4xl [@container(min-width:1024px)]:text-5xl [@container(min-width:1280px)]:text-6xl font-bold mb-3 [@container(min-width:480px)]:mb-4 [@container(min-width:768px)]:mb-6 text-custom-black leading-tight">{title}</h1>
         <hr class="border-0 border-t border-custom-gray-light" />
       </div>
-      <div class="content prose-lg text-base cq-mobile-lg:text-lg cq-tablet:text-xl cq-laptop:text-2xl leading-relaxed">
+      <div class="content prose-lg text-base [@container(min-width:480px)]:text-lg [@container(min-width:768px)]:text-xl [@container(min-width:1280px)]:text-2xl leading-relaxed">
         <slot />
       </div>
     </div>

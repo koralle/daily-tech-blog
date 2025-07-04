@@ -21,7 +21,7 @@ const { title, description, lang = 'ja' } = Astro.props;
     class="m-0 p-0 font-atkinson text-base sm:text-lg lg:text-xl leading-relaxed text-custom-black bg-background break-words min-h-screen flex flex-col"
   >
     <Header />
-    <main class="container-content flex-1 w-full max-w-7xl mx-auto px-3 py-6 sm:px-4 sm:py-8 md:px-6 md:py-12 lg:px-8 lg:py-16 xl:px-12">
+    <main class="[container-type:inline-size] [container-name:content] flex-1 w-full max-w-7xl mx-auto px-3 py-6 sm:px-4 sm:py-8 md:px-6 md:py-12 lg:px-8 lg:py-16 xl:px-12">
       <slot />
     </main>
     <Footer />

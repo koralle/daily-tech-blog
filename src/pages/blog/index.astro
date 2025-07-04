@@ -9,39 +9,39 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <section class="container-grid w-full max-w-7xl mx-auto cq-mobile:p-2 cq-mobile-lg:p-4 cq-tablet:p-6 cq-tablet-lg:p-8 cq-laptop:p-10 cq-desktop:p-12">
-    <h1 class="text-3xl cq-mobile-lg:text-4xl cq-tablet:text-5xl cq-laptop:text-6xl font-bold mb-6 cq-tablet:mb-8 cq-laptop:mb-12 text-custom-black cq-tablet:text-center">ブログ記事</h1>
-    <ul class="grid cq-grid-mobile:grid-cols-1 cq-grid-tablet:grid-cols-2 cq-grid-tablet-lg:grid-cols-3 cq-grid-laptop:grid-cols-4 gap-4 cq-mobile-lg:gap-6 cq-tablet:gap-8 cq-laptop:gap-10 list-none m-0 p-0">
+  <section class="[container-type:inline-size] [container-name:grid] w-full max-w-7xl mx-auto p-2 [@container(min-width:480px)]:p-4 [@container(min-width:768px)]:p-6 [@container(min-width:1024px)]:p-8 [@container(min-width:1280px)]:p-10 [@container(min-width:1440px)]:p-12">
+    <h1 class="text-3xl [@container(min-width:480px)]:text-4xl [@container(min-width:768px)]:text-5xl [@container(min-width:1280px)]:text-6xl font-bold mb-6 [@container(min-width:768px)]:mb-8 [@container(min-width:1280px)]:mb-12 text-custom-black [@container(min-width:768px)]:text-center">ブログ記事</h1>
+    <ul class="grid [@container(min-width:320px)]:grid-cols-1 [@container(min-width:768px)]:grid-cols-2 [@container(min-width:1024px)]:grid-cols-3 [@container(min-width:1280px)]:grid-cols-4 gap-4 [@container(min-width:480px)]:gap-6 [@container(min-width:768px)]:gap-8 [@container(min-width:1280px)]:gap-10 list-none m-0 p-0">
       {
         posts.map((post, index) => (
           <li
-            class={`${index === 0 ? 'cq-grid-tablet:col-span-2 cq-grid-tablet-lg:col-span-3 cq-grid-laptop:col-span-4' : ''} transition-all duration-200 ease-in-out`}
+            class={`${index === 0 ? '[@container(min-width:768px)]:col-span-2 [@container(min-width:1024px)]:col-span-3 [@container(min-width:1280px)]:col-span-4' : ''} transition-all duration-200 ease-in-out`}
           >
             <a href={`/blog/${post.id}/`} class="block no-underline group h-full">
-              <article class="h-full bg-surface rounded-lg p-4 cq-mobile-lg:p-6 cq-tablet:p-8 border border-custom-gray-light hover:border-accent transition-all duration-200 group-hover:shadow-lg group-hover:shadow-accent/10">
+              <article class="h-full bg-surface rounded-lg p-4 [@container(min-width:480px)]:p-6 [@container(min-width:768px)]:p-8 border border-custom-gray-light hover:border-accent transition-all duration-200 group-hover:shadow-lg group-hover:shadow-accent/10">
                 {post.data.heroImage && (
                   <Image
                     width={720}
                     height={360}
                     src={post.data.heroImage}
                     alt=""
-                    class={`mb-3 cq-mobile-lg:mb-4 cq-tablet:mb-6 rounded-lg transition-transform duration-200 group-hover:scale-105 w-full ${index === 0 ? 'aspect-[16/9] cq-tablet:aspect-[21/9]' : 'aspect-[16/9]'} object-cover`}
+                    class={`mb-3 [@container(min-width:480px)]:mb-4 [@container(min-width:768px)]:mb-6 rounded-lg transition-transform duration-200 group-hover:scale-105 w-full ${index === 0 ? 'aspect-[16/9] [@container(min-width:768px)]:aspect-[21/9]' : 'aspect-[16/9]'} object-cover`}
                   />
                 )}
                 <div class="flex flex-col justify-between h-full">
                   <div>
                     <h4
-                      class={`title m-0 text-custom-black leading-tight group-hover:text-accent transition-colors ${index === 0 ? 'text-xl cq-mobile-lg:text-2xl cq-tablet:text-3xl cq-laptop:text-4xl' : 'text-lg cq-mobile-lg:text-xl cq-tablet:text-2xl'} mb-2 cq-mobile-lg:mb-3`}
+                      class={`title m-0 text-custom-black leading-tight group-hover:text-accent transition-colors ${index === 0 ? 'text-xl [@container(min-width:480px)]:text-2xl [@container(min-width:768px)]:text-3xl [@container(min-width:1280px)]:text-4xl' : 'text-lg [@container(min-width:480px)]:text-xl [@container(min-width:768px)]:text-2xl'} mb-2 [@container(min-width:480px)]:mb-3`}
                     >
                       {post.data.title}
                     </h4>
                     {post.data.description && (
-                      <p class="text-custom-gray text-sm cq-mobile-lg:text-base cq-tablet:text-lg mb-3 cq-mobile-lg:mb-4 line-clamp-3">
+                      <p class="text-custom-gray text-sm [@container(min-width:480px)]:text-base [@container(min-width:768px)]:text-lg mb-3 [@container(min-width:480px)]:mb-4 [-webkit-line-clamp:3] [-webkit-box-orient:vertical] [display:-webkit-box] overflow-hidden">
                         {post.data.description}
                       </p>
                     )}
                   </div>
-                  <p class="date m-0 text-custom-gray group-hover:text-accent transition-colors text-sm cq-mobile-lg:text-base">
+                  <p class="date m-0 text-custom-gray group-hover:text-accent transition-colors text-sm [@container(min-width:480px)]:text-base">
                     <FormattedDate date={post.data.pubDate} />
                   </p>
                 </div>
