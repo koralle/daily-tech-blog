@@ -10,30 +10,36 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-  <article class="w-full">
-    <div class="hero-image w-full">
+  <article class="container-content w-full max-w-5xl mx-auto cq-mobile:p-2 cq-mobile-lg:p-4 cq-tablet:p-6 cq-tablet-lg:p-8 cq-laptop:p-10 cq-desktop:p-12">
+    <div class="hero-image w-full mb-6 cq-mobile-lg:mb-8 cq-tablet:mb-12 cq-laptop:mb-16">
       {
         heroImage && (
-          <Image width={1020} height={510} src={heroImage} alt="" class="block mx-auto rounded-xl shadow-lg" />
+          <Image 
+            width={1020} 
+            height={510} 
+            src={heroImage} 
+            alt="" 
+            class="block mx-auto rounded-lg cq-tablet:rounded-xl shadow-lg aspect-[16/9] cq-tablet:aspect-[21/9] object-cover w-full max-w-4xl" 
+          />
         )
       }
     </div>
-    <div class="prose w-full max-w-3xl mx-auto p-4 text-custom-gray-dark">
-      <div class="title mb-4 py-4 text-center leading-tight">
-        <div class="date mb-2 text-custom-gray">
+    <div class="prose w-full max-w-4xl mx-auto text-custom-gray-dark">
+      <div class="title mb-6 cq-mobile-lg:mb-8 cq-tablet:mb-12 py-4 cq-tablet:text-center leading-tight">
+        <div class="date mb-3 cq-mobile-lg:mb-4 text-custom-gray text-sm cq-mobile-lg:text-base cq-tablet:text-lg">
           <FormattedDate date={pubDate} />
           {
             updatedDate && (
-              <div class="last-updated-on italic">
+              <div class="last-updated-on italic mt-1 cq-mobile-lg:mt-2">
                 最終更新: <FormattedDate date={updatedDate} />
               </div>
             )
           }
         </div>
-        <h1 class="text-5xl md:text-6xl font-bold mb-2 text-custom-black leading-tight">{title}</h1>
+        <h1 class="text-2xl cq-mobile-lg:text-3xl cq-tablet:text-4xl cq-tablet-lg:text-5xl cq-laptop:text-6xl font-bold mb-3 cq-mobile-lg:mb-4 cq-tablet:mb-6 text-custom-black leading-tight">{title}</h1>
         <hr class="border-0 border-t border-custom-gray-light" />
       </div>
-      <div class="content prose-lg">
+      <div class="content prose-lg text-base cq-mobile-lg:text-lg cq-tablet:text-xl cq-laptop:text-2xl leading-relaxed">
         <slot />
       </div>
     </div>

@@ -9,32 +9,43 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <section class="w-full max-w-4xl mx-auto">
-    <h1 class="text-4xl md:text-5xl font-bold mb-8 text-custom-black text-center">ブログ記事</h1>
-    <ul class="flex flex-wrap gap-8 list-none m-0 p-0 md:gap-4">
+  <section class="container-grid w-full max-w-7xl mx-auto cq-mobile:p-2 cq-mobile-lg:p-4 cq-tablet:p-6 cq-tablet-lg:p-8 cq-laptop:p-10 cq-desktop:p-12">
+    <h1 class="text-3xl cq-mobile-lg:text-4xl cq-tablet:text-5xl cq-laptop:text-6xl font-bold mb-6 cq-tablet:mb-8 cq-laptop:mb-12 text-custom-black cq-tablet:text-center">ブログ記事</h1>
+    <ul class="grid cq-grid-mobile:grid-cols-1 cq-grid-tablet:grid-cols-2 cq-grid-tablet-lg:grid-cols-3 cq-grid-laptop:grid-cols-4 gap-4 cq-mobile-lg:gap-6 cq-tablet:gap-8 cq-laptop:gap-10 list-none m-0 p-0">
       {
         posts.map((post, index) => (
           <li
-            class={`${index === 0 ? 'w-full mb-4 text-center' : 'w-full md:w-[calc(50%-1rem)]'} transition-all duration-200 ease-in-out`}
+            class={`${index === 0 ? 'cq-grid-tablet:col-span-2 cq-grid-tablet-lg:col-span-3 cq-grid-laptop:col-span-4' : ''} transition-all duration-200 ease-in-out`}
           >
-            <a href={`/blog/${post.id}/`} class="block no-underline group">
-              {post.data.heroImage && (
-                <Image
-                  width={720}
-                  height={360}
-                  src={post.data.heroImage}
-                  alt=""
-                  class={`mb-2 rounded-xl transition-shadow duration-200 group-hover:shadow-lg ${index === 0 ? 'w-full' : ''}`}
-                />
-              )}
-              <h4
-                class={`title m-0 text-custom-black leading-tight group-hover:text-accent transition-colors ${index === 0 ? 'text-4xl md:text-5xl' : 'text-xl md:text-2xl'}`}
-              >
-                {post.data.title}
-              </h4>
-              <p class="date m-0 text-custom-gray group-hover:text-accent transition-colors">
-                <FormattedDate date={post.data.pubDate} />
-              </p>
+            <a href={`/blog/${post.id}/`} class="block no-underline group h-full">
+              <article class="h-full bg-surface rounded-lg p-4 cq-mobile-lg:p-6 cq-tablet:p-8 border border-custom-gray-light hover:border-accent transition-all duration-200 group-hover:shadow-lg group-hover:shadow-accent/10">
+                {post.data.heroImage && (
+                  <Image
+                    width={720}
+                    height={360}
+                    src={post.data.heroImage}
+                    alt=""
+                    class={`mb-3 cq-mobile-lg:mb-4 cq-tablet:mb-6 rounded-lg transition-transform duration-200 group-hover:scale-105 w-full ${index === 0 ? 'aspect-[16/9] cq-tablet:aspect-[21/9]' : 'aspect-[16/9]'} object-cover`}
+                  />
+                )}
+                <div class="flex flex-col justify-between h-full">
+                  <div>
+                    <h4
+                      class={`title m-0 text-custom-black leading-tight group-hover:text-accent transition-colors ${index === 0 ? 'text-xl cq-mobile-lg:text-2xl cq-tablet:text-3xl cq-laptop:text-4xl' : 'text-lg cq-mobile-lg:text-xl cq-tablet:text-2xl'} mb-2 cq-mobile-lg:mb-3`}
+                    >
+                      {post.data.title}
+                    </h4>
+                    {post.data.description && (
+                      <p class="text-custom-gray text-sm cq-mobile-lg:text-base cq-tablet:text-lg mb-3 cq-mobile-lg:mb-4 line-clamp-3">
+                        {post.data.description}
+                      </p>
+                    )}
+                  </div>
+                  <p class="date m-0 text-custom-gray group-hover:text-accent transition-colors text-sm cq-mobile-lg:text-base">
+                    <FormattedDate date={post.data.pubDate} />
+                  </p>
+                </div>
+              </article>
             </a>
           </li>
         ))
