@@ -33,6 +33,9 @@ importers:
         specifier: ^4.1.11
         version: 4.1.11
     devDependencies:
+      '@eslint/js':
+        specifier: ^9.30.1
+        version: 9.30.1
       '@prettier/plugin-oxc':
         specifier: ^0.0.4
         version: 0.0.4
