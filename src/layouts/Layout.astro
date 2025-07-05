@@ -17,7 +17,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body>
+  <body class="relative">
     <Header />
     <main>
       <slot />
@@ -25,4 +25,3 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     <Footer />
   </body>
 </html>
-
