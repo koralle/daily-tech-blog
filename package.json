@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@prettier/plugin-oxc": "^0.0.4",
+    "@tailwindcss/vite": "^4.1.11",
     "@types/node": "^24.0.7",
     "@typescript/native-preview": "7.0.0-dev.20250630.1",
     "lefthook": "^1.11.14",
