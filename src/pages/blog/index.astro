@@ -9,9 +9,17 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <section class="[container-type:inline-size] [container-name:grid] w-full max-w-7xl mx-auto p-2 [@container(min-width:480px)]:p-4 [@container(min-width:768px)]:p-6 [@container(min-width:1024px)]:p-8 [@container(min-width:1280px)]:p-10 [@container(min-width:1440px)]:p-12">
-    <h1 class="text-3xl [@container(min-width:480px)]:text-4xl [@container(min-width:768px)]:text-5xl [@container(min-width:1280px)]:text-6xl font-bold mb-6 [@container(min-width:768px)]:mb-8 [@container(min-width:1280px)]:mb-12 text-custom-black [@container(min-width:768px)]:text-center">ブログ記事</h1>
-    <ul class="grid [@container(min-width:320px)]:grid-cols-1 [@container(min-width:768px)]:grid-cols-2 [@container(min-width:1024px)]:grid-cols-3 [@container(min-width:1280px)]:grid-cols-4 gap-4 [@container(min-width:480px)]:gap-6 [@container(min-width:768px)]:gap-8 [@container(min-width:1280px)]:gap-10 list-none m-0 p-0">
+  <section
+    class="[container-type:inline-size] [container-name:grid] w-full max-w-7xl mx-auto p-2 [@container(min-width:480px)]:p-4 [@container(min-width:768px)]:p-6 [@container(min-width:1024px)]:p-8 [@container(min-width:1280px)]:p-10 [@container(min-width:1440px)]:p-12"
+  >
+    <h1
+      class="text-3xl [@container(min-width:480px)]:text-4xl [@container(min-width:768px)]:text-5xl [@container(min-width:1280px)]:text-6xl font-bold mb-6 [@container(min-width:768px)]:mb-8 [@container(min-width:1280px)]:mb-12 text-custom-black [@container(min-width:768px)]:text-center"
+    >
+      ブログ記事
+    </h1>
+    <ul
+      class="grid [@container(min-width:320px)]:grid-cols-1 [@container(min-width:768px)]:grid-cols-2 [@container(min-width:1024px)]:grid-cols-3 [@container(min-width:1280px)]:grid-cols-4 gap-4 [@container(min-width:480px)]:gap-6 [@container(min-width:768px)]:gap-8 [@container(min-width:1280px)]:gap-10 list-none m-0 p-0"
+    >
       {
         posts.map((post, index) => (
           <li

@@ -4,38 +4,35 @@ import ThemeToggle from './ThemeToggle.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
-<header class="sticky top-0 z-50 w-full bg-surface/90 backdrop-blur-md shadow-lg shadow-custom-gray/10 border-b border-custom-gray-light">
+<header
+  class="sticky top-0 z-50 w-full bg-surface/90 backdrop-blur-md shadow-lg shadow-custom-gray/10 border-b border-custom-gray-light"
+>
   <div class="w-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
     <nav class="flex items-center justify-between h-14 sm:h-16 lg:h-20">
       <!-- Logo/Title -->
       <h2 class="m-0 text-sm sm:text-base lg:text-lg font-bold flex-shrink-0">
         <a href="/" class="no-underline text-custom-black hover:text-accent transition-colors">{SITE_TITLE}</a>
       </h2>
-      
+
       <!-- Desktop Navigation -->
       <div class="hidden md:flex internal-links">
         <HeaderLink href="/">ホーム</HeaderLink>
         <HeaderLink href="/blog">ブログ</HeaderLink>
         <HeaderLink href="/about">プロフィール</HeaderLink>
       </div>
-      
+
       <!-- Right side controls -->
       <div class="flex items-center gap-2 sm:gap-3 lg:gap-4">
         <ThemeToggle />
-        
+
         <!-- Social links - hidden on smaller screens -->
         <div class="social-links hidden lg:flex gap-2">
-          <a href="https://m.webtoo.ls/@astro" target="_blank" class="flex p-1 hover:text-accent transition-colors">
-            <span class="sr-only">Follow Astro on Mastodon</span>
-            <svg viewBox="0 0 16 16" aria-hidden="true" class="w-6 h-6 lg:w-8 lg:h-8"
-              ><path
-                fill="currentColor"
-                d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"
-              ></path></svg
-            >
-          </a>
-          <a href="https://twitter.com/astrodotbuild" target="_blank" class="flex p-1 hover:text-accent transition-colors">
-            <span class="sr-only">Follow Astro on Twitter</span>
+          <a
+            href="https://twitter.com/koralle_tech"
+            target="_blank"
+            class="flex p-1 hover:text-accent transition-colors"
+          >
+            <span class="sr-only">Follow koralle on Twitter</span>
             <svg viewBox="0 0 16 16" aria-hidden="true" class="w-6 h-6 lg:w-8 lg:h-8"
               ><path
                 fill="currentColor"
@@ -43,8 +40,8 @@ import { SITE_TITLE } from '../consts';
               ></path></svg
             >
           </a>
-          <a href="https://github.com/withastro/astro" target="_blank" class="flex p-1 hover:text-accent transition-colors">
-            <span class="sr-only">Go to Astro's GitHub repo</span>
+          <a href="https://github.com/koralle" target="_blank" class="flex p-1 hover:text-accent transition-colors">
+            <span class="sr-only">Go to koralle's GitHub profile</span>
             <svg viewBox="0 0 16 16" aria-hidden="true" class="w-6 h-6 lg:w-8 lg:h-8"
               ><path
                 fill="currentColor"
@@ -55,7 +52,7 @@ import { SITE_TITLE } from '../consts';
         </div>
 
         <!-- Mobile menu button (for future implementation) -->
-        <button 
+        <button
           class="md:hidden p-2 rounded-lg bg-surface border border-custom-gray-light hover:bg-custom-gray-light/10 transition-colors"
           aria-label="メニューを開く"
           id="mobile-menu-button"
@@ -66,14 +63,16 @@ import { SITE_TITLE } from '../consts';
         </button>
       </div>
     </nav>
-    
+
     <!-- Mobile Navigation (hidden by default) -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-custom-gray-light mt-2 pt-4 pb-4">
       <div class="flex flex-col space-y-2">
         <a href="/" class="px-3 py-2 text-sm rounded-lg hover:bg-custom-gray-light/10 transition-colors">ホーム</a>
         <a href="/blog" class="px-3 py-2 text-sm rounded-lg hover:bg-custom-gray-light/10 transition-colors">ブログ</a>
-        <a href="/about" class="px-3 py-2 text-sm rounded-lg hover:bg-custom-gray-light/10 transition-colors">プロフィール</a>
-        
+        <a href="/about" class="px-3 py-2 text-sm rounded-lg hover:bg-custom-gray-light/10 transition-colors"
+          >プロフィール</a
+        >
+
         <!-- Mobile social links -->
         <div class="flex gap-4 px-3 py-2 lg:hidden">
           <a href="https://m.webtoo.ls/@astro" target="_blank" class="hover:text-accent transition-colors">
@@ -113,11 +112,11 @@ import { SITE_TITLE } from '../consts';
   // Mobile menu toggle functionality
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  
+
   mobileMenuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
   });
-  
+
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
     if (!mobileMenuButton?.contains(e.target as Node) && !mobileMenu?.contains(e.target as Node)) {

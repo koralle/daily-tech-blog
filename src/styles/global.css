@@ -1,25 +1,29 @@
-@import 'tailwindcss';
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'kiso.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
 
 @theme {
   /* Primary colors */
   --color-accent: #ec93a1;
   --color-accent-dark: #d16b7a;
   --color-accent-light: #f2b5c0;
-  
+
   /* Light theme colors */
   --color-background-light: #ffffff;
   --color-surface-light: #f8fafc;
   --color-text-light: rgb(15 18 25);
   --color-text-muted-light: rgb(96 115 159);
   --color-border-light: rgb(229 233 240);
-  
+
   /* Dark theme colors (default) */
   --color-background: #0f1419;
   --color-surface: #1a1f2e;
   --color-text: #e2e8f0;
   --color-text-muted: #94a3b8;
   --color-border: #334155;
-  
+
   /* Legacy color mappings for existing classes */
   --color-custom-black: var(--color-text);
   --color-custom-gray: var(--color-text-muted);
@@ -27,7 +31,7 @@
   --color-custom-gray-dark: var(--color-text);
 
   --font-family-atkinson: 'Atkinson', sans-serif;
-  
+
   /* Responsive breakpoints */
   --breakpoint-mobile: 320px;
   --breakpoint-mobile-large: 480px;
@@ -80,11 +84,10 @@
   --color-text: var(--color-text-light);
   --color-text-muted: var(--color-text-muted-light);
   --color-border: var(--color-border-light);
-  
+
   /* Update legacy mappings for light mode */
   --color-custom-black: var(--color-text-light);
   --color-custom-gray: var(--color-text-muted-light);
   --color-custom-gray-light: var(--color-border-light);
   --color-custom-gray-dark: var(--color-text-light);
 }
-
