@@ -48,6 +48,9 @@ importers:
       '@typescript/native-preview':
         specifier: 7.0.0-dev.20250630.1
         version: 7.0.0-dev.20250630.1
+      astro-eslint-parser:
+        specifier: ^1.2.2
+        version: 1.2.2
       eslint:
         specifier: ^9.30.1
         version: 9.30.1(jiti@2.4.2)
