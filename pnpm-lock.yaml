@@ -23,6 +23,9 @@ importers:
       astro:
         specifier: ^5.11.0
         version: 5.11.0(@types/node@24.0.7)(aws4fetch@1.0.20)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(terser@5.16.9)(typescript@5.8.3)(yaml@2.8.0)
+      kiso.css:
+        specifier: ^1.2.1
+        version: 1.2.1
       sharp:
         specifier: ^0.34.2
         version: 0.34.2
@@ -1533,6 +1536,9 @@ packages:
   json-parse-even-better-errors@4.0.0:
     resolution: {integrity: sha512-lR4MXjGNgkJc7tkQ97kb2nuEMnNCyU//XYVH0MKTGcXEiSudQ5MKGKen3C5QubYy0vmq+JGitUg92uuywGEwIA==}
     engines: {node: ^18.17.0 || >=20.5.0}
+
+  kiso.css@1.2.1:
+    resolution: {integrity: sha512-GtXh3lT8g89DbzD1hxPGJP9SXKL8ujfoU62+rQUnjjcS+Mi7OiwDTMeLE3GBbH979v3U+DaQCY2xnlUJWz1tnA==}
 
   kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
@@ -4006,6 +4012,8 @@ snapshots:
       argparse: 2.0.1
 
   json-parse-even-better-errors@4.0.0: {}
+
+  kiso.css@1.2.1: {}
 
   kleur@3.0.3: {}
 
