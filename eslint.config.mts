@@ -1,5 +1,5 @@
+import eslint from '@eslint/js';
 import typegen from 'eslint-typegen';
-import astroParser from 'astro-eslint-parser';
 import tseslint from 'typescript-eslint';
 import pluginAstro from 'eslint-plugin-astro';
 import { ESLint, Linter } from 'eslint';
@@ -9,6 +9,7 @@ export default typegen([
     name: 'daily-tech-blog/ignore-files',
     ignores: ['dist', '.astro']
   },
+  eslint.configs.recommended,
   {
     name: 'daily-tech-blog/typescript',
     files: ['src/**/*.ts', 'src/**/*.tsx'],
@@ -100,28 +101,5 @@ export default typegen([
       '@typescript-eslint/prefer-string-starts-ends-with': 'error'
     }
   },
-  {
-    name: 'daily-tech-blog/astro',
-    files: ['src/**/*.astro'],
-    languageOptions: {
-      parser: astroParser,
-      parserOptions: {
-        parser: tseslint.parser,
-        estraFileExtensions: ['astro']
-      }
-    },
-    plugins: {
-      astro: pluginAstro
-    },
-    rules: {
-      'astro/missing-client-only-directive-value': 'error',
-      'astro/no-conflict-set-directives': 'error',
-      'astro/no-deprecated-astro-canonicalurl': 'error',
-      'astro/no-deprecated-astro-fetchcontent': 'error',
-      'astro/no-deprecated-astro-resolve': 'error',
-      'astro/no-deprecated-getentrybyslug': 'error',
-      'astro/no-unused-define-vars-in-style': 'error',
-      'astro/valid-compile': 'error'
-    }
-  }
+  ...pluginAstro.configs.recommended
 ]);
