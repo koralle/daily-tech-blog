@@ -1,0 +1,71 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+
+const { currentPage, totalPages, baseUrl } = Astro.props;
+
+const prevPage = currentPage > 1 ? currentPage - 1 : null;
+const nextPage = currentPage < totalPages ? currentPage + 1 : null;
+---
+
+<nav class="flex justify-center items-center gap-2 mt-8">
+  <!-- 最初のページ -->
+  {
+    currentPage > 1 && (
+      <a
+        href={`${baseUrl}/1`}
+        class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700"
+      >
+        最初
+      </a>
+    )
+  }
+
+  <!-- 前のページ -->
+  {
+    prevPage && (
+      <a
+        href={`${baseUrl}/${prevPage}`}
+        class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700"
+      >
+        前へ
+      </a>
+    )
+  }
+
+  <!-- 現在のページ -->
+  <span class="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-md">
+    {currentPage}
+  </span>
+
+  <!-- 次のページ -->
+  {
+    nextPage && (
+      <a
+        href={`${baseUrl}/${nextPage}`}
+        class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700"
+      >
+        次へ
+      </a>
+    )
+  }
+
+  <!-- 最後のページ -->
+  {
+    currentPage < totalPages && (
+      <a
+        href={`${baseUrl}/${totalPages}`}
+        class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700"
+      >
+        最後
+      </a>
+    )
+  }
+</nav>
+
+<div class="text-center mt-4 text-sm text-gray-600">
+  {totalPages} ページ中 {currentPage} ページ目
+</div>
