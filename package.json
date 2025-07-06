@@ -16,7 +16,7 @@
     "format:check": "prettier . -c",
     "format:fix": "prettier . -w",
     "format": "pnpm run format:fix",
-    "typecheck": "tsgo -p tsconfig.json",
+    "typecheck": "astro check --tsconfig tsconfig.json",
     "check": "run-p typecheck format:check lint:check --aggregate-output -l"
   },
   "dependencies": {
