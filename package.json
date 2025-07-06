@@ -16,7 +16,7 @@
     "format:check": "prettier . -c",
     "format:fix": "prettier . -w",
     "format": "pnpm run format:fix",
-    "typecheck": "tsgo -p tsconfig.json",
+    "typecheck": "astro check --tsconfig tsconfig.json",
     "check": "run-p typecheck format:check lint:check --aggregate-output -l"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.4",
     "@prettier/plugin-oxc": "^0.0.4",
     "@tailwindcss/vite": "^4.1.11",
     "@types/node": "^24.0.7",
