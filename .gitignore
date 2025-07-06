@@ -28,7 +28,6 @@ dist
 .astro
 
 # Wrangler
-worker-configuration.d.ts
 .wrangler
 .dev.vars*
 worker-configuration.d.ts
