@@ -1,20 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "import",
-    "jest",
-    "jsdoc",
-    "jsx-a11y",
-    "nextjs",
-    "node",
-    "oxc",
-    "promise",
-    "react",
-    "react-perf",
-    "typescript",
-    "unicorn",
-    "vitest"
-  ],
+  "plugins": ["import", "jest", "jsdoc", "jsx-a11y", "node", "oxc", "promise", "typescript", "unicorn", "vitest"],
   "categories": {
     "correctness": "error",
     "suspicious": "error",
