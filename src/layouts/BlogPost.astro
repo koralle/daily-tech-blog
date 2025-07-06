@@ -13,7 +13,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead
+      title={title}
+      description={description}
+    />
   </head>
 
   <body>
@@ -23,7 +26,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         <div class="w-full">
           {
             heroImage && (
-              <Image width={1020} height={510} src={heroImage} alt="" class="block mx-auto rounded-xl shadow-lg" />
+              <Image
+                width={1020}
+                height={510}
+                src={heroImage}
+                alt=""
+                class="block mx-auto rounded-xl shadow-lg"
+              />
             )
           }
         </div>
