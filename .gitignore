@@ -34,3 +34,6 @@ worker-configuration.d.ts
 
 # https://zenn.dev/atu4403/articles/claudecode-japanese-input-solution
 AI_INSTRUCTIONS.md
+
+# eslint-typegen
+eslint-typegen.d.ts

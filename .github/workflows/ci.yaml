@@ -54,6 +54,14 @@ jobs:
       - name: Setup
         uses: ./.github/composite-actions/cache-and-install
 
+      - name: Typegen
+        run: |
+          pnpm run cf-typegen
+
+      - name: Sync
+        run: |
+          pnpm astro sync
+
       - name: Lint
         shell: bash
         run: |
