@@ -20,7 +20,7 @@ jobs:
         run: |
           pnpm run cf-typegen
 
-      - name : Sync
+      - name: Sync
         run: |
           pnpm astro sync
 
