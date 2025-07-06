@@ -16,6 +16,14 @@ jobs:
       - name: Setup
         uses: ./.github/composite-actions/cache-and-install
 
+      - name: Typegen
+        run: |
+          pnpm run cf-typegen
+
+      - name : Sync
+        run: |
+          pnpm astro sync
+
       - name: Typecheck
         shell: bash
         run: |
