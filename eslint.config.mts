@@ -2,6 +2,7 @@ import eslint from '@eslint/js';
 import typegen from 'eslint-typegen';
 import tseslint from 'typescript-eslint';
 import pluginAstro from 'eslint-plugin-astro';
+import oxlint from 'eslint-plugin-oxlint';
 import { ESLint, Linter } from 'eslint';
 
 export default typegen([
@@ -101,5 +102,6 @@ export default typegen([
       '@typescript-eslint/prefer-string-starts-ends-with': 'error'
     }
   },
+  ...oxlint.buildFromOxlintConfigFile('oxlintrc.json'),
   ...pluginAstro.configs.recommended
 ]);
