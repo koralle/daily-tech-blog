@@ -2,13 +2,21 @@
 interface Props {
   currentPage: number;
   totalPages: number;
-  baseUrl: string;
+  baseUrl?: string;
+  urlBuilder?: (page: number) => string;
 }
 
-const { currentPage, totalPages, baseUrl } = Astro.props;
+const { currentPage, totalPages, baseUrl, urlBuilder } = Astro.props;
 
 const prevPage = currentPage > 1 ? currentPage - 1 : null;
 const nextPage = currentPage < totalPages ? currentPage + 1 : null;
+
+const getPageUrl = (page: number) => {
+  if (urlBuilder) {
+    return urlBuilder(page);
+  }
+  return `${baseUrl}/${page}`;
+};
 ---
 
 <nav class="flex justify-center items-center gap-2 mt-8">
@@ -16,7 +24,7 @@ const nextPage = currentPage < totalPages ? currentPage + 1 : null;
   {
     currentPage > 1 && (
       <a
-        href={`${baseUrl}/1`}
+        href={getPageUrl(1)}
         class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700"
       >
         最初
@@ -28,7 +36,7 @@ const nextPage = currentPage < totalPages ? currentPage + 1 : null;
   {
     prevPage && (
       <a
-        href={`${baseUrl}/${prevPage}`}
+        href={getPageUrl(prevPage)}
         class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700"
       >
         前へ
@@ -45,7 +53,7 @@ const nextPage = currentPage < totalPages ? currentPage + 1 : null;
   {
     nextPage && (
       <a
-        href={`${baseUrl}/${nextPage}`}
+        href={getPageUrl(nextPage)}
         class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700"
       >
         次へ
@@ -57,7 +65,7 @@ const nextPage = currentPage < totalPages ? currentPage + 1 : null;
   {
     currentPage < totalPages && (
       <a
-        href={`${baseUrl}/${totalPages}`}
+        href={getPageUrl(totalPages)}
         class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700"
       >
         最後

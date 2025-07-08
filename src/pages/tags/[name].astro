@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getTagMetadata } from '../../data/tagMetadata';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const postsPerPage = 12;
+
+  // すべてのタグを収集
+  const tagPostsMap = new Map<string, CollectionEntry<'blog'>[]>();
+
+  allPosts.forEach((post) => {
+    const tags = post.data.tags || [];
+    tags.forEach((tag) => {
+      if (!tagPostsMap.has(tag)) {
+        tagPostsMap.set(tag, []);
+      }
+      tagPostsMap.get(tag)!.push(post);
+    });
+  });
+
+  // 各タグごとにページを生成
+  const paths: any[] = [];
+
+  tagPostsMap.forEach((posts, tagName) => {
+    // 投稿を日付順にソート
+    const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+
+    // 各ページのパスを生成
+    for (let page = 1; page <= totalPages; page++) {
+      const startIndex = (page - 1) * postsPerPage;
+      const endIndex = startIndex + postsPerPage;
+      const pagePosts = sortedPosts.slice(startIndex, endIndex);
+
+      paths.push({
+        params: { name: `${tagName}/${page}` },
+        props: {
+          posts: pagePosts,
+          tagName,
+          currentPage: page,
+          totalPages
+        }
+      });
+    }
+
+    // ページ1へのリダイレクト用パス
+    paths.push({
+      params: { name: tagName },
+      props: {
+        redirect: true,
+        tagName
+      }
+    });
+  });
+
+  return paths;
+}
+
+const { posts, tagName, currentPage, totalPages, redirect } = Astro.props;
+
+// タグ名だけの場合は1ページ目にリダイレクト
+if (redirect) {
+  return Astro.redirect(`/tags/${encodeURIComponent(tagName)}/1`);
+}
+
+const tagInfo = getTagMetadata(tagName);
+---
+
+<Layout>
+  <div class="w-[960px] max-w-[calc(100%-2em)] mx-auto py-12 px-4">
+    <section>
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold mb-2">タグ: {tagInfo.name}</h1>
+        {tagInfo.description && <p class="text-gray-600">{tagInfo.description}</p>}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {posts.map((post) => <PostCard post={post} />)}
+      </div>
+
+      {
+        totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            urlBuilder={(page) => `/tags/${encodeURIComponent(tagName)}/${page}`}
+          />
+        )
+      }
+    </section>
+  </div>
+</Layout>

@@ -1,5 +1,6 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
+import { MAX_TAGS_PER_POST } from './consts';
 
 const blog = defineCollection({
   // Load Markdown and MDX files in the `src/content/blog/` directory.
@@ -12,7 +13,8 @@ const blog = defineCollection({
       // Transform string to Date object
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
-      heroImage: image().optional()
+      heroImage: image().optional(),
+      tags: z.array(z.string()).max(MAX_TAGS_PER_POST).optional().default([])
     })
 });
 

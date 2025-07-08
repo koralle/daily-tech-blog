@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TagCard from '../../components/TagCard.astro';
+import { getCollection } from 'astro:content';
+import { getTagMetadata } from '../../data/tagMetadata';
+
+// すべての記事を取得してタグを集計
+const allPosts = await getCollection('blog');
+const tagCounts = new Map<string, number>();
+
+// 各記事のタグをカウント
+allPosts.forEach((post) => {
+  const tags = post.data.tags || [];
+  tags.forEach((tag) => {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  });
+});
+
+// タグ情報を配列に変換してソート
+const sortedTags = Array.from(tagCounts.entries())
+  .sort((a, b) => a[0].localeCompare(b[0], 'ja'))
+  .map(([tagName, count]) => ({
+    metadata: getTagMetadata(tagName),
+    count
+  }));
+---
+
+<Layout>
+  <div class="w-[960px] max-w-[calc(100%-2em)] mx-auto py-12 px-4">
+    <section>
+      <h1 class="text-3xl font-bold mb-8 text-center">タグ一覧</h1>
+
+      {
+        sortedTags.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sortedTags.map(({ metadata, count }) => (
+              <TagCard
+                tag={metadata}
+                postCount={count}
+              />
+            ))}
+          </div>
+        ) : (
+          <p class="text-center text-gray-600">タグが設定された記事はまだありません。</p>
+        )
+      }
+    </section>
+  </div>
+</Layout>
