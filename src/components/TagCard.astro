@@ -1,9 +1,8 @@
 ---
-import { Icon } from 'astro-icon/components';
-import type { TagMetadata } from '../data/tagMetadata';
+import type { Tag } from '../data/tags';
 
 interface Props {
-  tag: TagMetadata;
+  tag: Tag;
   postCount?: number;
 }
 
@@ -11,7 +10,7 @@ const { tag, postCount } = Astro.props;
 ---
 
 <a
-  href={`/tags/${encodeURIComponent(tag.name)}`}
+  href={`/tags/${tag.id}`}
   class="block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-200"
 >
   <div class="flex items-center gap-4">
@@ -25,7 +24,7 @@ const { tag, postCount } = Astro.props;
     }
     -->
     <div class="flex-1">
-      <h3 class="text-xl font-semibold text-gray-900 mb-1">{tag.name}</h3>
+      <h3 class="text-xl font-semibold text-gray-900 mb-1">{tag.displayName}</h3>
       {tag.description && <p class="text-sm text-gray-600 mb-2">{tag.description}</p>}
       {postCount !== undefined && <p class="text-sm text-gray-500">{postCount} 件の記事</p>}
     </div>

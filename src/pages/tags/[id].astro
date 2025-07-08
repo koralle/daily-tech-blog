@@ -3,29 +3,50 @@ import Layout from '../../layouts/Layout.astro';
 import PostCard from '../../components/PostCard.astro';
 import Pagination from '../../components/Pagination.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { getTagMetadata } from '../../data/tagMetadata';
+import { getTagById, getAllTagIds } from '../../data/tags';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
   const postsPerPage = 12;
+  const allTagIds = getAllTagIds();
 
   // すべてのタグを収集
   const tagPostsMap = new Map<string, CollectionEntry<'blog'>[]>();
 
+  // まず有効なタグIDで初期化
+  allTagIds.forEach((tagId) => {
+    tagPostsMap.set(tagId, []);
+  });
+
+  // 各記事のタグを処理
   allPosts.forEach((post) => {
     const tags = post.data.tags || [];
-    tags.forEach((tag) => {
-      if (!tagPostsMap.has(tag)) {
-        tagPostsMap.set(tag, []);
+    tags.forEach((tagId) => {
+      if (tagPostsMap.has(tagId)) {
+        tagPostsMap.get(tagId)!.push(post);
       }
-      tagPostsMap.get(tag)!.push(post);
     });
   });
 
   // 各タグごとにページを生成
   const paths: any[] = [];
 
-  tagPostsMap.forEach((posts, tagName) => {
+  tagPostsMap.forEach((posts, tagId) => {
+    // 投稿がない場合でもタグページは生成する
+    if (posts.length === 0) {
+      paths.push({
+        params: { id: tagId },
+        props: {
+          posts: [],
+          tagId,
+          currentPage: 1,
+          totalPages: 1,
+          redirect: false
+        }
+      });
+      return;
+    }
+
     // 投稿を日付順にソート
     const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -38,22 +59,23 @@ export async function getStaticPaths() {
       const pagePosts = sortedPosts.slice(startIndex, endIndex);
 
       paths.push({
-        params: { name: `${tagName}/${page}` },
+        params: { id: `${tagId}/${page}` },
         props: {
           posts: pagePosts,
-          tagName,
+          tagId,
           currentPage: page,
-          totalPages
+          totalPages,
+          redirect: false
         }
       });
     }
 
     // ページ1へのリダイレクト用パス
     paths.push({
-      params: { name: tagName },
+      params: { id: tagId },
       props: {
         redirect: true,
-        tagName
+        tagId
       }
     });
   });
@@ -61,34 +83,45 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const { posts, tagName, currentPage, totalPages, redirect } = Astro.props;
+const { posts, tagId, currentPage, totalPages, redirect } = Astro.props;
 
-// タグ名だけの場合は1ページ目にリダイレクト
+// タグIDだけの場合は1ページ目にリダイレクト
 if (redirect) {
-  return Astro.redirect(`/tags/${encodeURIComponent(tagName)}/1`);
+  return Astro.redirect(`/tags/${tagId}/1`);
 }
 
-const tagInfo = getTagMetadata(tagName);
+const tag = getTagById(tagId);
+if (!tag) {
+  return Astro.redirect('/404');
+}
 ---
 
 <Layout>
   <div class="w-[960px] max-w-[calc(100%-2em)] mx-auto py-12 px-4">
     <section>
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold mb-2">タグ: {tagInfo.name}</h1>
-        {tagInfo.description && <p class="text-gray-600">{tagInfo.description}</p>}
+        <h1 class="text-3xl font-bold mb-2">タグ: {tag.displayName}</h1>
+        {tag.description && <p class="text-gray-600">{tag.description}</p>}
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {posts.map((post) => <PostCard post={post} />)}
-      </div>
+      {
+        posts.length === 0 ? (
+          <p class="text-center text-gray-600">このタグの記事はまだありません。</p>
+        ) : (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {posts.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        )
+      }
 
       {
         totalPages > 1 && (
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            urlBuilder={(page) => `/tags/${encodeURIComponent(tagName)}/${page}`}
+            urlBuilder={(page) => `/tags/${tagId}/${page}`}
           />
         )
       }

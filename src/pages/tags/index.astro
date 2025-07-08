@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import TagCard from '../../components/TagCard.astro';
 import { getCollection } from 'astro:content';
-import { getTagMetadata } from '../../data/tagMetadata';
+import { getTagById, type Tag } from '../../data/tags';
 
 // すべての記事を取得してタグを集計
 const allPosts = await getCollection('blog');
@@ -11,18 +11,19 @@ const tagCounts = new Map<string, number>();
 // 各記事のタグをカウント
 allPosts.forEach((post) => {
   const tags = post.data.tags || [];
-  tags.forEach((tag) => {
-    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  tags.forEach((tagId) => {
+    tagCounts.set(tagId, (tagCounts.get(tagId) || 0) + 1);
   });
 });
 
 // タグ情報を配列に変換してソート
 const sortedTags = Array.from(tagCounts.entries())
-  .sort((a, b) => a[0].localeCompare(b[0], 'ja'))
-  .map(([tagName, count]) => ({
-    metadata: getTagMetadata(tagName),
-    count
-  }));
+  .map(([tagId, count]) => {
+    const tag = getTagById(tagId);
+    return tag ? { tag, count } : null;
+  })
+  .filter((item): item is { tag: Tag; count: number } => item !== null)
+  .sort((a, b) => a.tag.displayName.localeCompare(b.tag.displayName, 'ja'));
 ---
 
 <Layout>
@@ -33,9 +34,9 @@ const sortedTags = Array.from(tagCounts.entries())
       {
         sortedTags.length > 0 ? (
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sortedTags.map(({ metadata, count }) => (
+            {sortedTags.map(({ tag, count }) => (
               <TagCard
-                tag={metadata}
+                tag={tag}
                 postCount={count}
               />
             ))}
