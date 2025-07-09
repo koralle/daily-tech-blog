@@ -21,12 +21,32 @@ const { Content } = await render(post);
 const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !== 'undefined');
 ---
 
-<Layout>
-  <article>
-    <h1>{post.data.title}</h1>
-    <ul>
-      {validTagList.map((tagId) => <li>{getTagById(tagId)?.displayName}</li>)}
-    </ul>
-    <Content />
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+>
+  <article class="py-8 lg:py-12 prose prose-gray max-w-none">
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">{post.data.title}</h1>
+      {
+        validTagList.length > 0 && (
+          <ul class="flex flex-wrap gap-2 list-none p-0">
+            {validTagList.map((tagId) => (
+              <li class="inline-block">
+                <a
+                  href={`/categories/${tagId}`}
+                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
+                >
+                  {getTagById(tagId)?.displayName}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+    <div class="prose prose-gray prose-sm sm:prose-base lg:prose-lg max-w-none">
+      <Content />
+    </div>
   </article>
 </Layout>

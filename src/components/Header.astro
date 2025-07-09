@@ -1,6 +1,9 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import MobileMenu from './MobileMenu.astro';
 import { SITE_TITLE } from '../consts';
+
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="sticky top-0 px-4 bg-white shadow-md">
@@ -13,7 +16,7 @@ import { SITE_TITLE } from '../consts';
         {SITE_TITLE}
       </a>
     </h2>
-    <div class="flex">
+    <div class="hidden sm:flex">
       <HeaderLink
         activePath="/"
         href="/"
@@ -73,5 +76,6 @@ import { SITE_TITLE } from '../consts';
         </svg>
       </a>
     </div>
+    <MobileMenu currentPath={currentPath} />
   </nav>
 </header>
