@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { getTagById } from '../../data/tags';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles');
@@ -16,8 +17,16 @@ type Props = CollectionEntry<'articles'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
+
+const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !== 'undefined');
 ---
 
 <Layout>
-  <Content />
+  <article>
+    <h1>{post.data.title}</h1>
+    <ul>
+      {validTagList.map((tagId) => <li>{getTagById(tagId)?.displayName}</li>)}
+    </ul>
+    <Content />
+  </article>
 </Layout>
