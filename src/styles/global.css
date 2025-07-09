@@ -36,6 +36,8 @@
 }
 
 @theme {
+  --color-brand: #ec93a1;
+
   --breakpoint-*: initial;
   --breakpoint-xs: 480px;
   --breakpoint-sm: 640px;
