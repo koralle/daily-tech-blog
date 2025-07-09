@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { getTagById } from '../../data/tags';
+import { formatDate } from '../../utils';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles');
@@ -25,9 +26,10 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
   title={post.data.title}
   description={post.data.description}
 >
-  <article class="py-8 lg:py-12 prose prose-gray max-w-none">
-    <header class="mb-8">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">{post.data.title}</h1>
+  <article class="flex flex-col gap-8 pt-10">
+    <header class="flex flex-col gap-4">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold my-0">{post.data.title}</h1>
+      <p>最終更新日: {formatDate('YYYY/MM/DD')(post.data.lastUpdatedDate ?? post.data.publishedDate)}</p>
       {
         validTagList.length > 0 && (
           <ul class="flex flex-wrap gap-2 list-none p-0">
