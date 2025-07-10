@@ -13,16 +13,25 @@ const { page } = Astro.props;
 ---
 
 <Layout>
-  <p>
-    {
-      page.data.map((collectionItem) => (
-        <li>
-          <a href={`/articles/${collectionItem.id}`}>{collectionItem.data.title}</a>
-        </li>
-      ))
-    }
-  </p>
-  <a href={page.url.first}>1</a>
-  <span>{page.currentPage}</span>
-  <a href={page.url.last}>{page.lastPage}</a>
+  <article class="flex flex-col py-12">
+    <header>
+      <h1 class="text-center">記事一覧</h1>
+    </header>
+    <p>
+      {
+        page.data.map((collectionItem) => (
+          <li>
+            <a href={`/articles/${collectionItem.id}`}>{collectionItem.data.title}</a>
+          </li>
+        ))
+      }
+    </p>
+    <footer class="flex justify-center gap-4">
+      {page.start + 1 !== page.currentPage ? <a href={page.url.first}>&lt;&lt;</a> : null}
+      <a href={page.url.prev}> &lt; </a>
+      <span>{page.currentPage}</span>
+      <a href={page.url.next}> &gt; </a>
+      {page.end + 1 !== page.currentPage ? <a href={page.url.last}>&gt;&gt;</a> : null}
+    </footer>
+  </article>
 </Layout>
