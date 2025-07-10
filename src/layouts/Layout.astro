@@ -23,9 +23,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
       description={description}
     />
   </head>
-  <body class="relative grid grid-cols-1 justify-center items-start w-full">
+  <body class="relative flex flex-col w-full">
     <Header />
-    <main class="grid grid-rows-1 justify-center items-start w-full min-h-[calc(100svb-16.75rem)]">
+    <main class="grid grid-rows-1 justify-center items-start w-full min-h-[calc(100svb-15rem)]">
       <div class="container px-4 sm:px-6 lg:px-8 max-w-7xl">
         <slot />
       </div>
