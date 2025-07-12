@@ -13,17 +13,22 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html
+  lang="ja"
+  dir="ltr"
+>
   <head>
     <BaseHead
       title={title}
       description={description}
     />
   </head>
-  <body class="relative">
+  <body class="relative flex flex-col w-full">
     <Header />
-    <main class="grid jutify-center items-start w-full min-h-[calc(100svb-16.75rem)]">
-      <slot />
+    <main class="grid grid-cols-1 justify-center items-start w-full min-h-[calc(100svb-15rem)]">
+      <div class="container justify-self-center px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <slot />
+      </div>
     </main>
     <Footer />
   </body>

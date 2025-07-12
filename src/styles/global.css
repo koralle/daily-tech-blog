@@ -34,3 +34,18 @@
   font-style: normal;
   font-display: swap;
 }
+
+@theme {
+  --color-brand: #ec93a1;
+
+  --breakpoint-*: initial;
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --height-header: 5rem;
+  --height-footer: 10rem;
+}
