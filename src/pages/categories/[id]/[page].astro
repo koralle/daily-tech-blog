@@ -62,8 +62,12 @@ const { page } = Astro.props;
           <>
             <a href={page.url.first}>&lt;&lt;</a>
             <a href={page.url.prev}>&lt;</a>
-            {page.lastPage >= 3 && <a href={`/categories/${Astro.params.id}/${page.lastPage - 2}`}>{page.lastPage - 2}</a>}
-            {page.lastPage >= 2 && <a href={`/categories/${Astro.params.id}/${page.lastPage - 1}`}>{page.lastPage - 1}</a>}
+            {page.lastPage >= 3 && (
+              <a href={`/categories/${Astro.params.id}/${page.lastPage - 2}`}>{page.lastPage - 2}</a>
+            )}
+            {page.lastPage >= 2 && (
+              <a href={`/categories/${Astro.params.id}/${page.lastPage - 1}`}>{page.lastPage - 1}</a>
+            )}
             <span class="font-bold">{page.currentPage}</span>
           </>
         ) : (
