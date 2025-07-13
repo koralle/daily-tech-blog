@@ -58,7 +58,7 @@ Tailwind CSS v4 を使用。設定は `src/styles/global.css` で管理。
 
 ### ビルド設定
 
-- **Astro**: `astro.config.ts` - Cloudflare アダプター設定済み
+- **Astro**: `astro.config.mts` - Cloudflare アダプター設定済み
 - **TypeScript**: `tsconfig.json` - strict モード有効
 - **Wrangler**: `wrangler.toml` - Cloudflare デプロイメント設定
 
