@@ -1,17 +1,20 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import MobileMenu from './MobileMenu.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { SITE_TITLE } from '../consts';
 
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky flex flex-col justify-center top-0 px-4 bg-white shadow-md h-[var(--height-header)]">
+<header
+  class="sticky flex flex-col justify-center top-0 px-4 bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800/50 h-[var(--height-header)] transition-colors"
+>
   <nav class="flex items-center justify-between">
     <h2 class="m-0 text-base">
       <a
         href="/"
-        class="no-underline text-black hover:text-black"
+        class="no-underline text-black dark:text-white hover:text-black dark:hover:text-white"
       >
         {SITE_TITLE}
       </a>
@@ -36,7 +39,8 @@ const currentPath = Astro.url.pathname;
         About
       </HeaderLink>
     </div>
-    <div class="hidden md:flex gap-4">
+    <div class="hidden md:flex gap-4 items-center">
+      <ThemeToggle />
       <a
         href="https://twitter.com/koralle_tech"
         target="_blank"
@@ -47,7 +51,7 @@ const currentPath = Astro.url.pathname;
           aria-hidden="true"
           width="32"
           height="32"
-          class="text-black"
+          class="text-black dark:text-white"
         >
           <path
             fill="currentColor"
@@ -66,7 +70,7 @@ const currentPath = Astro.url.pathname;
           aria-hidden="true"
           width="32"
           height="32"
-          class="text-black"
+          class="text-black dark:text-white"
         >
           <path
             fill="currentColor"
