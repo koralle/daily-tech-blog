@@ -48,9 +48,12 @@ pnpm lint         # ESLint + Oxlint でリント
 ### 主要コンポーネント
 
 - `BaseHead.astro`: メタタグ管理
-- `ArticleLayout.astro`: 記事レイアウト
-- `BlogPostList.astro`: 記事一覧表示
 - `Pagination.astro`: ページネーション UI
+- `Footer.astro` フッター
+- `FormattedDate.astro` フォーマットした日付文字列
+- `Header.astro` ヘッダー
+- `HeaderLink.astro` ヘッダーリンク
+- `MobileMenu.astro` モバイルメニュー
 
 ### スタイリング
 
