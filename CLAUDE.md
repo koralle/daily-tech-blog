@@ -22,15 +22,15 @@ pnpm deploy       # Cloudflare Pages にデプロイ
 ```bash
 pnpm check        # 全チェック実行（型チェック、フォーマット、リント）
 pnpm typecheck    # TypeScript 型チェック
-pnpm format       # Prettier でフォーマット
-pnpm lint         # ESLint + Oxlint でリント
+pnpm format       # Prettier でフォーマット（pnpm run format:fix と同じ）
+pnpm lint         # リントチェック（oxlint + eslint）
 ```
 
 ## アーキテクチャ
 
 ### コンテンツ管理
 
-- **記事**: `src/content/articles/` に MDX ファイルとして保存
+- **記事**: `src/content/articles/` に MDX ファイルとして保存（ディレクトリ要作成）
 - **スキーマ**: `src/content/config.ts` で Zod スキーマによる型定義
 - **タグ**: `src/data/tags.ts` で定義し、記事で参照
 
@@ -40,8 +40,8 @@ pnpm lint         # ESLint + Oxlint でリント
 /                                    # トップページ（記事一覧）
 /page/[page]                        # ページネーション
 /articles/[...slug]                 # 個別記事
-/categories/[id]/[page]             # カテゴリ別記事一覧
-/tags                               # タグ一覧
+/categories/[id]/[page]             # タグ別記事一覧（実装上はタグでフィルタ）
+/about                              # About ページ
 /rss.xml                           # RSS フィード
 ```
 
@@ -68,6 +68,7 @@ Tailwind CSS v4 を使用。設定は `src/styles/global.css` で管理。
 ## 開発時の注意点
 
 1. **新規記事の追加時**:
+   - まず `src/content/articles/` ディレクトリを作成（未作成の場合）
    - `src/content/articles/` に MDX ファイルを作成
    - frontmatter は `src/content/config.ts` のスキーマに従う
    - タグは `src/data/tags.ts` に定義済みのものを使用
@@ -79,6 +80,14 @@ Tailwind CSS v4 を使用。設定は `src/styles/global.css` で管理。
 3. **デプロイ前**:
    - `pnpm check` で全チェックをパス
    - `pnpm build` でビルドエラーがないことを確認
+
+## 現在の状態
+
+### 未実装/要作成項目
+
+- `src/content/articles/` ディレクトリ（記事配置用）
+- 実際の記事コンテンツ（MDX ファイル）
+- タグ一覧ページ（`/tags` ルート）
 
 4. **環境変数**:
    - ローカル開発用は `.dev.vars` ファイルを作成
