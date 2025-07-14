@@ -27,8 +27,8 @@ importers:
         specifier: ^1.11.13
         version: 1.11.13
       kiso.css:
-        specifier: ^1.2.1
-        version: 1.2.1
+        specifier: ^1.2.2
+        version: 1.2.2
       sharp:
         specifier: ^0.34.2
         version: 0.34.2
@@ -2466,8 +2466,8 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
-  kiso.css@1.2.1:
-    resolution: {integrity: sha512-GtXh3lT8g89DbzD1hxPGJP9SXKL8ujfoU62+rQUnjjcS+Mi7OiwDTMeLE3GBbH979v3U+DaQCY2xnlUJWz1tnA==}
+  kiso.css@1.2.2:
+    resolution: {integrity: sha512-lv5pmbiqfov6DRUnHmtqEit5DzAtFAtKL+Pw0X2cBHtq/fBmXkVe+DAFnTdvawuA8f3vly7yaLLha0nAMlSz5A==}
 
   kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
@@ -6450,7 +6450,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kiso.css@1.2.1: {}
+  kiso.css@1.2.2: {}
 
   kleur@3.0.3: {}
 
