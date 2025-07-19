@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Workers (Web)
+name: Deploy to Cloudflare Workers (Worker)
 
 on:
   pull_request:
@@ -9,6 +9,9 @@ on:
 jobs:
   deploy-to-cloudflare-workers:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: workers/images
     outputs:
       should_deploy: ${{ steps.check.outputs.should_run }}
     steps:
@@ -20,7 +23,6 @@ jobs:
 
       - name: Deploy to Cloudflare Workers
         if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' }}
-        working-directory: apps/web
         run: pnpm run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

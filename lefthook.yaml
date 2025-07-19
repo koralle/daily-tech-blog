@@ -1,27 +1,30 @@
 pre-commit:
   parallel: true
   jobs:
-    - name: Format with Prettier
+    - name: Format with Prettier (Workers)
+      root: workers/images
       glob:
-        - 'next-env.d.ts'
         - '**/*.ts'
-        - '**/*.tsx'
         - '.prettierrc.mjs'
-        - 'next.config.ts'
+        - 'package.json'
+        - 'tsconfig.json'
       run: |
         pnpm prettier {staged_files} --write --config .prettierrc.mjs
       stage_fixed: true
 
-    - name: Lint with Oxlint
-      run: |
-        pnpm run lint:fix
-      stage_fixed: true
-
-    - name: Typecheck with tsgo
+    - name: Format with Prettier (Web)
+      root: apps/web
       glob:
-        - 'next-env.d.ts'
         - '**/*.ts'
         - '**/*.tsx'
+        - '**/*.astro'
         - '.prettierrc.mjs'
+        - 'package.json'
+        - 'tsconfig.json'
+        - 'astro.config.mts'
+        - 'eslint.config.mts'
+        - 'oxlintrc.json'
+        - 'wrangler.toml'
       run: |
-        pnpm run typecheck
+        pnpm prettier {staged_files} --write --config .prettierrc.mjs
+      stage_fixed: true

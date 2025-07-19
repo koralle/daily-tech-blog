@@ -1,5 +1,6 @@
-# Next.js
-.next
-
-# pnpm
+dist
+.astro
+.wrangler
+node_modules
 pnpm-lock.yaml
+worker-configuration.d.ts

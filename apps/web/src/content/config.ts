@@ -1,7 +1,7 @@
-import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
-import { isValidTagId } from '../data/tags';
 import { MAX_TAGS_PER_POST } from '../consts';
+import { glob } from 'astro/loaders';
+import { isValidTagId } from '../data/tags';
 
 const articleCollection = defineCollection({
   loader: glob({ base: './src/content/articles', pattern: '**/*.mdx' }),

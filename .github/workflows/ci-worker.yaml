@@ -1,4 +1,4 @@
-name: CI (Web)
+name: CI (Worker)
 
 on:
   pull_request:
@@ -8,6 +8,9 @@ on:
 jobs:
   typecheck:
     runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: workers/images
 
     steps:
       - name: Checkout
@@ -17,17 +20,12 @@ jobs:
         uses: ./.github/composite-actions/cache-and-install
 
       - name: Typegen
-        working-directory: apps/web
+        working-directory: workers/images
         run: |
           pnpm run cf-typegen
 
-      - name: Sync
-        working-directory: apps/web
-        run: |
-          pnpm astro sync
-
       - name: Typecheck
-        working-directory: apps/web
+        working-directory: workers/images
         shell: bash
         run: |
           pnpm run typecheck
@@ -43,7 +41,7 @@ jobs:
         uses: ./.github/composite-actions/cache-and-install
 
       - name: Format
-        working-directory: apps/web
+        working-directory: workers/images
         shell: bash
         run: |
           pnpm run format:check
@@ -59,17 +57,12 @@ jobs:
         uses: ./.github/composite-actions/cache-and-install
 
       - name: Typegen
-        working-directory: apps/web
+        working-directory: workers/images
         run: |
           pnpm run cf-typegen
 
-      - name: Sync
-        working-directory: apps/web
-        run: |
-          pnpm astro sync
-
       - name: Lint
         shell: bash
-        working-directory: apps/web
+        working-directory: workers/images
         run: |
           pnpm run lint:check
