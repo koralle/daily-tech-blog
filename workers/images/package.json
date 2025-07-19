@@ -1,0 +1,26 @@
+{
+  "name": "@daily-tech-blog/images-worker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "lint:check": "oxlint --config oxlintrc.json --tsconfig tsconfig.json",
+    "format:check": "prettier . -c --config .prettierrc.mjs",
+    "format:fix": "prettier . -w --config .prettierrc.mjs",
+    "format": "pnpm run format:fix",
+    "cf-typegen": "wrangler types",
+    "typecheck": "tsgo --noEmit",
+    "check": "run-p typecheck format:check --aggregate-output -l"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250719.0",
+    "@types/node": "^24.0.10",
+    "@typescript/native-preview": "7.0.0-dev.20250719.1",
+    "oxlint": "^1.6.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "hono": "^4.8.5"
+  }
+}

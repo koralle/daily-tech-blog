@@ -51,26 +51,20 @@ const tagMap = new Map(TAGS.map((tag) => [tag.id, tag]));
 
 /**
  * タグIDからタグ情報を取得
- * @param id タグID
- * @returns タグ情報（見つからない場合はundefined）
+ * @param {string} id タグID
+ * @returns {Tag|undefined} タグ情報（見つからない場合はundefined）
  */
-export function getTagById(id: string): Tag | undefined {
-  return tagMap.get(id);
-}
+export const getTagById = (id: string): Tag | undefined => tagMap.get(id);
 
 /**
  * 全てのタグIDを取得
- * @returns タグIDの配列
+ * @returns {string[]} タグIDの配列
  */
-export function getAllTagIds(): string[] {
-  return TAGS.map((tag) => tag.id);
-}
+export const getAllTagIds = (): string[] => TAGS.map((tag) => tag.id);
 
 /**
  * タグIDの検証
- * @param id 検証するID
- * @returns 有効なタグIDかどうか
+ * @param {string} id 検証するID
+ * @returns {boolean} 有効なタグIDかどうか
  */
-export function isValidTagId(id: string): id is TagId {
-  return tagMap.has(id);
-}
+export const isValidTagId = (id: string): id is TagId => tagMap.has(id);

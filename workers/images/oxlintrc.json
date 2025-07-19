@@ -1,0 +1,42 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": ["node_modules"],
+  "plugins": ["import", "jest", "jsdoc", "node", "oxc", "promise", "typescript", "unicorn", "vitest"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "error",
+    "perf": "error",
+    "style": "error",
+    "restriction": "error",
+    "nursery": "warn"
+  },
+  "env": {
+    "browser": true,
+    "es2024": true,
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": ["src/*.ts"],
+      "rules": {
+        "max-lines-per-function": ["error", { "max": 50 }],
+        "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "pascalCase": true } }],
+        "id-length": "off",
+        "explicit-function-return-type": "off"
+      }
+    },
+    {
+      "files": ["src/index.ts"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx"],
+      "rules": {
+        "jest/consistent-test-it": ["error", { "fn": "test" }]
+      }
+    }
+  ]
+}

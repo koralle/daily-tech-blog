@@ -1,13 +1,8 @@
-/** @type {import("prettier").Config} */
+import PrettierConfig from '../../.prettierrc.mjs';
+
+/* @type import("prettier").Config */
 export default {
-  bracketSameLine: false,
-  printWidth: 120,
-  useTabs: false,
-  tabWidth: 2,
-  semi: true,
-  singleQuote: true,
-  singleAttributePerLine: true,
-  trailingComma: 'none',
+  ...PrettierConfig,
 
   // overrides
   overrides: [
@@ -23,6 +18,13 @@ export default {
       options: {
         plugins: ['@prettier/plugin-oxc'],
         parser: 'oxc-ts'
+      }
+    },
+    {
+      files: ['**/*.astro'],
+      options: {
+        plugins: ['prettier-plugin-astro'],
+        parser: 'astro'
       }
     }
   ]
