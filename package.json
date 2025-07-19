@@ -30,7 +30,7 @@
     "@astrojs/solid-js": "^5.1.0",
     "astro": "^5.11.0",
     "dayjs": "^1.11.13",
-    "kiso.css": "^1.2.1",
+    "kiso.css": "^1.2.2",
     "sharp": "^0.34.2",
     "solid-js": "^1.9.7",
     "tailwindcss": "^4.1.11"
