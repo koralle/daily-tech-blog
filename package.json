@@ -9,6 +9,6 @@
     "lefthook": "^1.11.16",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
-    "wrangler": "^4.23.0"
+    "wrangler": "^4.25.0"
   }
 }
