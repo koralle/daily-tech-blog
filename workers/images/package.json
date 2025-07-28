@@ -16,7 +16,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250719.0",
     "@types/node": "^24.0.10",
-    "@typescript/native-preview": "7.0.0-dev.20250719.1",
+    "@typescript/native-preview": "7.0.0-dev.20250728.1",
     "oxlint": "^1.6.0",
     "typescript": "^5.8.3"
   },
