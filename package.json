@@ -6,7 +6,7 @@
   "scripts": {},
   "devDependencies": {
     "@prettier/plugin-oxc": "^0.0.4",
-    "lefthook": "^1.11.16",
+    "lefthook": "^1.12.2",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
     "wrangler": "^4.26.0"
