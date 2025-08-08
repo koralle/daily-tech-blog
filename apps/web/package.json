@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "prepare": "panda codegen",
     "build": "astro build",
     "start": "astro preview",
     "preview": "astro build && wrangler dev",

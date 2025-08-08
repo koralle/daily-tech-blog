@@ -7,6 +7,8 @@
     "src/**/*.astro",
     "astro.config.mts",
     "eslint.config.mts",
+    "panda.config.ts",
+    "postcss.config.cjs",
     "rss.xml.js"
   ],
   "plugins": ["import", "jest", "jsdoc", "jsx-a11y", "node", "oxc", "promise", "typescript", "unicorn", "vitest"],

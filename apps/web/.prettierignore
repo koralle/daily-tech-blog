@@ -3,3 +3,6 @@ pnpm-lock.yaml
 
 # Cloudflare Workers
 worker-configuration.d.ts
+
+# Panda CSS
+styled-system
