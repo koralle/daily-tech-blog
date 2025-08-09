@@ -1,4 +1,4 @@
-import { defineConfig } from '@pandacss/dev';
+import { defineConfig, defineLayerStyles } from '@pandacss/dev';
 
 export default defineConfig({
   // Whether to use css reset
@@ -37,7 +37,14 @@ export default defineConfig({
             1200: { value: '#2E0F13' }
           }
         }
-      }
+      },
+      layerStyles: defineLayerStyles({
+        globalBackground: {
+          value: {
+            background: '{colors.rosePink.200}'
+          }
+        }
+      })
     }
   },
 
