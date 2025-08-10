@@ -13,7 +13,7 @@ export default typegen([
   eslint.configs.recommended,
   {
     name: 'daily-tech-blog/typescript',
-    files: ['src/**/*.ts', 'src/**/*.tsx'],
+    files: ['src/**/*.ts', 'src/**/*.tsx', 'panda/**/*.ts', 'panda.config.ts'],
     languageOptions: {
       parser: tseslint.parser as Linter.Parser,
       parserOptions: {
