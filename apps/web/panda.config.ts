@@ -1,6 +1,7 @@
 import { defineConfig } from '@pandacss/dev';
 import { colorTokens } from './panda/tokens/colors';
 import { fontWeightTokens } from './panda/tokens/font-weights';
+import { radiiTokens } from './panda/tokens/radii';
 
 export default defineConfig({
   // Whether to use css reset
@@ -19,7 +20,8 @@ export default defineConfig({
     extend: {
       tokens: {
         colors: colorTokens,
-        fontWeights: fontWeightTokens
+        fontWeights: fontWeightTokens,
+        radii: radiiTokens
       },
     }
   },
