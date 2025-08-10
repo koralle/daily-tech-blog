@@ -7,6 +7,7 @@ import { letterSpacingTokens } from './panda/tokens/letter-spacings';
 import { fontSizeTokens } from './panda/tokens/font-sizes';
 import { spacingTokens } from './panda/tokens/spacings';
 import { fontTokens } from './panda/tokens/fonts';
+import { borderWidthTokens } from './panda/tokens/border-widths';
 
 export default defineConfig({
   // Whether to use css reset
@@ -24,6 +25,7 @@ export default defineConfig({
   theme: {
     extend: {
       tokens: {
+        borderWidths: borderWidthTokens,
         colors: colorTokens,
         fonts: fontTokens,
         fontSizes: fontSizeTokens,
@@ -32,7 +34,7 @@ export default defineConfig({
         lineHeights: lineHeightTokens,
         radii: radiiTokens,
         spacing: spacingTokens
-      },
+      }
     }
   },
 
