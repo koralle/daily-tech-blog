@@ -45,6 +45,41 @@ export const colorTokens = {
       1100: {
         value: '#0f0f0f'
       }
+    },
+    rosePink: {
+      100: {
+        value: '#ffcad8'
+      },
+      200: {
+        value: '#ffbecc'
+      },
+      300: {
+        value: '#ffabb9'
+      },
+      400: {
+        value: '#ec93a1'
+      },
+      500: {
+        value: '#cb7583'
+      },
+      600: {
+        value: '#a65463'
+      },
+      700: {
+        value: '#833545'
+      },
+      800: {
+        value: '#64182c'
+      },
+      900: {
+        value: '#4c0019'
+      },
+      1000: {
+        value: '#3b000c'
+      },
+      1100: {
+        value: '#2f0005'
+      }
     }
   }
 } as const satisfies Tokens
