@@ -1,5 +1,6 @@
 import { defineConfig } from '@pandacss/dev';
 import { colorTokens } from './panda/tokens/colors';
+import { fontWeightTokens } from './panda/tokens/font-weights';
 
 export default defineConfig({
   // Whether to use css reset
@@ -17,7 +18,8 @@ export default defineConfig({
   theme: {
     extend: {
       tokens: {
-        colors: colorTokens
+        colors: colorTokens,
+        fontWeights: fontWeightTokens
       },
     }
   },
