@@ -3,6 +3,7 @@ import { colorTokens } from './panda/tokens/colors';
 import { fontWeightTokens } from './panda/tokens/font-weights';
 import { radiiTokens } from './panda/tokens/radii';
 import { lineHeightTokens } from './panda/tokens/line-heights';
+import { letterSpacingTokens } from './panda/tokens/letter-spacings';
 
 export default defineConfig({
   // Whether to use css reset
@@ -22,6 +23,7 @@ export default defineConfig({
       tokens: {
         colors: colorTokens,
         fontWeights: fontWeightTokens,
+        letterSpacings: letterSpacingTokens,
         lineHeights: lineHeightTokens,
         radii: radiiTokens,
       },
