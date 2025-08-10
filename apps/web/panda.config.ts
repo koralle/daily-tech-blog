@@ -8,6 +8,7 @@ import { fontSizeTokens } from './panda/tokens/font-sizes';
 import { spacingTokens } from './panda/tokens/spacings';
 import { fontTokens } from './panda/tokens/fonts';
 import { borderWidthTokens } from './panda/tokens/border-widths';
+import { sizeTokens } from './panda/tokens/sizes';
 
 export default defineConfig({
   // Whether to use css reset
@@ -33,6 +34,7 @@ export default defineConfig({
         letterSpacings: letterSpacingTokens,
         lineHeights: lineHeightTokens,
         radii: radiiTokens,
+        sizes: sizeTokens,
         spacing: spacingTokens
       }
     }
