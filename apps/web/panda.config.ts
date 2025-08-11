@@ -36,6 +36,11 @@ export default defineConfig({
         radii: radiiTokens,
         sizes: sizeTokens,
         spacing: spacingTokens
+      },
+      breakpoints: {
+        sm: '640px',
+        md: '864px',
+        lg: '1176px'
       }
     }
   },
