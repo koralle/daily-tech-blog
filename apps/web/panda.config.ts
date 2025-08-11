@@ -9,6 +9,7 @@ import { spacingTokens } from './panda/tokens/spacings';
 import { fontTokens } from './panda/tokens/fonts';
 import { borderWidthTokens } from './panda/tokens/border-widths';
 import { sizeTokens } from './panda/tokens/sizes';
+import { globalStyles } from './panda/global-styles';
 
 export default defineConfig({
   // Whether to use css reset
@@ -21,6 +22,8 @@ export default defineConfig({
 
   // Files to exclude
   exclude: [],
+
+  globalCss: globalStyles,
 
   // Useful for theme customization
   theme: {
