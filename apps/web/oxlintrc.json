@@ -44,6 +44,15 @@
       "rules": {
         "jest/consistent-test-it": ["error", { "fn": "test" }]
       }
+    },
+    {
+      "files": ["panda/**/*.ts"],
+      "rules": {
+        "sort-keys": "off",
+        "no-magic-numbers": "off",
+        "import/prefer-default-export": "off",
+        "unicorn/filename-case": "off"
+      }
     }
   ]
 }
