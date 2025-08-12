@@ -10,6 +10,7 @@ import { fontTokens } from './panda/tokens/fonts';
 import { borderWidthTokens } from './panda/tokens/border-widths';
 import { sizeTokens } from './panda/tokens/sizes';
 import { globalStyles } from './panda/global-styles';
+import { textStyles } from './panda/text-styles';
 
 export default defineConfig({
   // Whether to use css reset
@@ -44,9 +45,13 @@ export default defineConfig({
         sm: '640px',
         md: '864px',
         lg: '1176px'
-      }
+      },
+      textStyles
     }
   },
+
+  jsxFramework: 'solid',
+  jsxFactory: 'panda',
 
   // The output directory for your css system
   outdir: 'styled-system'

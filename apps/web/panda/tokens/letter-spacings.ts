@@ -8,9 +8,9 @@ export const letterSpacingTokens = {
     value: '0.025em'
   },
   md: {
-    value: '0.1em'
+    value: '0.03em'
   },
   lg: {
-    value: '0.2em'
+    value: '0.04em'
   }
 } as const satisfies Tokens['letterSpacings'];

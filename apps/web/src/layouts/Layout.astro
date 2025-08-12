@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import { Footer } from './Footer';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { css } from '../../styled-system/css';
 
 interface Props {
   title?: string;
@@ -23,13 +24,43 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
       description={description}
     />
   </head>
-  <body class="relative flex flex-col w-full">
-    <Header />
-    <main class="grid grid-cols-1 justify-center items-start w-full min-h-[calc(100svb-15rem)]">
-      <div class="container justify-self-center px-4 sm:px-6 lg:px-8 max-w-7xl">
+  <body
+    class={css({
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '16px',
+      padding: '16px',
+      md: {
+        padding: '32px',
+        gap: '32px'
+      }
+    })}
+  >
+    <div
+      class={css({
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        md: {
+          gap: '32px'
+        },
+        lg: {
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'start'
+        }
+      })}
+    >
+      <Header />
+      <main
+        class={css({
+          display: 'flex',
+          flexDirection: 'column'
+        })}
+      >
         <slot />
-      </div>
-    </main>
+      </main>
+    </div>
     <Footer />
   </body>
 </html>
