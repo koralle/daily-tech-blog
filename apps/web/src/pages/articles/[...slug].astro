@@ -6,6 +6,7 @@ import { getTagById } from '../../data/tags';
 import { formatDate } from '../../utils';
 import { Article } from '../../components/Article';
 import { css } from '../../../styled-system/css';
+import { Heading } from '../../components/MDX/heading';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles');
@@ -20,7 +21,6 @@ type Props = CollectionEntry<'articles'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
-
 const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !== 'undefined');
 ---
 
@@ -66,7 +66,13 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
         最終更新日: {formatDate('YYYY/MM/DD')(post.data.lastUpdatedDate ?? post.data.publishedDate)}
       </p>
     </header>
-    <div>
+    <div
+      class={css({
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px'
+      })}
+    >
       <Content />
     </div>
   </Article>

@@ -21,7 +21,8 @@ export const Article = ({ children }: Props) => {
         display: 'flex',
         flexDirection: 'column',
         gap: '16px',
-        rounded: '12'
+        rounded: '12',
+        boxShadow: '0 8px 24px oklch(0% 0 0 / 0.15)'
       })}
     >
       {children}
