@@ -6,7 +6,6 @@ import { getTagById } from '../../data/tags';
 import { formatDate } from '../../utils';
 import { Article } from '../../components/Article';
 import { css } from '../../../styled-system/css';
-import { Heading } from '../../components/MDX/heading';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles');

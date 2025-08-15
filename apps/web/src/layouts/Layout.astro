@@ -26,8 +26,8 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   </head>
   <body
     class={css({
-      display: 'flex',
-      flexDirection: 'column',
+      display: 'grid',
+      gridTemplateRows: '1fr max-content',
       minHeight: '100svb',
       gap: '16px',
       padding: '16px',
@@ -56,7 +56,11 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
       <main
         class={css({
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          width: '100%',
+          lg: {
+            maxWidth: '50'
+          }
         })}
       >
         <slot />
