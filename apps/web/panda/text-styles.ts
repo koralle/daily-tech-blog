@@ -33,6 +33,14 @@ export const textStyles = defineTextStyles({
       letterSpacing: 'lg'
     }
   },
+  articleLinkItem: {
+    value: {
+      fontWeight: '700',
+      fontSize: '24',
+      lineHeight: '150',
+      letterSpacing: 'lg'
+    }
+  },
   lastUpdated: {
     value: {
       fontWeight: '400',

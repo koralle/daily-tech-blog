@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import type { GetStaticPathsOptions } from 'astro';
 import { css } from '../../../styled-system/css';
+import { getTagById } from '../../data/tags';
+import { ArticleLinkItem } from './_components/article-link-item';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const allArticles = await getCollection('articles');
@@ -36,54 +38,11 @@ const { page } = Astro.props;
     >
       {
         page.data.map((collectionItem) => (
-          <div
-            class={css({
-              display: 'flex',
-              flexDirection: 'column',
-              backgroundColor: 'white',
-              padding: '16px',
-              boxShadow: '0 8px 24px oklch(0% 0 0 / 0.15)',
-              gap: '16px',
-              md: {
-                padding: '24px'
-              },
-              rounded: '12'
-            })}
-          >
-            <a
-              href={`/articles/${collectionItem.id}`}
-              class={css({
-                color: 'gray.700',
-                display: 'inline flex',
-                justifyContent: 'start',
-                alignItems: 'center',
-                textStyle: 'articleTitle'
-              })}
-            >
-              {collectionItem.data.title}
-            </a>
-            <div
-              class={css({
-                display: 'flex',
-                gap: '16px'
-              })}
-            >
-              {collectionItem.data.tags.map((tag) => (
-                <a
-                  class={css({
-                    color: 'white',
-                    backgroundColor: 'rosePink.600',
-                    textStyle: 'categoryTag',
-                    paddingX: '1em',
-                    paddingY: '0.5em',
-                    borderRadius: '8'
-                  })}
-                >
-                  {tag}
-                </a>
-              ))}
-            </div>
-          </div>
+          <ArticleLinkItem
+            articleId={collectionItem.id}
+            title={collectionItem.data.title}
+            tagIds={collectionItem.data.tags}
+          />
         ))
       }
     </div>
