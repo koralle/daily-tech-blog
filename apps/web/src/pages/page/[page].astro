@@ -3,13 +3,12 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import type { GetStaticPathsOptions } from 'astro';
 import { css } from '../../../styled-system/css';
-import { getTagById } from '../../data/tags';
 import { ArticleLinkItem } from './_components/article-link-item';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const allArticles = await getCollection('articles');
 
-  return paginate(allArticles, { pageSize: 5 });
+  return paginate(allArticles, { pageSize: 8 });
 }
 
 const { page } = Astro.props;
@@ -28,7 +27,7 @@ const { page } = Astro.props;
     <div
       class={css({
         display: 'grid',
-        gridTemplateRows: 'repeat(5, auto)',
+        gridTemplateRows: 'repeat(8, auto)',
         width: '100%',
         gap: '16px',
         md: {
@@ -75,7 +74,8 @@ const { page } = Astro.props;
               {page.lastPage >= 2 && (
                 <a
                   href={`/page/2`}
-                  class={css({})}
+                  class={css({
+                  })}
                 >
                   2
                 </a>
@@ -83,7 +83,8 @@ const { page } = Astro.props;
               {page.lastPage >= 3 && (
                 <a
                   href={`/page/3`}
-                  class={css({})}
+                  class={css({
+                  })}
                 >
                   3
                 </a>
@@ -91,7 +92,8 @@ const { page } = Astro.props;
               {page.url.next && (
                 <a
                   href={page.url.next}
-                  class={css({})}
+                  class={css({
+                  })}
                 >
                   &gt;
                 </a>
@@ -110,20 +112,23 @@ const { page } = Astro.props;
             <>
               <a
                 href={page.url.first}
-                class={css({})}
+                  class={css({
+                  })}
               >
                 &lt;&lt;
               </a>
               <a
                 href={page.url.prev}
-                class={css({})}
+                  class={css({
+                  })}
               >
                 &lt;
               </a>
               {page.lastPage >= 3 && (
                 <a
                   href={`/page/${page.lastPage - 2}`}
-                  class={css({})}
+                  class={css({
+                  })}
                 >
                   {page.lastPage - 2}
                 </a>
@@ -131,7 +136,8 @@ const { page } = Astro.props;
               {page.lastPage >= 2 && (
                 <a
                   href={`/page/${page.lastPage - 1}`}
-                  class={css({})}
+                  class={css({
+                  })}
                 >
                   {page.lastPage - 1}
                 </a>
@@ -148,13 +154,16 @@ const { page } = Astro.props;
             <>
               <a
                 href={page.url.first}
-                class={css({})}
+                  class={css({
+                  })}
               >
                 &lt;&lt;
               </a>
               <a
                 href={page.url.prev}
-                class={css({})}
+                  class={css({
+
+                  })}
               >
                 &lt;
               </a>

@@ -49,12 +49,11 @@ export const ArticleLinkItem = ({ articleId, title, tagIds }: Props) => {
             <a
               href={`/categories/${tagId}/1`}
               class={css({
-                fontSize: '18',
-                paddingX: 'calc(var(--spacing-unit) * 4)',
-                paddingY: 'calc(var(--spacing-unit) * 1)',
                 color: 'white',
                 backgroundColor: 'rosePink.600',
                 textStyle: 'categoryTag',
+                paddingX: 'calc(var(--spacing-unit) * 4)',
+                paddingY: 'calc(var(--spacing-unit) * 1)',
                 rounded: '8',
                 outlineOffset: 'calc(var(--spacing-unit) * 1)'
               })}

@@ -2,10 +2,13 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { getTagById } from '../../data/tags';
+import { getTagById, isValidTagId } from '../../data/tags';
 import { formatDate } from '../../utils';
 import { Article } from '../../components/Article';
 import { css } from '../../../styled-system/css';
+import BaseHead from '../../components/BaseHead.astro';
+import { Heading } from '../../components/MDX/heading';
+import { Paragraph } from './_components/paragraph';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles');
@@ -23,6 +26,12 @@ const { Content } = await render(post);
 const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !== 'undefined');
 ---
 
+<head>
+  <BaseHead
+    title={post.data.title}
+    description={''}
+  />
+</head>
 <Layout
   title={post.data.title}
   description={post.data.description}
@@ -34,31 +43,41 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
       </h1>
       {
         validTagList.length > 0 && (
-          <ul class={css({ display: 'flex', gap: '16px' })}>
-            {validTagList.map((tagId) => (
-              <li>
+          <div
+            class={css({
+              display: 'flex',
+              gap: 'calc(var(--spacing-unit) * 4)'
+            })}
+          >
+            {validTagList.map((tagId) => {
+              const isValid = isValidTagId(tagId);
+              if (!isValid) {
+                return null;
+              }
+
+              const tag = getTagById(tagId);
+              if (tag === undefined) {
+                return null;
+              }
+
+              return (
                 <a
                   href={`/categories/${tagId}/1`}
                   class={css({
                     color: 'white',
                     backgroundColor: 'rosePink.600',
                     textStyle: 'categoryTag',
-                    paddingX: '1em',
-                    paddingY: '0.5em',
-                    borderRadius: '8',
-                    _hover: {
-                      backgroundColor: 'rosePink.700'
-                    },
-                    _active: {
-                      backgroundColor: 'rosePink.800'
-                    }
+                    paddingX: 'calc(var(--spacing-unit) * 4)',
+                    paddingY: 'calc(var(--spacing-unit) * 1)',
+                    rounded: '8',
+                    outlineOffset: 'calc(var(--spacing-unit) * 1)'
                   })}
                 >
-                  {getTagById(tagId)?.displayName}
+                  {tag.displayName}
                 </a>
-              </li>
-            ))}
-          </ul>
+              );
+            })}
+          </div>
         )
       }
       <p class={css({ textStyle: 'lastUpdated' })}>
@@ -72,7 +91,7 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
         gap: '16px'
       })}
     >
-      <Content />
+      <Content components={{ h2: Heading, p: Paragraph }} />
     </div>
   </Article>
 </Layout>
