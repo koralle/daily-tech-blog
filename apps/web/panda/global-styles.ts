@@ -30,5 +30,9 @@ export const globalStyles = defineGlobalStyles({
   ':where(pre:not(.astro-code), :not(pre) > code, kbd, samp)': {
     overflowWrap: 'normal',
     wordBreak: 'normal'
+  },
+  ':where(.astro-code)': {
+    padding: 'calc(var(--spacing-unit) * 8)',
+    rounded: '8'
   }
 });

@@ -17,5 +17,10 @@ export default defineConfig({
     },
 
     imageService: 'cloudflare'
-  })
+  }),
+  markdown: {
+    shikiConfig: {
+      theme: 'catppuccin-frappe'
+    }
+  }
 });
