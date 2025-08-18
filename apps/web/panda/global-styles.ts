@@ -21,7 +21,7 @@ export const globalStyles = defineGlobalStyles({
   ':where(html[lang="ja"])': {
     // 文字内の単語がどの位置で折り返されるかを指定する
     // https://ics.media/entry/240411/#word-break
-    wordBreak: 'auto-phrase',
+    wordBreak: 'auto-phrase'
   },
   ':where(pre:not(.astro-code), code, kbd, samp)': {
     overflowWrap: 'normal',
