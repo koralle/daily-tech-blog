@@ -46,9 +46,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
         class={css({
           display: 'flex',
           flexDirection: 'column',
-          width: '100%',
           lg: {
-            maxWidth: '50'
+            maxWidth: '50',
+            minHeight: '100%'
           }
         })}
       >
