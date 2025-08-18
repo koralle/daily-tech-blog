@@ -34,5 +34,17 @@ export const globalStyles = defineGlobalStyles({
   ':where(.astro-code)': {
     padding: 'calc(var(--spacing-unit) * 8)',
     rounded: '8'
+  },
+  ':where(body)': {
+    display: 'grid',
+    gridTemplateRows: '1fr max-content',
+    minWidth: '100svi',
+    minHeight: '100svb',
+    gap: 'calc(var(--spacing-unit) * 4)',
+    padding: 'calc(var(--spacing-unit) * 4)',
+    md: {
+      padding: 'calc(var(--spacing-unit) * 8)',
+      gap: 'calc(var(--spacing-unit) * 8)'
+    }
   }
 });
