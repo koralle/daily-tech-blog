@@ -32,7 +32,7 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
       display: 'flex',
       flexDirection: 'column',
       flexGrow: '1',
-      gap: '16px',
+      gap: 'calc(var(--spacing-unit) * 4)',
       rounded: '12',
       backgroundColor: 'white',
       padding: 'calc(var(--spacing-unit) * 4)',
