@@ -4,6 +4,7 @@ import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { getTagById } from '../../data/tags';
 import { formatDate } from '../../utils';
+import { css } from '../../../styled-system/css';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles');
@@ -26,7 +27,21 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
   title={post.data.title}
   description={post.data.description}
 >
-  <article class="flex flex-col gap-8 pt-10">
+  <article
+    class={css({
+      display: 'flex',
+      flexDirection: 'column',
+      flexGrow: '1',
+      gap: 'calc(var(--spacing-unit) * 4)',
+      rounded: '12',
+      backgroundColor: 'white',
+      padding: 'calc(var(--spacing-unit) * 4)',
+      width: '100%',
+      md: {
+        padding: 'calc(var(--spacing-unit) * 8)'
+      }
+    })}
+  >
     <header class="flex flex-col gap-4">
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold my-0">{post.data.title}</h1>
       <p>最終更新日: {formatDate('YYYY/MM/DD')(post.data.lastUpdatedDate ?? post.data.publishedDate)}</p>
