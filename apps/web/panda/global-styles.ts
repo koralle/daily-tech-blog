@@ -37,6 +37,7 @@ export const globalStyles = defineGlobalStyles({
   },
   ':where(body)': {
     display: 'grid',
+    gridAutoColumns: '100%',
     gridTemplateRows: '1fr max-content',
     minWidth: '100svi',
     minHeight: '100svb',
