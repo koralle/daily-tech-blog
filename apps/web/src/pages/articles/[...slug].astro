@@ -5,6 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getTagById } from '../../data/tags';
 import { formatDate } from '../../utils';
 import { css } from '../../../styled-system/css';
+import { MDX } from './_components/mdx-components';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles');
@@ -62,8 +63,26 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
         )
       }
     </header>
-    <div class="prose prose-gray prose-sm sm:prose-base lg:prose-lg max-w-none">
-      <Content />
+    <div
+      class={css({
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'calc(var(--spacing-unit) * 4)'
+      })}
+    >
+      <Content
+        components={{
+          a: MDX.Link,
+          code: MDX.Code,
+          h2: MDX.H2,
+          p: MDX.P,
+          table: MDX.Table,
+          td: MDX.Td,
+          th: MDX.Th,
+          tr: MDX.Tr,
+          ul: MDX.Ul
+        }}
+      />
     </div>
   </article>
 </Layout>
