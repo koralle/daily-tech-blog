@@ -229,7 +229,7 @@ const Ul = ({ children }: MDXComponentProps) => (
 export const MDX = {
   H2: H2,
   Link: Link,
-  Papagraph: Paragraph,
+  Paragraph: Paragraph,
   Code: Code,
   Strong: Strong,
   Table: Table,
