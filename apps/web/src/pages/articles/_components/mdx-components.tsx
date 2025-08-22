@@ -1,5 +1,5 @@
-import { css } from '../../../../styled-system/css';
 import type { ComponentProps, JSX } from 'solid-js';
+import { css } from '../../../../styled-system/css';
 import { splitProps } from 'solid-js';
 
 export interface MDXComponentProps {
@@ -49,14 +49,18 @@ const H2 = ({ children }: MDXComponentProps) => (
       fontSize: '24',
       fontWeight: '700',
       letterSpacing: '0.04em',
-      lineHeight: '150'
+      lineHeight: '150',
+      boxSizing: 'border-box',
+      borderBlockEndWidth: '2px',
+      borderBlockEndStyle: 'solid',
+      borderBlockEndColor: 'rosePink.600'
     })}
   >
     {children}
   </h2>
 );
 
-const P = ({ children }: MDXComponentProps) => (
+const Paragraph = ({ children }: MDXComponentProps) => (
   <p
     class={css({
       color: 'gray.800',
@@ -117,7 +121,9 @@ const Table = (props: TableProps) => {
         alignSelf: 'center',
         boxSizing: 'border-box',
         borderCollapse: 'collapse',
-        border: '1px solid var(--colors-gray-100)',
+        borderWidth: 'px',
+        borderStyle: 'solid',
+        borderColor: 'gray.100',
         overflow: 'scroll'
       })}
       {...rest}
@@ -142,7 +148,9 @@ const Td = (props: TdProps) => {
         paddingX: 'calc(var(--spacing-unit) * 4)',
         paddingY: 'calc(var(--spacing-unit) * 2)',
         boxSizing: 'border-box',
-        border: '1px solid var(--colors-gray-200)'
+        borderWidth: 'px',
+        borderStyle: 'solid',
+        borderColor: 'gray.200'
       })}
       {...rest}
     >
@@ -158,10 +166,6 @@ interface ThProps extends ComponentProps<'th'> {
 const Th = (props: ThProps) => {
   const [local, rest] = splitProps(props, ['children', 'class', 'style']);
 
-  if (local.style === 'textAlign:right') {
-    alert('foo');
-  }
-
   return (
     <th
       style={local.style}
@@ -172,7 +176,9 @@ const Th = (props: ThProps) => {
         paddingX: 'calc(var(--spacing-unit) * 4)',
         paddingY: 'calc(var(--spacing-unit) * 2)',
         boxSizing: 'border-box',
-        border: '1px solid var(--colors-gray-200)'
+        borderWidth: 'px',
+        borderStyle: 'solid',
+        borderColor: 'gray.200'
       })}
       {...rest}
     >
@@ -193,7 +199,9 @@ const Tr = (props: TrProps) => {
       class={css({
         width: '100%',
         boxSizing: 'border-box',
-        border: '1px solid var(--colors-gray-100)',
+        borderWidth: 'px',
+        borderStyle: 'solid',
+        borderColor: 'gray.100',
         '&:nth-child(even)': {
           backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-800) 6.25%, transparent)'
         }
@@ -221,7 +229,7 @@ const Ul = ({ children }: MDXComponentProps) => (
 export const MDX = {
   H2: H2,
   Link: Link,
-  P: P,
+  Papagraph: Paragraph,
   Code: Code,
   Strong: Strong,
   Table: Table,
