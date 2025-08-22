@@ -61,6 +61,25 @@ const H2 = ({ children }: MDXComponentProps) => (
   </h2>
 );
 
+const H3 = ({ children }: MDXComponentProps) => (
+  <h2
+    class={css({
+      color: 'gray.700',
+      fontSize: '20',
+      fontWeight: '700',
+      letterSpacing: '0.04em',
+      lineHeight: '150',
+      paddingInlineStart: 'calc(var(--spacing-unit) * 2)',
+      boxSizing: 'border-box',
+      borderInlineStartWidth: '6px',
+      borderInlineStartStyle: 'solid',
+      borderInlineStartColor: 'rosePink.600'
+    })}
+  >
+    {children}
+  </h2>
+);
+
 const Paragraph = ({ children }: MDXComponentProps) => (
   <p
     class={css({
@@ -229,6 +248,7 @@ const Ul = ({ children }: MDXComponentProps) => (
 
 export const MDX = {
   H2: H2,
+  H3: H3,
   Link: Link,
   Paragraph: Paragraph,
   Code: Code,
