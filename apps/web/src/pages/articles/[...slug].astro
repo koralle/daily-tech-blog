@@ -6,6 +6,7 @@ import { getTagById } from '../../data/tags';
 import { formatDate } from '../../utils';
 import { css } from '../../../styled-system/css';
 import { MDX } from './_components/mdx-components';
+import { CategoryTag } from '../../components/category-tag';
 
 export async function getStaticPaths() {
   const posts = await getCollection('articles');
@@ -33,7 +34,7 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
       display: 'flex',
       flexDirection: 'column',
       flexGrow: '1',
-      gap: 'calc(var(--spacing-unit) * 4)',
+      gap: 'calc(var(--spacing-unit) * 8)',
       rounded: '12',
       backgroundColor: 'white',
       padding: 'calc(var(--spacing-unit) * 4)',
@@ -43,25 +44,54 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
       }
     })}
   >
-    <header class="flex flex-col gap-4">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold my-0">{post.data.title}</h1>
-      <p>最終更新日: {formatDate('YYYY/MM/DD')(post.data.lastUpdatedDate ?? post.data.publishedDate)}</p>
-      {
-        validTagList.length > 0 && (
-          <ul class="flex flex-wrap gap-2 list-none p-0">
-            {validTagList.map((tagId) => (
-              <li class="inline-block">
-                <a
-                  href={`/categories/${tagId}/1`}
-                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
-                >
-                  {getTagById(tagId)?.displayName}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )
-      }
+    <header
+      class={css({
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'calc(var(--spacing-unit) * 4)'
+      })}
+    >
+      <h1
+        class={css({
+          width: '100%',
+          color: 'gray.700',
+          fontSize: '24',
+          fontWeight: '700',
+          lineHeight: '150',
+          letterSpacing: '0.04em'
+        })}
+      >
+        {post.data.title}
+      </h1>
+      <div class={css({ display: 'flex', flexDirection: 'column', gap: 'calc(var(--spacing-unit) * 2)' })}>
+        {
+          validTagList.length > 0 ? (
+            <ul
+              class={css({
+                display: 'flex',
+                gap: 'calc(var(--spacing-unit) * 4)'
+              })}
+            >
+              {validTagList.map((tagId) => (
+                <li class="inline-block">
+                  <CategoryTag href={`/categories/${tagId}/1`}>{getTagById(tagId)?.displayName}</CategoryTag>
+                </li>
+              ))}
+            </ul>
+          ) : null
+        }
+        <p
+          class={css({
+            color: 'gray.800',
+            fontWeight: '400',
+            fontSize: '16',
+            letterSpacing: '0.04em',
+            lineHeight: '150'
+          })}
+        >
+          最終更新日: {formatDate('YYYY/MM/DD')(post.data.lastUpdatedDate ?? post.data.publishedDate)}
+        </p>
+      </div>
     </header>
     <div
       class={css({
@@ -75,7 +105,7 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
           a: MDX.Link,
           code: MDX.Code,
           h2: MDX.H2,
-          p: MDX.P,
+          p: MDX.Papagraph,
           table: MDX.Table,
           td: MDX.Td,
           th: MDX.Th,
