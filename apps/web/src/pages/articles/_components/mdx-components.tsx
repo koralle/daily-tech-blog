@@ -16,6 +16,7 @@ const Link = (props: LinkProps) => {
   return (
     <a
       target="_blank"
+      rel="noopener noreferrer"
       {...rest}
       class={css({
         color: 'rosePink.700',
