@@ -40,6 +40,11 @@ export const TAGS: readonly Tag[] = [
     id: 'astrojs',
     displayName: 'Astro',
     description: 'Build fast websites, faster'
+  },
+  {
+    id: 'uiux',
+    displayName: 'UI/UX',
+    description: 'UX/UXデザインに関するあれこれ'
   }
 ] as const;
 
