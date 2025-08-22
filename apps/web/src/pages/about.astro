@@ -1,12 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { css } from '../../styled-system/css';
 ---
 
 <Layout
   title="About Me"
   description="Lorem ipsum dolor sit amet"
 >
-  <article class="flex flex-col py-12">
+  <article
+    class={css({
+      display: 'flex',
+      flexDirection: 'column',
+      flexGrow: '1',
+      gap: 'calc(var(--spacing-unit) * 8)',
+      rounded: '12',
+      backgroundColor: 'white',
+      padding: 'calc(var(--spacing-unit) * 4)',
+      width: '100%',
+      md: {
+        padding: 'calc(var(--spacing-unit) * 8)'
+      }
+    })}
+  >
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis
