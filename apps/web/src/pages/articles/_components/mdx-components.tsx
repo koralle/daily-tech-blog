@@ -53,7 +53,10 @@ const H2 = ({ children }: MDXComponentProps) => (
       boxSizing: 'border-box',
       borderBlockEndWidth: '2px',
       borderBlockEndStyle: 'solid',
-      borderBlockEndColor: 'rosePink.600'
+      borderBlockEndColor: 'rosePink.600',
+      '&:where(:has(a))': {
+        borderBlockEnd: 'none'
+      }
     })}
   >
     {children}
