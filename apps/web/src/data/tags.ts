@@ -45,6 +45,16 @@ export const TAGS: readonly Tag[] = [
     id: 'uiux',
     displayName: 'UI/UX',
     description: 'UX/UXデザインに関するあれこれ'
+  },
+  {
+    id: 'nix',
+    displayName: 'Nix',
+    description: '純粋関数型パッケージマネージャであるNixに関するあれこれ'
+  },
+  {
+    id: 'nixos',
+    displayName: 'NixOS',
+    description: 'NixをベースとしたLinuxディストリビューションであるNixOSについて'
   }
 ] as const;
 
