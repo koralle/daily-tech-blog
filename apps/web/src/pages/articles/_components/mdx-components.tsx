@@ -22,7 +22,6 @@ const Link = (props: LinkProps) => {
         color: 'rosePink.700',
         textDecoration: 'underline',
         textUnderlineOffset: '3',
-        padding: '0.25em',
         borderRadius: '4',
         _hover: {
           backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-600) 12.5%, transparent)'
