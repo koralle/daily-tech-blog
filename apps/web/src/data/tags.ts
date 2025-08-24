@@ -55,6 +55,11 @@ export const TAGS: readonly Tag[] = [
     id: 'nixos',
     displayName: 'NixOS',
     description: 'NixをベースとしたLinuxディストリビューションであるNixOSについて'
+  },
+  {
+    id: 'neovim',
+    displayName: 'Neovim',
+    description: '最強のテキストエディタであるNeovimについて'
   }
 ] as const;
 
