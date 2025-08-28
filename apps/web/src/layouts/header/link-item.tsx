@@ -1,7 +1,7 @@
 import { sva } from '../../../styled-system/css';
 import { createStyleContext } from '../../../styled-system/jsx';
 
-const linkItemStyles = sva({
+const linkItem = sva({
   slots: ['root', 'icon', 'label'],
   base: {
     root: {
@@ -18,7 +18,9 @@ const linkItemStyles = sva({
         backgroundColor: 'rosePink.100'
       }
     },
-    icon: {},
+    icon: {
+      fill: 'currentcolor'
+    },
     label: {
       fontSize: 16,
       fontWeight: '700',
@@ -27,7 +29,7 @@ const linkItemStyles = sva({
   }
 });
 
-const { withProvider, withContext } = createStyleContext(linkItemStyles);
+const { withProvider, withContext } = createStyleContext(linkItem);
 
 const Root = withProvider('a', 'root');
 const Icon = withContext('div', 'icon');
