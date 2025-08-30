@@ -1,0 +1,77 @@
+---
+title: macOSで使えそうなウィンドウマネージャを探そう
+description: 自分が今メインで使用しているM1 Macbook Airでウィンドウマネージャが欲しくなってきたので調べてみる
+publishedDate: 2025-08-30
+lastUpdatedDate: 2025-08-30
+tags: ['macos']
+---
+
+## これ何
+
+普段の勉強や開発のメイン機としてM1 Macbook Airを使用している。<br />
+しかし結構雰囲気で使用しているので、普段の開発体験を上げるための工夫の一環として**ウィンドウマネージャ**を導入してみようという記事。
+
+## ウィンドウマネージャってなんだ
+
+[ArchlinuxのWiki](https://wiki.archlinux.jp/index.php/%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3)にそれっぽい説明が書いてあった。
+
+> ウィンドウマネージャ (WM) とは、グラフィカルユーザインターフェイスでウインドウシステムにおけるウィンドウの配置や外観を制御するシステムソフトウェアです。
+
+すごいざっくり言えば、ウィンドウの配置や見た目をいい感じに制御できるソフトウェアのこと。
+
+## macOSで使えるウィンドウマネージャは?
+
+そのウィンドウマネージャもたくさん種類があるわけで、その中からmacOSで使用でき且つメジャーそうなものを調べてみた。
+
+その際、この辺りの観点に注目した。
+
+- 無料で使える
+- キー入力でタイル表示ができる
+- セキュリティ的に問題ない
+
+### ステージマネージャ
+
+そもそも、macOS Ventura以降あれば[ステージマネージャ](https://support.apple.com/ja-jp/guide/mac-help/mchl534ba392/mac)というアプリがビルトインされている。
+
+ただこれ結構使いづらい...似たような感想を抱いている人がいる
+
+- [Macのステージマネージャは結局5日でやめた：シングルタスクとは何か問題｜tama](https://note.com/tama_774/n/n423e084c02f3)
+
+### macOS標準のウィンドウのタイル表示
+
+macOS Sequoia以降ではウィンドウのドラッグ時に`[Option]`キーを入力していれば簡単にタイル表示にする機能がある。
+
+### [AeroSpace](https://github.com/nikitabobko/AeroSpace)
+
+とても良さそうなTiling Window Manager (=TWM)を見つけた。
+
+[nikitabobko/AeroSpace: AeroSpace is an i3-like tiling window manager for macOS](https://github.com/nikitabobko/AeroSpace)
+
+読み方は「エアロスペース」らしい。
+
+以下のコマンドを叩けばHomebrew経由でインストールできる。
+
+```bash
+brew install --cask nikitabobko/tap/aerospace
+```
+
+自分は[home-manager](https://github.com/nix-community/home-manager)ユーザーなので、一旦Homebrewでインストールしてみてからサッと動かして採用できそうならhome-manager経由でインストールするようにする。
+
+AeroSpaceを使用するには「プライバシーとセキュリティ」の権限を弄る必要があった。<br />
+「設定」> 「プライバシーとセキュリティ」を開いて、AeroSpaceに権限を付与する。
+
+すると特別な操作をしなくてもAeroSpaceが起動して勝手にウィンドウをタイル表示してくれた。便利。
+
+どうやら設定ファイルを書くと、挙動やキーバインドの調整ができるらしい。<br />
+これについてはまた改めてトライする。<br />
+とにかく採用。
+
+## まとめ
+
+色々と調べようと思ったら早々にAeroSpaceに着地した。<br />
+しばらく使い込んでいきたい。
+
+## 参考
+
+- [Mac でウィンドウ配置をキーボードで操作するためのウィンドウマネージャー比較](https://zenn.dev/kangetsu_121/articles/f3ee95b5f087ed)
+- [タイリングウィンドウマネージャーAeroSpaceでMacのデスクトップ環境を快適にしてみた](https://zenn.dev/leok/articles/0647df5604750c)
