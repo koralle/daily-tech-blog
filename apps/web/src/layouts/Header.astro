@@ -1,0 +1,168 @@
+---
+import { css } from '../../styled-system/css';
+import { Drawer } from './header/drawer';
+import Menu from '../assets/images/menu.svg';
+import Logo from '../assets/images/logo.svg';
+import GitHubLogo from '../assets/images/github-logo.svg';
+import TwitterLogo from '../assets/images/twitter-logo.svg';
+import Home from '../assets/images/home.svg';
+import Paper from '../assets/images/paper.svg';
+import Profile from '../assets/images/profile.svg';
+import { SITE_TITLE } from '../consts';
+import { SocialLink } from './header/social-link';
+import { LinkItem } from './header/link-item';
+---
+
+<header
+  class={css({
+    display: 'grid',
+    inlineSize: '100%',
+    backgroundColor: 'white',
+    borderRadius: '12',
+    paddingInline: 'calc(var(--spacing-unit) * 4)',
+    paddingBlock: 'calc(var(--spacing-unit) * 4)',
+    md: {
+      paddingInline: 'calc(var(--spacing-unit) * 8)',
+      paddingBlock: 'calc(var(--spacing-unit) * 6)'
+    },
+    lg: {
+      inlineSize: 'calc(var(--spacing-unit) * 70)',
+      blockSize: 'fit-content',
+      paddingInline: '0',
+      gap: 'calc(var(--spacing-unit) * 4)'
+    }
+  })}
+>
+  <div
+    class={css({
+      display: 'grid',
+      lg: {
+        paddingInline: 'calc(var(--spacing-unit) * 8)',
+        gap: 'calc(var(--spacing-unit) * 4)'
+      }
+    })}
+  >
+    <div
+      class={css({
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      })}
+    >
+      <div
+        class={css({
+          display: 'flex',
+          justifyContent: 'start',
+          alignItems: 'center',
+          gap: 'calc(var(--spacing-unit) * 4)'
+        })}
+      >
+        <div
+          class={css({
+            inlineSize: 'calc(var(--spacing-unit) * 10)',
+            blockSize: 'calc(var(--spacing-unit) * 10)',
+            md: {
+              inlineSize: 'calc(var(--spacing-unit) * 16)',
+              blockSize: 'calc(var(--spacing-unit) * 16)'
+            }
+          })}
+        >
+          <Logo />
+        </div>
+        <span
+          class={css({
+            color: 'gray.700',
+            fontSize: '24',
+            fontWeight: '700',
+            letterSpacing: '0.04em',
+            lineHeight: '150'
+          })}
+        >
+          {SITE_TITLE}
+        </span>
+      </div>
+      <Drawer.Trigger id="drawerTrigger">
+        <Menu />
+      </Drawer.Trigger>
+    </div>
+    <p
+      class={css({
+        color: 'gray.700',
+        display: 'none',
+        fontSize: '16',
+        fontWeight: '400',
+        letterSpacing: '0.025em',
+        lineHeight: '150',
+        lg: {
+          display: 'inline flex',
+          justifyContent: 'start',
+          alignItems: 'center'
+        }
+      })}
+    >
+      フロントエンドの波に浮かぶ<br />あざらしの技術ブログ
+    </p>
+  </div>
+  <nav
+    class={css({
+      display: 'none',
+      lg: {
+        display: 'grid',
+        gap: 'calc(var(--spacing-unit) * 4)'
+      }
+    })}
+  >
+    <div
+      class={css({
+        display: 'none',
+        lg: {
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, calc(var(--spacing-unit) * 6))',
+          justifyContent: 'start',
+          alignItems: 'center',
+          gap: 'calc(var(--spacing-unit) * 6)',
+          paddingInline: 'calc(var(--spacing-unit) * 8)'
+        }
+      })}
+    >
+      <SocialLink.Root href="https://twitter.com/koralle_tech">
+        <SocialLink.Icon>
+          <TwitterLogo />
+        </SocialLink.Icon>
+      </SocialLink.Root>
+
+      <SocialLink.Root href="https://github.com/koralle">
+        <SocialLink.Icon>
+          <GitHubLogo />
+        </SocialLink.Icon>
+      </SocialLink.Root>
+    </div>
+    <div
+      class={css({
+        display: 'grid',
+        gap: 'calc(var(--spacing-unit) * 1)'
+      })}
+    >
+      <LinkItem.Root href="/">
+        <LinkItem.Icon>
+          <Home />
+        </LinkItem.Icon>
+        <LinkItem.Label> Home </LinkItem.Label>
+      </LinkItem.Root>
+
+      <LinkItem.Root href="/page/1">
+        <LinkItem.Icon>
+          <Paper />
+        </LinkItem.Icon>
+        <LinkItem.Label> Articles </LinkItem.Label>
+      </LinkItem.Root>
+
+      <LinkItem.Root href="/about">
+        <LinkItem.Icon>
+          <Profile />
+        </LinkItem.Icon>
+        <LinkItem.Label> About </LinkItem.Label>
+      </LinkItem.Root>
+    </div>
+  </nav>
+</header>
