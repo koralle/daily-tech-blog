@@ -1,28 +1,26 @@
-import { sva } from '../../../styled-system/css';
-import { createStyleContext } from '../../../styled-system/jsx';
+import { css } from '../../../styled-system/css';
+import type { JSX } from 'solid-js/jsx-runtime';
 
-const socialLinkStyles = sva({
-  slots: ['root', 'icon'],
-  base: {
-    root: {
-      position: 'relative',
-      _before: {
-        position: 'absolute',
-        content: '',
-        width: '44px',
-        height: '44px'
-      }
-    },
-    icon: {
-      color: 'gray.700'
-    }
-  }
-});
+interface SocialLinkRootProps extends JSX.HTMLAttributes<HTMLAnchorElement> {
+  children: JSX.Element;
+}
 
-const { withProvider, withContext } = createStyleContext(socialLinkStyles);
+const Root = ({ children, ...rest }: SocialLinkRootProps) => (
+  <a
+    class={css({
+      display: 'block grid'
+    })}
+    {...rest}
+  >
+    {children}
+  </a>
+);
 
-const Root = withProvider('a', 'root');
-const Icon = withContext('div', 'icon');
+interface SocialLinkIconProps {
+  children: JSX.Element;
+}
+
+const Icon = ({ children }: SocialLinkIconProps) => <>{children}</>;
 
 export const SocialLink = {
   Root,
