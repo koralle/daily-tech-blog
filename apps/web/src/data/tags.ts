@@ -139,6 +139,11 @@ export const TAGS: readonly Tag[] = [
     id: 'macos',
     displayName: 'macOS',
     description: 'macOSに関するあれこれ'
+  },
+  {
+    id: 'oxlint',
+    displayName: 'Oxlint',
+    description: 'Oxlintに関するあれこれ'
   }
 ] as const;
 
