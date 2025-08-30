@@ -1,7 +1,12 @@
 ---
+import { randomUUID } from 'node:crypto';
 import { css } from '../../styled-system/css';
+import { visuallyHidden } from '../../styled-system/patterns';
 import { SITE_TITLE } from '../consts';
 import Logo from '../assets/images/logo.svg';
+import Menu from '../assets/images/menu.svg';
+
+const modalDialogTitleId = randomUUID();
 ---
 
 <header
@@ -21,29 +26,144 @@ import Logo from '../assets/images/logo.svg';
   <div
     class={css({
       display: 'flex',
-      alignItems: 'center',
-      gap: 'calc(var(--spacing-unit) * 4)'
+      justifyContent: 'space-between',
+      alignItems: 'center'
     })}
   >
     <div
       class={css({
-        width: 'calc(var(--spacing-unit) * 10)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 'calc(var(--spacing-unit) * 4)'
+      })}
+    >
+      <div
+        class={css({
+          width: 'calc(var(--spacing-unit) * 10)',
+          md: {
+            width: 'calc(var(--spacing-unit) * 16)'
+          }
+        })}
+      >
+        <Logo />
+      </div>
+      <span
+        class={css({
+          fontSize: '24',
+          fontWeight: '700',
+          lineHeight: '150',
+          letterSpacing: '0.04em'
+        })}
+      >
+        {SITE_TITLE}
+      </span>
+    </div>
+    <button
+      id="modalDialog-trigger"
+      class={css({
+        width: 'calc(var(--spacing-unit) * 6)',
+        height: 'calc(var(--spacing-unit) * 6)',
         md: {
-          width: 'calc(var(--spacing-unit) * 16)'
+          width: 'calc(var(--spacing-unit) * 8)',
+          height: 'calc(var(--spacing-unit) * 8)'
         }
       })}
     >
-      <Logo />
-    </div>
-    <span
-      class={css({
-        fontSize: '24',
-        fontWeight: '700',
-        lineHeight: '150',
-        letterSpacing: '0.04em'
-      })}
-    >
-      {SITE_TITLE}
-    </span>
+      <Menu />
+    </button>
   </div>
 </header>
+
+<dialog
+  id="modalDialog"
+  autofocus
+  aria-labelledby={modalDialogTitleId}
+  class={css({
+    '&[open]': {
+      display: 'grid',
+      inlineSize: '100%',
+      blockSize: '100%',
+      padding: 'calc(var(--spacing-unit) * 4)',
+      md: {
+        padding: 'calc(var(--spacing-unit) * 8)'
+      }
+    }
+  })}
+>
+  <h1
+    id={modalDialogTitleId}
+    class={visuallyHidden()}
+  >
+    折りたたみメニュー
+  </h1>
+  <div
+    class={css({
+      color: 'gray.700',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      blockSize: 'fit-content',
+      paddingBlockEnd: 'calc(var(--spacing-unit) * 4)',
+      borderBlockEndWidth: '1px',
+      borderBlockEndStyle: 'solid',
+      borderBlockEndColor: 'rosePink.100'
+    })}
+  >
+    <div
+      class={css({
+        display: 'flex',
+        alignItems: 'center',
+        gap: 'calc(var(--spacing-unit) * 4)'
+      })}
+    >
+      <div
+        class={css({
+          width: 'calc(var(--spacing-unit) * 10)',
+          md: {
+            width: 'calc(var(--spacing-unit) * 16)'
+          }
+        })}
+      >
+        <Logo />
+      </div>
+      <span
+        class={css({
+          fontSize: '24',
+          fontWeight: '700',
+          lineHeight: '150',
+          letterSpacing: '0.04em'
+        })}
+      >
+        {SITE_TITLE}
+      </span>
+    </div>
+    <button
+      id="modalDialog-closeTrigger"
+      class={css({
+        width: 'calc(var(--spacing-unit) * 6)',
+        height: 'calc(var(--spacing-unit) * 6)',
+        md: {
+          width: 'calc(var(--spacing-unit) * 8)',
+          height: 'calc(var(--spacing-unit) * 8)'
+        }
+      })}
+    >
+      <Menu />
+    </button>
+  </div>
+</dialog>
+
+<script>
+  function handleClickDialogTrigger(event: Event) {
+    const modal = document.getElementById('modalDialog') as HTMLDialogElement;
+    modal.showModal();
+  }
+
+  function handleClickCloseDialogTrigger(event: Event) {
+    const modal = document.getElementById('modalDialog') as HTMLDialogElement;
+    modal.close();
+  }
+
+  document.getElementById('modalDialog-trigger')?.addEventListener('click', handleClickDialogTrigger);
+  document.getElementById('modalDialog-closeTrigger')?.addEventListener('click', handleClickCloseDialogTrigger);
+</script>
