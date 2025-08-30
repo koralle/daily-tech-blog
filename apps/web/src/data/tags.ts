@@ -119,7 +119,17 @@ export const TAGS: readonly Tag[] = [
   { id: 'algorithm', displayName: 'アルゴリズム', description: 'アルゴリズムに関するあれこれ' },
   { id: 'database', displayName: 'データベース', description: 'データベースに関するあれこれ' },
   { id: 'system-design', displayName: 'システムデザイン', description: 'システムデザインに関するあれこれ' },
-  { id: 'aws', displayName: 'AWS', description: 'アマゾンウェブサービス' }
+  { id: 'aws', displayName: 'AWS', description: 'アマゾンウェブサービス' },
+  {
+    id: 'http',
+    displayName: 'HTTP',
+    description: 'HTTPプロトコル及び関連する技術に関するあれこれ'
+  },
+  {
+    id: 'web',
+    displayName: 'Web',
+    description: 'Web技術全般に関するあれこれ'
+  }
 ] as const;
 
 // 型安全なタグID
