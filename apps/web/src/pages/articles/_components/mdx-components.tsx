@@ -6,6 +6,34 @@ export interface MDXComponentProps {
   children: JSX.Element;
 }
 
+interface BlockquoteProps extends ComponentProps<'blockquote'> {
+  children: JSX.Element;
+}
+
+const Blockquote = (props: BlockquoteProps) => {
+  const [local, rest] = splitProps(props, ['children', 'class']);
+
+  return (
+    <blockquote
+      {...rest}
+      class={css({
+        color: 'gray.200',
+        fontWeight: '700',
+        fontStyle: 'oblique 40deg',
+        letterSpacing: '0.025em',
+        lineHeight: '150',
+
+        paddingInlineStart: 'calc(var(--spacing-unit) * 3)',
+
+        borderInlineStartWidth: '4px',
+        borderInlineStartStyle: 'solid',
+        borderInlineStartColor: 'gray.200'
+      })}
+    >
+      {local.children}
+    </blockquote>
+  );
+};
 interface LinkProps extends ComponentProps<'a'> {
   children: JSX.Element;
 }
@@ -249,6 +277,7 @@ const Ul = ({ children }: MDXComponentProps) => (
 );
 
 export const MDX = {
+  Blockquote: Blockquote,
   H2: H2,
   H3: H3,
   Link: Link,
