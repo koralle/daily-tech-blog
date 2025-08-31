@@ -48,7 +48,7 @@
     "eslint-typegen": "^2.2.1",
     "globals": "^16.3.0",
     "jiti": "^2.4.2",
-    "oxlint": "^1.6.0",
+    "oxlint": "^1.14.0",
     "pnpm": "^10.12.4",
     "prettier-plugin-astro": "^0.14.1",
     "solid-devtools": "^0.34.3",
