@@ -1,0 +1,42 @@
+---
+title: actを触ってみよう
+description: GitHub Actionsをよく使うのにローカルで動かすためのactをまともに触ったことがないので触ってみる。
+publishedDate: 2025-08-31
+lastUpdatedDate: 2025-08-31
+tags: ['github-actions']
+---
+
+## これ何
+
+GitHub Actionsをよく触るのに[act](https://github.com/nektos/act)をちゃんと触ったことがない。<br />
+重い腰を上げて触ってみる。
+
+- GitHub: [nektos/act: Run your GitHub Actions locally 🚀](https://github.com/nektos/act)
+- ドキュメント: [Introduction - act - User Guide | Manual | Docs | Documentation](https://nektosact.com/)
+
+## インストールから
+
+自分はNix(home-manager)使いなのでNixを使ってインストールする。<br/>
+細かいところは省略。
+
+```nix
+{ config, pkgs, inputs, ... }: {
+  nix.package = pkgs.nix;
+
+  programs.home-manager.enable = true;
+
+  home.packages = with pkgs; [
+    # nektos/act
+    # https://github.com/nektos/act
+    act
+  ];
+}
+```
+
+## DockerじゃなくてPodmanを使って動かしたい
+
+T.B.D
+
+## このリポジトリで使ってみる
+
+T.B.D
