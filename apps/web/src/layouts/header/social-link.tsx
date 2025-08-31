@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'solid-js';
-import { css } from '../../../styled-system/css';
 import type { JSX } from 'solid-js/jsx-runtime';
+import { css } from '../../../styled-system/css';
 
 interface SocialLinkRootProps extends ComponentProps<'a'> {
   children: JSX.Element;
