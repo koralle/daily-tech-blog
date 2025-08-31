@@ -1,0 +1,234 @@
+---
+title: importに関連するOxlintのルール設定を見直そう
+description: Oxlintを雰囲気で使っていたらimport周りのルールがごちゃごちゃになってきたので整理する
+publishedDate: 2025-08-31
+lastUpdatedDate: 2025-08-31
+tags: ['frontend', 'oxlint']
+---
+
+## これ何
+
+このブログではLinterとして[ESLint](https://eslint.org/)と[Oxlint](https://oxc.rs/docs/guide/usage/linter.html)を併用している。<br />
+ESLintの扱いにはもう慣れっこだが（大嘘）、Oxlintはまだまだ雰囲気で使っている。<br />
+その結果import周りのルール設定が競合してぐちゃぐちゃになり全部offにするという事態になっている。<br />
+
+なので一度見直そうと思う。
+
+## 事前知識の整理 - ルールに関連する3つの概念
+
+Oxlintのルールを見直す前に、ルールに関する3つの概念を正しく整理しておく。
+
+* **Category**
+* **Plugin**
+* **Automatic Fixes**
+
+## Category
+
+Oxlintのルールについて詳細にみていく前に、Oxlintにおける**Category**という概念をきちんと理解しておく。
+
+Oxlintの1つ1つのルールはそれぞれ一つのカテゴリー（Category）に属している。<br />
+ではどういった基準でカテゴリー分けされているのかというと、それはそれぞれのルールの目的及び振る舞いと関係がある。
+
+| 名称                                                                               | 説明 | 代表的なルール |
+| :-                                                                                 | :-   | :-             |
+| [`correctness`](https://oxc.rs/docs/guide/usage/linter/rules.html#correctness-194) | 明らかに間違っている、あるいは無駄なコードを検出する | [`eslint/no-debugger`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-debugger.html), [`jsx_a11y/alt-text`](https://oxc.rs/docs/guide/usage/linter/rules/jsx_a11y/alt-text.html)               |
+| [`suspicious`](https://oxc.rs/docs/guide/usage/linter/rules.html#suspicious-40)    | 間違っている、あるいは無駄な<strong>「可能性がある」</strong>コードを検出する | [`typescript/no-unnecessary-type-arguments`](https://oxc.rs/docs/guide/usage/linter/rules/typescript/no-unnecessary-type-arguments.html#typescript-no-unnecessary-type-arguments), [`react/style-prop-object`](https://oxc.rs/docs/guide/usage/linter/rules/react/style-prop-object.html) |
+| [`pedantic`](https://oxc.rs/docs/guide/usage/linter/rules.html#pedantic-96)        | 厳格だけれどもユーザーやプロジェクトによっては厳しすぎるかもしれない | [`eslint/eqeqeq`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/eqeqeq.html), [`unicorn/prefer-date-now`](https://oxc.rs/docs/guide/usage/linter/rules/unicorn/prefer-date-now.html) |
+| [`perf`](https://oxc.rs/docs/guide/usage/linter/rules.html#perf-11)                | コードのパフォーマンスを向上させる目的がある     | [`eslint/no-await-in-loop`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-await-in-loop.html), [`react/no-array-index-key`](https://oxc.rs/docs/guide/usage/linter/rules/react/no-array-index-key.html) |
+| [`style`](https://oxc.rs/docs/guide/usage/linter/rules.html#style-155)             | 一貫したスタイルを維持したり、慣用的な構文を強制したりするのに役立つ | [`eslint/arrow-body-style`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/arrow-body-style.html), [`typescript/no-empty-interface`](https://oxc.rs/docs/guide/usage/linter/rules/typescript/no-empty-interface.html) |
+| [`restriction`](https://oxc.rs/docs/guide/usage/linter/rules.html#restriction-70)  | 特定のパターン、構文、機能の使用を一旦禁止させ、ケースバイケースで有効化させる | [`eslint/no-alert`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-alert.html), [`typescript/no-require-imports`](https://oxc.rs/docs/guide/usage/linter/rules/typescript/no-require-imports.html) |
+| [`nursery`](https://oxc.rs/docs/guide/usage/linter/rules.html#nursery-8)           | 開発中だったり、大幅に変更される可能性があったり、厳しすぎるかもしれない | [`eslint/no-unreachable`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-unreachable.html) |
+
+Oxlintはcategory単位でルールに反するコードに対するアクションを許容(Allow, `-A`)/警告(Warn, `-W`)/拒否(Deny, `-D`)の中から指定できる。<br />
+以下の例では、`correctness`及び`pedantic`なルールに反するコードを全て拒否している。
+
+```bash
+# Enable all correctness and suspicious rules
+oxlint -D correctness -D pedantic
+```
+
+## Plugin
+
+OxlintはOxlint単体でESLintの様々なPluginの機能をサポートしている。<br />
+ただし唯一`oxc`だけはちょっと毛色が異なっており、これはOxlintをメンテナンスしているoxc固有のルールと[`deepscan`](https://deepscan.io/)というツールから移植されたものが含まれている。
+
+| 名称         | 対応するESLintのPlugin名 |
+| :-           | :-                       |
+| `typescript` | [`typescript-eslint`](https://typescript-eslint.io/) |
+| `unicorn`    | [`eslint-plugin-unicorn`](http://github.com/sindresorhus/eslint-plugin-unicorn) |
+| `react`      | [`eslint-plugin-react`](https://github.com/jsx-eslint/eslint-plugin-react), [`eslint-plugin-react-hooks`](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks) |
+| `react-perf` | [`eslint-plugin-react-perf`](https://github.com/cvazac/eslint-plugin-react-perf) |
+| `nextjs`     | [`eslint-plugin-next`](https://github.com/vercel/next.js/tree/canary/packages/eslint-config-next) |
+| `oxc`        | N/A |
+| `import`     | [`eslint-plugin-import`](https://github.com/import-js/eslint-plugin-import) |
+| `jsdoc`      | [`eslint-plugin-jsdoc`](https://github.com/gajus/eslint-plugin-jsdoc) |
+| `jsx-a11y`   | [`eslint-plugin-jsx-a11y`](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) |
+| `node`       | [`eslint-plugin-node`](https://github.com/mysticatea/eslint-plugin-node) |
+| `promise`    | [`eslint-plugin-promise`](https://github.com/eslint-community/eslint-plugin-promise) |
+| `jest`       | [`eslint-plugin-jest`](https://github.com/jest-community/eslint-plugin-jest) |
+| `vitest`     | [`@vitest/eslint-plugin`](https://github.com/vitest-dev/eslint-plugin-vitest) |
+
+## CategoryとPluginの関係
+
+Oxlintの各ルールは先述のPluginのいずれかに由来するものであり、その挙動に応じてそれぞれ1つのCategoryというラベルが付与されている、と考えるのがわかりやすいかも。
+
+例として[`jsx_a11y/alt-text`](https://oxc.rs/docs/guide/usage/linter/rules/jsx_a11y/alt-text.html)は以下のように考えることができる。
+
+* `jsx_a11y/alt-text`は`eslint-plugin-jsx-a11y`由来のルールである
+* `<img>`要素にalt属性で適切な文字列を設定することはアクセシビリティ上必須である。<br />逆に言えば`<img>`要素に適切なalt属性が付与されていないのは間違っているので、`jsx_a11y/alt-text`は`correctness`に分類される
+
+## Automatic Fixes
+
+Oxlintのルールの一部はautofixが可能だが、このautofixの挙動にも2種類ある。
+
+| 名称 | 説明 | CLI実行時のオプション |
+| :-   | :--  | :- |
+| Fixes | コードの挙動に影響を与えず安全である | `--fix` |
+| Suggestions | コードの挙動を変えたり、意図しない変更を加える可能性がある | `--fix-suggestions` |
+
+また、FixesとSuggestionsなautofixの中には更に危険（Dangerous）なものがあり、`--fix-dangerously`オプションで有効化できる。
+
+つまり、`--fix`/`--fix-suggestions`/`--fix-dangerously`オプションの挙動は以下のようにまとめられる。
+
+| オプション | Fixesなautofix | Suggestionsなautofix | Dangerousなautofix |
+| :-   | :--  | :- | :- |
+| `--fix` | する | しない | しない |
+| `--fix-dangerously` | する | しない | する |
+| `--fix-suggestions --fix-dangerously` | しない | する | する |
+| `--fix --fix-suggestions --fix-dangerously` | する | する | する |
+
+## import周りのルールの整理
+
+ここでやっと本題に入る。
+
+今自分が頭を抱えているのは以下のルール。
+
+* [`import/exports-last`](https://oxc.rs/docs/guide/usage/linter/rules/import/exports-last.html)
+* [`import/group-exports`](https://oxc.rs/docs/guide/usage/linter/rules/import/group-exports.html)
+* [`import/prefer-default-export`](https://oxc.rs/docs/guide/usage/linter/rules/import/prefer-default-export.html)
+* [`import/no-duplicates`](https://oxc.rs/docs/guide/usage/linter/rules/import/no-duplicates.html)
+* [`sort-imports`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/sort-imports.html)
+* [`no-duplicate-imports`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/no-duplicate-imports.html)
+
+
+### `import/exports-last` (category: `Style`)
+
+このルールはモジュールの`export`宣言をファイルの末尾に記述することを強制する。
+
+`export`は変数・モジュール宣言と一緒に書いてあって欲しい派閥なのでこのルールは無効化する。
+
+### `import/group-exports` (category: `Style`)
+
+このルールは`export`宣言は1箇所にまとめてグループ化しろ、ということを強制する。
+
+例えばこれはNGで
+
+```ts
+export const first = true;
+export const second = true;
+```
+
+これはOKになる。
+
+```ts
+const first = true;
+const second = true;
+export { first, second };
+```
+
+`export`は変数・モジュール宣言と一緒に書いてあって欲しい派閥なのでこのルールは無効化する（2回目）。
+
+### `import/prefer-default-export` (category: `Style`)
+
+`export`宣言が1箇所しかない時にnamed exportよりもdefault exportの使用を優先することを強制するルール。
+
+これちょっと邪魔だな...無効化する。
+
+### `import/no-duplicates` (category: `Style`)
+
+同じモジュールから複数回importすることを禁止するルール。
+
+これの是非については後述する。
+
+### `sort-imports` (category: `Style`)
+
+`import`宣言のソート順を一定のルールになるように強制するルール。<br />
+[ESLintの`sort-imports`](https://eslint.org/docs/latest/rules/sort-imports)も参考になる。
+
+例えば、自分のソースコードではこのようになっている`import`宣言があるのだが、
+
+```ts
+import { css } from '../../../styled-system/css';
+import type { JSX } from 'solid-js/jsx-runtime';
+import type { ComponentProps } from 'solid-js';
+import { splitProps } from 'solid-js';
+```
+
+こう直せば良い。型の`import`宣言を先に書くことが要注意ポイント。
+
+```ts
+import type { ComponentProps } from 'solid-js';
+import type { JSX } from 'solid-js/jsx-runtime';
+import { css } from '../../../styled-system/css';
+import { splitProps } from 'solid-js';
+```
+
+これは全然あって良いルールなので有効化する。
+
+### `no-duplicate-imports` (category: `Style`)
+
+同じモジュールから複数回importすることを禁止するルール。<br />
+`import/no-duplicates`とは何が違うかというと、以下のような`import`宣言があった時、
+
+```ts
+import type { ComponentProps, JSX } from 'solid-js';
+import { css } from '../../../styled-system/css';
+import { splitProps } from 'solid-js';
+```
+
+`import/no-duplicates`はこれを許容する一方で`no-duplicate-imports`は拒否する。<br />
+`no-duplicate-imports`は以下のようにモジュールと型の`import`はまとめることを強制する。
+
+```ts
+import { type ComponentProps, type JSX, splitProps } from 'solid-js';
+```
+
+[ESLintの`no-duplicate-imports`](https://eslint.org/docs/latest/rules/no-duplicate-imports)も参考になる。
+
+これの是非については後述する。
+
+## `import/no-duplicates` vs `no-import-duplicates`
+
+ただこれをやると、今度は[`import/consistent-type-specifier-style`](https://oxc.rs/docs/guide/usage/linter/rules/import/consistent-type-specifier-style.html)と競合する。
+`import/consistent-type-secifier-style`では以下のように型とモジュールのimportは分けて記述することを強制する。
+
+```ts
+import type { ComponentProps, JSX } from 'solid-js';
+import { splitProps } from 'solid-js';
+```
+
+つまり、`import/no-duplicates`と`no-duplicate-imports`のどちらを採用するかによってOxlintの設定ファイルの修正内容がちょっと変わる。
+
+* `import/no-duplicates`を採用する場合、`no-duplicate-imports`は`off`にして無効化する
+* `no-duplicate-imports`を採用する場合、`import/no-duplicates`と`import/consistent-type-specifier-style`を`off`にして無効化する
+
+型のimportはモジュールのimportとは分けたい派なので、`import/no-duplicates`側を採用することにする。
+
+## まとめ
+
+今回言及したものだけ取り上げて`oxlintrc.json`を整理するとこうなった。
+
+```json
+{
+  "plugins": ["import"]
+  "overrides": {
+    "files": ["src/**/*.ts", "src/**/*.tsx"],
+    "rules": {
+      "import/exports-last": "off",
+      "import/group-exports": "off",
+      "import/prefer-default-export": "off",
+      "no-duplicate-imports": "off"
+    }
+  }
+}
+```
