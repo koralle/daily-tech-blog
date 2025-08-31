@@ -32,7 +32,7 @@ export const globalStyles = defineGlobalStyles({
     wordBreak: 'normal'
   },
   ':where(.astro-code)': {
-    padding: 'calc(var(--spacing-unit) * 8)',
+    padding: 'calc(var(--spacing-unit) * 6)',
     rounded: '8'
   },
   ':where(body)': {

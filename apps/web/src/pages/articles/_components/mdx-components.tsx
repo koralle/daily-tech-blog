@@ -162,24 +162,28 @@ const Table = (props: TableProps) => {
   const [local, rest] = splitProps(props, ['children', 'class']);
 
   return (
-    <table
-      class={css({
-        width: '100%',
-        md: {
-          width: '90%'
-        },
-        alignSelf: 'center',
-        boxSizing: 'border-box',
-        borderCollapse: 'collapse',
-        borderWidth: 'px',
-        borderStyle: 'solid',
-        borderColor: 'gray.100',
-        overflow: 'scroll'
-      })}
-      {...rest}
-    >
-      {local.children}
-    </table>
+    <div class={css({ overflowX: 'scroll' })}>
+      <table
+        class={css({
+          width: 'stretch',
+          md: {
+            width: 'stretch'
+          },
+          alignSelf: 'center',
+          boxSizing: 'border-box',
+          borderCollapse: 'collapse',
+          borderWidth: 'px',
+          borderStyle: 'solid',
+          borderColor: 'gray.100',
+          overflow: 'scroll',
+          whiteSpace: 'nowrap',
+          backgroundColor: 'white'
+        })}
+        {...rest}
+      >
+        {local.children}
+      </table>
+    </div>
   );
 };
 
@@ -254,6 +258,9 @@ const Tr = (props: TrProps) => {
         borderColor: 'gray.100',
         '&:nth-child(even)': {
           backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-800) 6.25%, transparent)'
+        },
+        '&:nth-child(odd)': {
+          backgroundColor: 'white'
         }
       })}
       {...rest}
