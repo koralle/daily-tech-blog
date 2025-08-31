@@ -38,7 +38,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/ts-plugin": "^1.10.4",
     "@eslint/js": "^9.33.0",
-    "@pandacss/dev": "^1.0.1",
+    "@pandacss/dev": "^1.2.0",
     "@types/node": "^24.0.10",
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.34.0",
