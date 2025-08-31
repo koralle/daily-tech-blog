@@ -1,0 +1,26 @@
+---
+title: git rev-parseコマンドを使ってみる
+description: git rev-parseコマンドを使う機会があったのでメモ
+publishedDate: 2025-08-31
+lastUpdatedDate: 2025-08-31
+tags: ['git']
+---
+
+## `git rev-parse`コマンドって何
+
+`git rev-parse`コマンドは、ざっくり言えばGit飲めた情報を取得するためのコマンド。
+
+例えば、最新のコミットのハッシュを取得する場合は
+
+```bash
+git rev-parse --short=7 HEAD
+```
+
+を実行すれば取得できる。
+
+## 参考
+
+
+* [Git - git-rev-parse Documentation](https://git-scm.com/docs/git-rev-parse)
+* [git rev-parse --short HEAD は環境によって長さが変わる可能性がある | ごみばこいん](https://gomiba.co/archives/2024/09/eea84b37-4b8e-4482-8eba-926f70d900bd/)
+* [git rev-parseを使いこなす #Git - Qiita](https://qiita.com/karupanerura/items/721962bb7da3e34187e1)
