@@ -6,3 +6,6 @@ worker-configuration.d.ts
 
 # Panda CSS
 styled-system
+
+# MDX
+src/content/articles/*.mdx
