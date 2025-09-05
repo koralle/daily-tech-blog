@@ -1,6 +1,7 @@
+import type { Component } from 'solid-js';
 import { css } from '../../styled-system/css';
 
-export const Footer = () => (
+export const Footer: Component = () => (
   <footer
     class={css({
       fontWeight: '700',

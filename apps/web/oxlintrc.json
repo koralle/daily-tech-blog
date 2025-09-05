@@ -57,6 +57,15 @@
         "import/prefer-default-export": "off",
         "unicorn/filename-case": "off"
       }
+    },
+    {
+      "files": [".prettierrc.mjs"],
+      "rules": {
+        "sort-keys": "off",
+        "import/no-default-export": "off",
+        "import/no-anonymous-default-export": "off",
+        "oxc/no-rest-spread-properties": "off"
+      }
     }
   ]
 }
