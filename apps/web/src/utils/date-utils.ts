@@ -1,3 +1,5 @@
 import dayjs from 'dayjs';
 
-export const formatDate = (format: string) => (date: Date) => dayjs(date).locale('ja').format(format);
+type FormatDateReturn = (format: string) => (date: Date) => string;
+
+export const formatDate: FormatDateReturn = (format: string) => (date: Date) => dayjs(date).locale('ja').format(format);
