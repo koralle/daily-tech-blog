@@ -5,15 +5,16 @@ runs:
   using: composite
 
   steps:
-    - name: Install Node.js
-      uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
-      with:
-        node-version: 22.x
-
-    - name: Install pnpm
+    - name: Setup pnpm
       uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
       with:
         run_install: false
+        version: 10
+
+    - name: Setup Node.js
+      uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+      with:
+        node-version: 22.x
 
     - name: Get pnpm store directory
       shell: bash
