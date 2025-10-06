@@ -18,7 +18,7 @@
     "@types/node": "^24.0.10",
     "@typescript/native-preview": "7.0.0-dev.20250804.1",
     "oxlint": "^1.6.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "hono": "^4.9.7"
