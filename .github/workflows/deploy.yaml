@@ -3,7 +3,7 @@ name: Deploy to Cloudflare Workers (Web)
 on:
   pull_request:
     branches:
-      - 'main'
+      - "main"
     types: [closed]
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
       should_deploy: ${{ steps.check.outputs.should_run }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493
 
       - name: Setup
         uses: ./.github/composite-actions/cache-and-install
