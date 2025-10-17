@@ -118,8 +118,8 @@ importers:
   workers/images:
     dependencies:
       hono:
-        specifier: ^4.9.7
-        version: 4.9.7
+        specifier: ^4.10.0
+        version: 4.10.0
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20250903.0
@@ -3008,8 +3008,8 @@ packages:
   hastscript@9.0.1:
     resolution: {integrity: sha512-g7df9rMFX/SPi34tyGCyUBREQoKkapwdY/T04Qn9TDWfHhAYt4/I0gMVirzK5wEzeUqIjEB+LXC/ypb7Aqno5w==}
 
-  hono@4.9.7:
-    resolution: {integrity: sha512-t4Te6ERzIaC48W3x4hJmBwgNlLhmiEdEE5ViYb02ffw4ignHNHa5IBtPjmbKstmtKa8X6C35iWwK4HaqvrzG9w==}
+  hono@4.10.0:
+    resolution: {integrity: sha512-V/S2IyKL6fk5+bEjiQzg74r5BglqAwU20IX3WjdTUFgvmtSqAZjSxN/Zb5lr6/JXVmH0aqkqOq++3UgzOi9+4Q==}
     engines: {node: '>=16.9.0'}
 
   hookable@5.5.3:
@@ -8157,7 +8157,7 @@ snapshots:
       property-information: 7.1.0
       space-separated-tokens: 2.0.2
 
-  hono@4.9.7: {}
+  hono@4.10.0: {}
 
   hookable@5.5.3: {}
 
