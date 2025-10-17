@@ -5,13 +5,15 @@ runs:
   using: composite
 
   steps:
-    - name: Install Node.js
-      uses: actions/setup-node@v4.4.0
-
-    - uses: pnpm/action-setup@v4.1.0
-      name: Install pnpm
+    - name: Setup pnpm
+      uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
       with:
         run_install: false
+
+    - name: Setup Node.js
+      uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+      with:
+        node-version: 22.x
 
     - name: Get pnpm store directory
       shell: bash
@@ -19,7 +21,7 @@ runs:
         echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
     - name: Setup pnpm cache
-      uses: actions/cache@v4
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
       with:
         path: ${{ env.STORE_PATH }}
         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
