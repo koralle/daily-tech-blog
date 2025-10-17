@@ -100,8 +100,8 @@ importers:
         specifier: ^1.14.0
         version: 1.14.0
       pnpm:
-        specifier: ^10.12.4
-        version: 10.12.4
+        specifier: ^10.18.3
+        version: 10.18.3
       prettier-plugin-astro:
         specifier: ^0.14.1
         version: 0.14.1
@@ -3933,8 +3933,8 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
 
-  pnpm@10.12.4:
-    resolution: {integrity: sha512-Xqiw3u2U7WhpHJutTJVUknBcXuuKh++GvGLHSiawN7CP+VcPEIsuTb0d0akYb+qSXlJ/FBxkjoWvRWMQdGgBhA==}
+  pnpm@10.18.3:
+    resolution: {integrity: sha512-u9FubXKG/X4B9rPAs8kyzaKWXAapCDKPdGY/EKmupR8RKe6mFRNL+ZKDGwCeq+Fn7LcAi1l/QP+bx1lGqt+wjQ==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -9310,7 +9310,7 @@ snapshots:
 
   pluralize@8.0.0: {}
 
-  pnpm@10.12.4: {}
+  pnpm@10.18.3: {}
 
   possible-typed-array-names@1.1.0: {}
 
