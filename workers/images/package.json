@@ -17,7 +17,7 @@
     "@cloudflare/workers-types": "^4.20250903.0",
     "@types/node": "^24.0.10",
     "@typescript/native-preview": "7.0.0-dev.20251017.1",
-    "oxlint": "^1.6.0",
+    "oxlint": "^1.24.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
