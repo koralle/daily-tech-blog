@@ -1,6 +1,7 @@
 import type { ComponentProps, JSX } from 'solid-js';
 import { css } from '../../../../styled-system/css';
 import { splitProps } from 'solid-js';
+import { CodeBlock } from './code-block';
 
 export interface MDXComponentProps {
   children: JSX.Element;
@@ -290,6 +291,7 @@ export const MDX = {
   Link: Link,
   Paragraph: Paragraph,
   Code: Code,
+  Pre: CodeBlock,
   Strong: Strong,
   Table: Table,
   Th: Th,
