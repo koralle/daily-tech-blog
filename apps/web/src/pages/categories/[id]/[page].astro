@@ -1,32 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
+import { getAllArticles } from '../../../utils';
 import Layout from '../../../layouts/Layout.astro';
 import { getAllTagIds } from '../../../data/tags';
-import type { CollectionEntry } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const allArticles = await getCollection('articles');
-  const allTagIdSet = new Set(getAllTagIds());
+  const allArticles = await getAllArticles();
+  const allTagIds = getAllTagIds();
 
-  const tagArticlesMap = new Map<string, CollectionEntry<'articles'>[]>();
-
-  for (const tagId of allTagIdSet.values()) {
-    tagArticlesMap.set(tagId, []);
-  }
-
-  for (const tagId of allTagIdSet.values()) {
-    const articlesFilteredByTagId = allArticles.filter((article) => article.data.tags.includes(tagId));
-    tagArticlesMap.set(tagId, articlesFilteredByTagId);
-  }
-
-  const result = tagArticlesMap.entries().flatMap(([tagId, articles]) => {
-    const filteredArticlesByTagId = articles.filter((article) => article.data.tags.includes(tagId));
-
-    return paginate(filteredArticlesByTagId, { params: { id: tagId }, pageSize: 12 });
+  return allTagIds.flatMap((tagId) => {
+    const filteredArticles = allArticles.filter((article) => article.data.tags.includes(tagId));
+    return paginate(filteredArticles, { params: { id: tagId }, pageSize: 12 });
   });
-
-  return Array.from(result);
 }
 
 const { page } = Astro.props;

@@ -28,9 +28,12 @@
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.1",
     "@astrojs/solid-js": "^5.1.3",
+    "@resvg/resvg-wasm": "^2.6.2",
     "astro": "^5.16.8",
     "dayjs": "^1.11.18",
     "kiso.css": "^1.2.2",
+    "satori": "^0.18.3",
+    "satori-html": "^0.3.2",
     "sharp": "^0.34.3",
     "solid-js": "^1.9.9"
   },
