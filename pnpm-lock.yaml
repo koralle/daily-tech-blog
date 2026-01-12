@@ -85,8 +85,8 @@ importers:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.34.0(jiti@2.5.1))
       eslint-plugin-oxlint:
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: ^1.38.0
+        version: 1.38.0
       eslint-typegen:
         specifier: ^2.2.1
         version: 2.2.1(eslint@9.34.0(jiti@2.5.1))
@@ -2394,8 +2394,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-oxlint@1.5.0:
-    resolution: {integrity: sha512-+Um4akCxGOSJ8ozILC7GEU6xbKB1P8nYhLTfsvLiLot6Tt0VtM3oR/PH7SzHYgKb0HNpD5+8bXcaD5KErlIkIg==}
+  eslint-plugin-oxlint@1.38.0:
+    resolution: {integrity: sha512-4XZrtcAxwaH+fih8dSPPChkWaNh2+bf6H8LZpueXSt8eGSxxTefBvCt8iDqCEeT8JW24Ods3UJGhW1qUKdbbVw==}
 
   eslint-scope@8.4.0:
     resolution: {integrity: sha512-sNXOfKCn74rt8RICKMvJS7XKV/Xk9kA7DyJr8mJik3S7Cwgy3qlkkmyS2uQB3jiJg6VNdZd/pDBJu0nvG2NlTg==}
@@ -7146,7 +7146,7 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-oxlint@1.5.0:
+  eslint-plugin-oxlint@1.38.0:
     dependencies:
       jsonc-parser: 3.3.1
 
