@@ -1,1 +1,15 @@
 @layer reset, base, tokens, recipes, utilities;
+
+@layer base {
+  :where(:root, body) {
+    inline-size: 100svi;
+    min-block-size: 100svb;
+    overflow-x: clip;
+  }
+
+  :where(body) {
+    display: block flex;
+    flex-direction: column;
+    gap: 0;
+  }
+}
