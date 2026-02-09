@@ -1,6 +1,14 @@
 {
   "extends": "astro/tsconfigs/strictest",
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [
+    "src/**/*.{ts,tsx}",
+    "src/**/*.astro",
+    ".storybook/**/*.{ts,tsx}",
+    "astro.config.mts",
+    "eslint.config.mts",
+    "panda.config.ts",
+    "./.astro/types.d.ts"
+  ],
   "exclude": ["dist"],
   "compilerOptions": {
     "target": "es2022",
