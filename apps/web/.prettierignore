@@ -9,3 +9,10 @@ styled-system
 
 # MDX
 src/content/articles/*.mdx
+
+# Astro
+dist
+.astro
+
+# Other
+eslint-typegen.d.ts

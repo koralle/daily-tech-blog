@@ -5,7 +5,6 @@
     "src/**/*.astro",
     ".storybook/**/*.{ts,tsx}",
     "astro.config.mts",
-    "eslint.config.mts",
     "panda.config.ts",
     "./.astro/types.d.ts"
   ],
