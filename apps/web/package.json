@@ -41,7 +41,7 @@
     "@storybook/preact-vite": "10.2.7",
     "@types/node": "24.0.10",
     "oxlint": "1.14.0",
-    "pnpm": "10.18.3",
+    "pnpm": "10.29.2",
     "prettier-plugin-astro": "0.14.1",
     "react": "19.2.4",
     "storybook": "10.2.7",
