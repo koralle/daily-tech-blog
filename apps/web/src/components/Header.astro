@@ -6,17 +6,14 @@ import { SITE_TITLE } from '../consts';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky flex flex-col justify-center top-0 px-4 bg-white shadow-md h-[var(--height-header)]">
-  <nav class="flex items-center justify-between">
-    <h2 class="m-0 text-base">
-      <a
-        href="/"
-        class="no-underline text-black hover:text-black"
-      >
+<header class="h-[var(--height-header)]">
+  <nav>
+    <h2>
+      <a href="/">
         {SITE_TITLE}
       </a>
     </h2>
-    <div class="hidden sm:flex">
+    <div>
       <HeaderLink
         activePath="/"
         href="/"
@@ -36,18 +33,17 @@ const currentPath = Astro.url.pathname;
         About
       </HeaderLink>
     </div>
-    <div class="hidden md:flex gap-4">
+    <div>
       <a
         href="https://twitter.com/koralle_tech"
         target="_blank"
       >
-        <span class="sr-only">Follow koralle on Twitter</span>
+        <span>Follow koralle on Twitter</span>
         <svg
           viewBox="0 0 16 16"
           aria-hidden="true"
           width="32"
           height="32"
-          class="text-black"
         >
           <path
             fill="currentColor"
@@ -60,13 +56,12 @@ const currentPath = Astro.url.pathname;
         href="https://github.com/koralle"
         target="_blank"
       >
-        <span class="sr-only">Go to koralle's GitHub profile</span>
+        <span>Go to koralle's GitHub profile</span>
         <svg
           viewBox="0 0 16 16"
           aria-hidden="true"
           width="32"
           height="32"
-          class="text-black"
         >
           <path
             fill="currentColor"

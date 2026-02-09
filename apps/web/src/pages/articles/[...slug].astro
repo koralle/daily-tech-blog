@@ -73,7 +73,7 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
               })}
             >
               {validTagList.map((tagId) => (
-                <li class="inline-block">
+                <li>
                   <CategoryTag href={`/categories/${tagId}/1`}>{getTagById(tagId)?.displayName}</CategoryTag>
                 </li>
               ))}
