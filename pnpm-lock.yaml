@@ -79,8 +79,8 @@ importers:
         specifier: 1.14.0
         version: 1.14.0
       pnpm:
-        specifier: 10.18.3
-        version: 10.18.3
+        specifier: 10.29.2
+        version: 10.29.2
       prettier-plugin-astro:
         specifier: 0.14.1
         version: 0.14.1
@@ -3038,8 +3038,8 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
 
-  pnpm@10.18.3:
-    resolution: {integrity: sha512-u9FubXKG/X4B9rPAs8kyzaKWXAapCDKPdGY/EKmupR8RKe6mFRNL+ZKDGwCeq+Fn7LcAi1l/QP+bx1lGqt+wjQ==}
+  pnpm@10.29.2:
+    resolution: {integrity: sha512-vvQ/p1nZH9LaSzGaWg0T73pFu5haPXNCBYRw+dIFGjuoZ05ilnJlRobvlEOtE6gtor657rPgIhyHuBVP/510uA==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -7289,7 +7289,7 @@ snapshots:
 
   pluralize@8.0.0: {}
 
-  pnpm@10.18.3: {}
+  pnpm@10.29.2: {}
 
   postcss-discard-duplicates@7.0.1(postcss@8.4.49):
     dependencies:
