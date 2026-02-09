@@ -5,10 +5,10 @@
   "packageManager": "pnpm@10.12.4",
   "scripts": {},
   "devDependencies": {
-    "@prettier/plugin-oxc": "^0.0.4",
-    "lefthook": "^1.13.0",
-    "npm-run-all2": "^8.0.4",
-    "prettier": "^3.6.2",
-    "wrangler": "^4.43.0"
+    "@prettier/plugin-oxc": "0.0.4",
+    "lefthook": "1.13.0",
+    "npm-run-all2": "8.0.4",
+    "prettier": "3.6.2",
+    "wrangler": "4.43.0"
   }
 }
