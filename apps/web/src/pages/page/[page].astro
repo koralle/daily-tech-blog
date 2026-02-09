@@ -13,9 +13,9 @@ const { page } = Astro.props;
 ---
 
 <Layout>
-  <article class="flex flex-col py-12">
+  <article>
     <header>
-      <h1 class="text-center">記事一覧</h1>
+      <h1>記事一覧</h1>
     </header>
     <p>
       {
@@ -26,12 +26,12 @@ const { page } = Astro.props;
         ))
       }
     </p>
-    <footer class="flex justify-center gap-4">
+    <footer>
       {
         page.currentPage === 1 ? (
           // 最初のページ: 1 2 3 > >>
           <>
-            <span class="font-bold">{page.currentPage}</span>
+            <span>{page.currentPage}</span>
             {page.lastPage >= 2 && <a href={`/page/2`}>2</a>}
             {page.lastPage >= 3 && <a href={`/page/3`}>3</a>}
             {page.url.next && <a href={page.url.next}>&gt;</a>}
@@ -44,7 +44,7 @@ const { page } = Astro.props;
             <a href={page.url.prev}>&lt;</a>
             {page.lastPage >= 3 && <a href={`/page/${page.lastPage - 2}`}>{page.lastPage - 2}</a>}
             {page.lastPage >= 2 && <a href={`/page/${page.lastPage - 1}`}>{page.lastPage - 1}</a>}
-            <span class="font-bold">{page.currentPage}</span>
+            <span>{page.currentPage}</span>
           </>
         ) : (
           // それ以外: << < 4 5 6 > >>
@@ -52,7 +52,7 @@ const { page } = Astro.props;
             <a href={page.url.first}>&lt;&lt;</a>
             <a href={page.url.prev}>&lt;</a>
             <a href={`/page/${page.currentPage - 1}`}>{page.currentPage - 1}</a>
-            <span class="font-bold">{page.currentPage}</span>
+            <span>{page.currentPage}</span>
             <a href={`/page/${page.currentPage + 1}`}>{page.currentPage + 1}</a>
             <a href={page.url.next}>&gt;</a>
             <a href={page.url.last}>&gt;&gt;</a>
