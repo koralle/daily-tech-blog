@@ -1,74 +1,65 @@
-import type { ComponentProps, JSX } from 'solid-js';
+import type { ComponentChildren, ComponentProps } from 'preact';
 import { css } from '../../../../styled-system/css';
-import { splitProps } from 'solid-js';
 
 export interface MDXComponentProps {
-  children: JSX.Element;
+  children: ComponentChildren;
 }
 
 interface BlockquoteProps extends ComponentProps<'blockquote'> {
-  children: JSX.Element;
+  children: ComponentChildren;
 }
 
-const Blockquote = (props: BlockquoteProps) => {
-  const [local, rest] = splitProps(props, ['children', 'class']);
+const Blockquote = ({ children, ...rest }: BlockquoteProps) => (
+  <blockquote
+    {...rest}
+    class={css({
+      color: 'gray.200',
+      fontWeight: '700',
+      fontStyle: 'oblique 40deg',
+      letterSpacing: '0.025em',
+      lineHeight: '150',
 
-  return (
-    <blockquote
-      {...rest}
-      class={css({
-        color: 'gray.200',
-        fontWeight: '700',
-        fontStyle: 'oblique 40deg',
-        letterSpacing: '0.025em',
-        lineHeight: '150',
+      paddingInlineStart: 'calc(var(--spacing-unit) * 3)',
 
-        paddingInlineStart: 'calc(var(--spacing-unit) * 3)',
-
-        borderInlineStartWidth: '4px',
-        borderInlineStartStyle: 'solid',
-        borderInlineStartColor: 'gray.200'
-      })}
-    >
-      {local.children}
-    </blockquote>
-  );
-};
+      borderInlineStartWidth: '4px',
+      borderInlineStartStyle: 'solid',
+      borderInlineStartColor: 'gray.200'
+    })}
+  >
+    {children}
+  </blockquote>
+);
 interface LinkProps extends ComponentProps<'a'> {
-  children: JSX.Element;
+  children: ComponentChildren;
 }
 
-const Link = (props: LinkProps) => {
-  const [local, rest] = splitProps(props, ['children', 'class']);
-
-  return (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      {...rest}
-      class={css({
-        color: 'rosePink.700',
-        textDecoration: 'underline',
-        textUnderlineOffset: '3',
-        borderRadius: '4',
-        _hover: {
-          backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-600) 12.5%, transparent)'
-        },
-        _active: {
-          backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-600) 25%, transparent)'
-        },
-        _focusVisible: {
-          outlineOffset: '2'
-        },
-        _visited: {
-          color: 'rosePink.900'
-        }
-      })}
-    >
-      {local.children}
-    </a>
-  );
-};
+const Link = ({ children, ...rest }: LinkProps) => (
+  <a
+    target="_blank"
+    rel="noopener noreferrer"
+    {...rest}
+    class={css({
+      color: 'rosePink.700',
+      textDecoration: 'underline',
+      textUnderlineOffset: '3',
+      borderRadius: '4',
+      _hover: {
+        backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-600) 12.5%, transparent)'
+      },
+      _active: {
+        backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-600) 25%, transparent)'
+      },
+      _focusVisible: {
+        outlineOffset: '2'
+      },
+      _visited: {
+        color: 'rosePink.900'
+      }
+    })}
+  >
+    {children}
+  </a>
+);
 
 const H2 = ({ children }: MDXComponentProps) => (
   <h2
@@ -155,120 +146,104 @@ const Strong = ({ children }: MDXComponentProps) => (
 );
 
 interface TableProps extends ComponentProps<'table'> {
-  children: JSX.Element;
+  children: ComponentChildren;
 }
 
-const Table = (props: TableProps) => {
-  const [local, rest] = splitProps(props, ['children', 'class']);
-
-  return (
-    <div class={css({ overflowX: 'scroll' })}>
-      <table
-        class={css({
-          width: 'stretch',
-          md: {
-            width: 'stretch'
-          },
-          alignSelf: 'center',
-          boxSizing: 'border-box',
-          borderCollapse: 'collapse',
-          borderWidth: 'px',
-          borderStyle: 'solid',
-          borderColor: 'gray.100',
-          overflow: 'scroll',
-          whiteSpace: 'nowrap',
-          backgroundColor: 'white'
-        })}
-        {...rest}
-      >
-        {local.children}
-      </table>
-    </div>
-  );
-};
-
-interface TdProps extends ComponentProps<'td'> {
-  children: JSX.Element;
-}
-
-const Td = (props: TdProps) => {
-  const [local, rest] = splitProps(props, ['children', 'class', 'style']);
-
-  return (
-    <td
-      style={local.style}
+const Table = ({ children, ...rest }: TableProps) => (
+  <div class={css({ overflowX: 'scroll' })}>
+    <table
       class={css({
-        textAlign: 'start',
-        paddingX: 'calc(var(--spacing-unit) * 4)',
-        paddingY: 'calc(var(--spacing-unit) * 2)',
+        width: 'stretch',
+        md: {
+          width: 'stretch'
+        },
+        alignSelf: 'center',
         boxSizing: 'border-box',
-        borderWidth: 'px',
-        borderStyle: 'solid',
-        borderColor: 'gray.200'
-      })}
-      {...rest}
-    >
-      {local.children}
-    </td>
-  );
-};
-
-interface ThProps extends ComponentProps<'th'> {
-  children: JSX.Element;
-}
-
-const Th = (props: ThProps) => {
-  const [local, rest] = splitProps(props, ['children', 'class', 'style']);
-
-  return (
-    <th
-      style={local.style}
-      class={css({
-        color: 'gray.900',
-        backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-800) 20%, transparent)',
-        textAlign: 'start',
-        paddingX: 'calc(var(--spacing-unit) * 4)',
-        paddingY: 'calc(var(--spacing-unit) * 2)',
-        boxSizing: 'border-box',
-        borderWidth: 'px',
-        borderStyle: 'solid',
-        borderColor: 'gray.200'
-      })}
-      {...rest}
-    >
-      {local.children}
-    </th>
-  );
-};
-
-interface TrProps extends ComponentProps<'tr'> {
-  children: JSX.Element;
-}
-
-const Tr = (props: TrProps) => {
-  const [local, rest] = splitProps(props, ['children', 'class']);
-
-  return (
-    <tr
-      class={css({
-        width: '100%',
-        boxSizing: 'border-box',
+        borderCollapse: 'collapse',
         borderWidth: 'px',
         borderStyle: 'solid',
         borderColor: 'gray.100',
-        '&:nth-child(even)': {
-          backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-800) 6.25%, transparent)'
-        },
-        '&:nth-child(odd)': {
-          backgroundColor: 'white'
-        }
+        overflow: 'scroll',
+        whiteSpace: 'nowrap',
+        backgroundColor: 'white'
       })}
       {...rest}
     >
-      {local.children}
-    </tr>
-  );
-};
+      {children}
+    </table>
+  </div>
+);
+
+interface TdProps extends ComponentProps<'td'> {
+  children: ComponentChildren;
+}
+
+const Td = ({ children, style, ...rest }: TdProps) => (
+  <td
+    style={style}
+    class={css({
+      textAlign: 'start',
+      paddingX: 'calc(var(--spacing-unit) * 4)',
+      paddingY: 'calc(var(--spacing-unit) * 2)',
+      boxSizing: 'border-box',
+      borderWidth: 'px',
+      borderStyle: 'solid',
+      borderColor: 'gray.200'
+    })}
+    {...rest}
+  >
+    {children}
+  </td>
+);
+
+interface ThProps extends ComponentProps<'th'> {
+  children: ComponentChildren;
+}
+
+const Th = ({ children, style, ...rest }: ThProps) => (
+  <th
+    style={style}
+    class={css({
+      color: 'gray.900',
+      backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-800) 20%, transparent)',
+      textAlign: 'start',
+      paddingX: 'calc(var(--spacing-unit) * 4)',
+      paddingY: 'calc(var(--spacing-unit) * 2)',
+      boxSizing: 'border-box',
+      borderWidth: 'px',
+      borderStyle: 'solid',
+      borderColor: 'gray.200'
+    })}
+    {...rest}
+  >
+    {children}
+  </th>
+);
+
+interface TrProps extends ComponentProps<'tr'> {
+  children: ComponentChildren;
+}
+
+const Tr = ({ children, ...rest }: TrProps) => (
+  <tr
+    class={css({
+      width: '100%',
+      boxSizing: 'border-box',
+      borderWidth: 'px',
+      borderStyle: 'solid',
+      borderColor: 'gray.100',
+      '&:nth-child(even)': {
+        backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-800) 6.25%, transparent)'
+      },
+      '&:nth-child(odd)': {
+        backgroundColor: 'white'
+      }
+    })}
+    {...rest}
+  >
+    {children}
+  </tr>
+);
 
 const Ul = ({ children }: MDXComponentProps) => (
   <ul

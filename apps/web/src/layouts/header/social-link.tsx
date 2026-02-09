@@ -1,9 +1,8 @@
-import type { ComponentProps } from 'solid-js';
-import type { JSX } from 'solid-js/jsx-runtime';
+import type { ComponentChildren, ComponentProps } from 'preact';
 import { css } from '../../../styled-system/css';
 
 interface SocialLinkRootProps extends ComponentProps<'a'> {
-  children: JSX.Element;
+  children: ComponentChildren;
 }
 
 const Root = ({ children, ...rest }: SocialLinkRootProps) => (
@@ -41,7 +40,7 @@ const Root = ({ children, ...rest }: SocialLinkRootProps) => (
 );
 
 interface SocialLinkIconProps {
-  children: JSX.Element;
+  children: ComponentChildren;
 }
 
 const Icon = ({ children }: SocialLinkIconProps) => <>{children}</>;
