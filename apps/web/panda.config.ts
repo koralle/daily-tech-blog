@@ -47,7 +47,7 @@ export default defineConfig({
       }
     }
   },
-  jsxFramework: 'solid',
+  jsxFramework: 'preact',
 
   // The output directory for your css system
   outdir: 'styled-system'

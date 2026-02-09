@@ -1,7 +1,7 @@
-import type { Component } from 'solid-js';
+import type { FunctionComponent } from 'preact';
 import { css } from '../../styled-system/css';
 
-export const Footer: Component = () => (
+export const Footer: FunctionComponent = () => (
   <footer
     class={css({
       fontWeight: '700',
