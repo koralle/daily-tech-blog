@@ -12,14 +12,20 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     return articleB.data.publishedDate.getTime() - articleA.data.publishedDate.getTime();
   });
 
-  return paginate(sortedArticles, { pageSize: 12 });
+  return paginate(sortedArticles, { pageSize: 6 });
 }
 
 const { page } = Astro.props;
 ---
 
 <Layout title="記事一覧">
-  <article class={css({ display: 'grid', gap: 'calc(var(--spacing-unit) * 5)' })}>
+  <article
+    class={css({
+      display: 'grid',
+      gap: 'calc(var(--spacing-unit) * 6)',
+      md: { gap: 'calc(var(--spacing-unit) * 10)' }
+    })}
+  >
     <header
       class={css({
         display: 'grid',
@@ -59,10 +65,7 @@ const { page } = Astro.props;
     <ul
       class={css({
         display: 'grid',
-        gap: 'calc(var(--spacing-unit) * 4)',
-        md: {
-          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
-        }
+        gap: 'calc(var(--spacing-unit) * 5)'
       })}
     >
       {

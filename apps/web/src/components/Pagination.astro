@@ -151,7 +151,7 @@ const visiblePages = getVisiblePages(currentPage, totalPages);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: calc(var(--spacing-unit) * 2);
+    gap: calc(var(--spacing-unit) * 3);
     list-style: none;
     padding: 0;
     margin: 0;
@@ -162,11 +162,11 @@ const visiblePages = getVisiblePages(currentPage, totalPages);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-inline-size: calc(var(--spacing-unit) * 8);
-    min-block-size: calc(var(--spacing-unit) * 8);
-    padding-inline: calc(var(--spacing-unit) * 2);
-    border-radius: 6px;
-    font-size: 0.95rem;
+    min-inline-size: calc(var(--spacing-unit) * 12);
+    min-block-size: calc(var(--spacing-unit) * 12);
+    padding-inline: calc(var(--spacing-unit) * 3);
+    border-radius: 8px;
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1;
   }
@@ -176,11 +176,19 @@ const visiblePages = getVisiblePages(currentPage, totalPages);
     color: var(--colors-gray-700);
     background-color: var(--colors-white);
     text-decoration: none;
-    transition: border-color 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
   }
 
   .pagination-link:hover {
     border-color: var(--colors-rose-pink-400);
+    background-color: var(--colors-rose-pink-50);
+  }
+
+  .pagination-link:focus-visible {
+    outline: 2px solid var(--colors-rose-pink-500);
+    outline-offset: 2px;
   }
 
   .pagination-link.is-current {

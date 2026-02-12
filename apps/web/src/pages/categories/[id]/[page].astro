@@ -30,7 +30,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const result = tagArticlesMap.entries().flatMap(([tagId, articles]) => {
     const filteredArticlesByTagId = articles.filter((article) => article.data.tags.includes(tagId));
 
-    return paginate(filteredArticlesByTagId, { params: { id: tagId }, pageSize: 12 });
+    return paginate(filteredArticlesByTagId, { params: { id: tagId }, pageSize: 6 });
   });
 
   return Array.from(result);
@@ -42,7 +42,13 @@ const currentTag = getTagById(currentTagId);
 ---
 
 <Layout title={`${currentTag?.displayName ?? 'カテゴリー'}の記事一覧`}>
-  <article class={css({ display: 'grid', gap: 'calc(var(--spacing-unit) * 5)' })}>
+  <article
+    class={css({
+      display: 'grid',
+      gap: 'calc(var(--spacing-unit) * 6)',
+      md: { gap: 'calc(var(--spacing-unit) * 10)' }
+    })}
+  >
     <header
       class={css({
         display: 'grid',
@@ -97,10 +103,7 @@ const currentTag = getTagById(currentTagId);
     <ul
       class={css({
         display: 'grid',
-        gap: 'calc(var(--spacing-unit) * 4)',
-        md: {
-          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
-        }
+        gap: 'calc(var(--spacing-unit) * 5)'
       })}
     >
       {
