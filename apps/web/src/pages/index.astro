@@ -1,79 +1,241 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { css } from '../../styled-system/css';
+import { getCollection } from 'astro:content';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getTagById } from '../data/tags';
+
+const allArticles = await getCollection('articles');
+const sortedArticles = allArticles.sort((articleA, articleB) => {
+  return articleB.data.publishedDate.getTime() - articleA.data.publishedDate.getTime();
+});
+
+const featuredArticles = sortedArticles.slice(0, 3);
+const recentArticles = sortedArticles.slice(0, 8);
+
+const tagCountMap = new Map<string, number>();
+for (const article of sortedArticles) {
+  for (const tagId of article.data.tags) {
+    tagCountMap.set(tagId, (tagCountMap.get(tagId) ?? 0) + 1);
+  }
+}
+
+const popularTagList = Array.from(tagCountMap.entries())
+  .sort((entryA, entryB) => entryB[1] - entryA[1])
+  .slice(0, 6)
+  .map(([tagId]) => getTagById(tagId))
+  .filter((tag) => typeof tag !== 'undefined');
 ---
 
-<Layout>
-  <div>
-    <h1>🧑‍🚀 Hello, Astronaut!</h1>
-    <p>
-      Welcome to the official
-      <a
-        href="https://astro.build/"
-        class="text-[var(--accent)] hover:text-[var(--accent)]"
+<Layout
+  title="kollog | 日々の技術ブログ"
+  description="フロントエンド開発を中心に、日々の学びと実践を記録する技術ブログ"
+>
+  <div
+    class={css({
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 'calc(var(--spacing-unit) * 8)'
+    })}
+  >
+    <section
+      class={css({
+        display: 'grid',
+        gap: 'calc(var(--spacing-unit) * 6)',
+        borderRadius: '12',
+        backgroundColor: 'white',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'gray.200',
+        padding: 'calc(var(--spacing-unit) * 5)',
+        md: {
+          padding: 'calc(var(--spacing-unit) * 8)'
+        }
+      })}
+    >
+      <div class={css({ display: 'grid', gap: 'calc(var(--spacing-unit) * 3)' })}>
+        <p
+          class={css({
+            color: 'rosePink.700',
+            fontSize: '16',
+            fontWeight: '700',
+            letterSpacing: '0.04em',
+            lineHeight: '150'
+          })}
+        >
+          日々の技術メモ
+        </p>
+        <h1
+          class={css({
+            color: 'gray.900',
+            fontSize: '24',
+            fontWeight: '700',
+            letterSpacing: '0.04em',
+            lineHeight: '150'
+          })}
+        >
+          フロントエンドを中心に、試したことと考えたことを記録するブログ
+        </h1>
+        <p
+          class={css({
+            color: 'gray.700',
+            fontSize: '16',
+            fontWeight: '400',
+            letterSpacing: '0.025em',
+            lineHeight: '170'
+          })}
+        >
+          実際に触って学んだ知見を、できるだけ短く分かりやすくまとめています。新着記事から読むか、気になるカテゴリから辿ってみてください。
+        </p>
+      </div>
+
+      {
+        popularTagList.length > 0 ? (
+          <ul
+            class={css({
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 'calc(var(--spacing-unit) * 2)'
+            })}
+          >
+            {popularTagList.map((tag) => (
+              <li>
+                <a
+                  href={`/categories/${tag.id}/1`}
+                  class={css({
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    borderRadius: '6',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'gray.200',
+                    backgroundColor: 'gray.0',
+                    color: 'gray.700',
+                    fontSize: '16',
+                    fontWeight: '400',
+                    lineHeight: '150',
+                    letterSpacing: '0.025em',
+                    textDecoration: 'none',
+                    paddingX: 'calc(var(--spacing-unit) * 3)',
+                    paddingY: 'calc(var(--spacing-unit) * 2)',
+                    _hover: {
+                      borderColor: 'rosePink.400'
+                    }
+                  })}
+                >
+                  {tag.displayName}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : null
+      }
+    </section>
+
+    <section class={css({ display: 'grid', gap: 'calc(var(--spacing-unit) * 4)' })}>
+      <h2
+        class={css({
+          color: 'gray.900',
+          fontSize: '24',
+          fontWeight: '700',
+          letterSpacing: '0.04em',
+          lineHeight: '150'
+        })}
       >
-        Astro
-      </a>
-      blog starter template. This template serves as a lightweight, minimally-styled starting point for anyone looking to
-      build a personal website, blog, or portfolio with Astro.
-    </p>
-    <p>
-      This template comes with a few integrations already configured in your
-      <code>astro.config.mjs</code> file. You can customize your setup with
-      <a
-        href="https://astro.build/integrations"
-        class="text-[var(--accent)] hover:text-[var(--accent)]"
+        注目の記事
+      </h2>
+      <ul
+        class={css({
+          display: 'grid',
+          gap: 'calc(var(--spacing-unit) * 4)',
+          md: {
+            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
+          }
+        })}
       >
-        Astro Integrations
-      </a>
-      to add tools like Tailwind, React, or Vue to your project.
-    </p>
-    <p>Here are a few ideas on how to get started with the template:</p>
-    <ul>
-      <li>Edit this page in <code>src/pages/index.astro</code></li>
-      <li>
-        Edit the site header items in <code>src/components/Header.astro</code>
-      </li>
-      <li>
-        Add your name to the footer in <code>src/components/Footer.astro</code>
-      </li>
-      <li>
-        Check out the included blog posts in <code>src/content/blog/</code>
-      </li>
-      <li>
-        Customize the blog post page layout in <code> src/layouts/BlogPost.astro </code>
-      </li>
-    </ul>
-    <p>
-      Have fun! If you get stuck, remember to
-      <a
-        href="https://docs.astro.build/"
-        class="text-[var(--accent)] hover:text-[var(--accent)]"
-      >
-        read the docs
-      </a>
-      or
-      <a
-        href="https://astro.build/chat"
-        class="text-[var(--accent)] hover:text-[var(--accent)]"
-      >
-        join us on Discord
-      </a>
-      to ask questions.
-    </p>
-    <p>
-      Looking for a blog template with a bit more personality? Check out
-      <a
-        href="https://github.com/Charca/astro-blog-template"
-        class="text-[var(--accent)] hover:text-[var(--accent)]"
-      >
-        astro-blog-template
-      </a> by
-      <a
-        href="https://twitter.com/Charca"
-        class="text-[var(--accent)] hover:text-[var(--accent)]"
-      >
-        Maxi Ferreira
-      </a>.
-    </p>
+        {
+          featuredArticles.map((article) => (
+            <li>
+              <ArticleCard article={article} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class={css({ display: 'grid', gap: 'calc(var(--spacing-unit) * 4)' })}>
+      <div class={css({ display: 'flex', justifyContent: 'space-between', alignItems: 'end' })}>
+        <h2
+          class={css({
+            color: 'gray.900',
+            fontSize: '24',
+            fontWeight: '700',
+            letterSpacing: '0.04em',
+            lineHeight: '150'
+          })}
+        >
+          最近の記事
+        </h2>
+        <a
+          href="/page/1"
+          class={css({
+            color: 'rosePink.700',
+            fontSize: '16',
+            fontWeight: '700',
+            lineHeight: '150',
+            letterSpacing: '0.025em',
+            textDecoration: 'underline'
+          })}
+        >
+          記事一覧を見る
+        </a>
+      </div>
+
+      <ul class={css({ display: 'grid', gap: 'calc(var(--spacing-unit) * 3)' })}>
+        {
+          recentArticles.map((article) => (
+            <li
+              class={css({
+                backgroundColor: 'white',
+                borderRadius: '12',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'gray.200',
+                padding: 'calc(var(--spacing-unit) * 4)'
+              })}
+            >
+              <a
+                href={`/articles/${article.id}`}
+                class={css({
+                  color: 'gray.900',
+                  fontSize: '20',
+                  fontWeight: '700',
+                  lineHeight: '150',
+                  letterSpacing: '0.025em',
+                  textDecoration: 'none',
+                  _hover: {
+                    color: 'rosePink.700'
+                  }
+                })}
+              >
+                {article.data.title}
+              </a>
+              <p
+                class={css({
+                  marginTop: 'calc(var(--spacing-unit) * 2)',
+                  color: 'gray.700',
+                  fontSize: '16',
+                  fontWeight: '400',
+                  lineHeight: '170',
+                  letterSpacing: '0.025em'
+                })}
+              >
+                {article.data.description}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </div>
 </Layout>

@@ -13,17 +13,16 @@ const Blockquote = ({ children, ...rest }: BlockquoteProps) => (
   <blockquote
     {...rest}
     class={css({
-      color: 'gray.200',
+      color: 'gray.600',
       fontWeight: '700',
       fontStyle: 'oblique 40deg',
       letterSpacing: '0.025em',
-      lineHeight: '150',
-
+      lineHeight: '170',
+      marginBlock: 'calc(var(--spacing-unit) * 4)',
       paddingInlineStart: 'calc(var(--spacing-unit) * 3)',
-
       borderInlineStartWidth: '4px',
       borderInlineStartStyle: 'solid',
-      borderInlineStartColor: 'gray.200'
+      borderInlineStartColor: 'rosePink.400'
     })}
   >
     {children}
@@ -69,6 +68,7 @@ const H2 = ({ children }: MDXComponentProps) => (
       fontWeight: '700',
       letterSpacing: '0.04em',
       lineHeight: '150',
+      marginBlock: 'calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 4)',
       boxSizing: 'border-box',
       borderBlockEndWidth: '2px',
       borderBlockEndStyle: 'solid',
@@ -83,13 +83,14 @@ const H2 = ({ children }: MDXComponentProps) => (
 );
 
 const H3 = ({ children }: MDXComponentProps) => (
-  <h2
+  <h3
     class={css({
       color: 'gray.700',
       fontSize: '20',
       fontWeight: '700',
       letterSpacing: '0.04em',
       lineHeight: '150',
+      marginBlock: 'calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 3)',
       paddingInlineStart: 'calc(var(--spacing-unit) * 2)',
       boxSizing: 'border-box',
       borderInlineStartWidth: '6px',
@@ -98,7 +99,7 @@ const H3 = ({ children }: MDXComponentProps) => (
     })}
   >
     {children}
-  </h2>
+  </h3>
 );
 
 const Paragraph = ({ children }: MDXComponentProps) => (
@@ -108,7 +109,7 @@ const Paragraph = ({ children }: MDXComponentProps) => (
       fontSize: '16',
       fontWeight: '400',
       letterSpacing: '0.04em',
-      lineHeight: '170'
+      lineHeight: '175'
     })}
   >
     {children}
@@ -118,13 +119,15 @@ const Paragraph = ({ children }: MDXComponentProps) => (
 const Code = ({ children }: MDXComponentProps) => (
   <code
     class={css({
+      fontFamily: 'mono',
       '&:where(:not(:has(.line)))': {
-        color: 'rosePink.600',
+        color: 'rosePink.700',
         fontWeight: '700',
         backgroundColor: 'color-mix(in oklch, var(--colors-rose-pink-600) 12.5%, transparent)',
-        padding: '0.25em',
+        padding: '0.25em 0.4em',
         borderRadius: '4',
-        letterSpacing: '0.025em'
+        letterSpacing: 'normal',
+        wordBreak: 'break-word'
       }
     })}
   >
@@ -150,20 +153,16 @@ interface TableProps extends ComponentProps<'table'> {
 }
 
 const Table = ({ children, ...rest }: TableProps) => (
-  <div class={css({ overflowX: 'scroll' })}>
+  <div class={css({ overflowX: 'auto' })}>
     <table
       class={css({
-        width: 'stretch',
-        md: {
-          width: 'stretch'
-        },
+        width: '100%',
         alignSelf: 'center',
         boxSizing: 'border-box',
         borderCollapse: 'collapse',
         borderWidth: 'px',
         borderStyle: 'solid',
         borderColor: 'gray.100',
-        overflow: 'scroll',
         whiteSpace: 'nowrap',
         backgroundColor: 'white'
       })}

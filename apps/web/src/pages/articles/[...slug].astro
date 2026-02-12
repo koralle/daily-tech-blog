@@ -39,6 +39,7 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
       backgroundColor: 'white',
       padding: 'calc(var(--spacing-unit) * 4)',
       width: '100%',
+      maxWidth: '100%',
       md: {
         padding: 'calc(var(--spacing-unit) * 8)'
       }
@@ -109,8 +110,8 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
           </svg>
           <span
             class={css({
-              display: 'inline flex',
-              alignItems: 'enter',
+              display: 'inline-flex',
+              alignItems: 'center',
               color: 'gray.800',
               fontWeight: '400',
               fontSize: '16',
@@ -127,7 +128,10 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
       class={css({
         display: 'flex',
         flexDirection: 'column',
-        gap: 'calc(var(--spacing-unit) * 4)'
+        gap: 'calc(var(--spacing-unit) * 4)',
+        maxWidth: '680px',
+        alignSelf: 'center',
+        width: '100%'
       })}
     >
       <Content
@@ -138,6 +142,7 @@ const validTagList = post.data.tags.filter((tagId) => typeof getTagById(tagId) !
           h2: MDX.H2,
           h3: MDX.H3,
           p: MDX.Paragraph,
+          strong: MDX.Strong,
           table: MDX.Table,
           td: MDX.Td,
           th: MDX.Th,

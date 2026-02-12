@@ -9,27 +9,201 @@ const { currentPage, totalPages, baseUrl } = Astro.props;
 
 const prevPage = currentPage > 1 ? currentPage - 1 : null;
 const nextPage = currentPage < totalPages ? currentPage + 1 : null;
+
+const createPageHref = (page: number) => `${baseUrl}/${page}`;
+
+const getVisiblePages = (current: number, total: number): Array<number | '...'> => {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, index) => index + 1);
+  }
+
+  if (current <= 4) {
+    return [1, 2, 3, 4, 5, '...', total];
+  }
+
+  if (current >= total - 3) {
+    return [1, '...', total - 4, total - 3, total - 2, total - 1, total];
+  }
+
+  return [1, '...', current - 1, current, current + 1, '...', total];
+};
+
+const visiblePages = getVisiblePages(currentPage, totalPages);
 ---
 
-<nav>
-  <!-- 最初のページ -->
-  {currentPage > 1 && <a href={`${baseUrl}/1`}>最初</a>}
+<nav aria-label="ページナビゲーション">
+  <ul class="pagination-list">
+    <li>
+      {
+        currentPage > 1 ? (
+          <a
+            href={createPageHref(1)}
+            class="pagination-link"
+            aria-label="最初のページへ"
+          >
+            «
+          </a>
+        ) : (
+          <span
+            class="pagination-link is-disabled"
+            aria-hidden="true"
+          >
+            «
+          </span>
+        )
+      }
+    </li>
+    <li>
+      {
+        prevPage ? (
+          <a
+            href={createPageHref(prevPage)}
+            class="pagination-link"
+            aria-label="前のページへ"
+          >
+            ‹
+          </a>
+        ) : (
+          <span
+            class="pagination-link is-disabled"
+            aria-hidden="true"
+          >
+            ‹
+          </span>
+        )
+      }
+    </li>
 
-  <!-- 前のページ -->
-  {prevPage && <a href={`${baseUrl}/${prevPage}`}>前へ</a>}
+    {
+      visiblePages.map((pageNumber) => (
+        <li>
+          {pageNumber === '...' ? (
+            <span class="pagination-ellipsis">…</span>
+          ) : pageNumber === currentPage ? (
+            <span
+              class="pagination-link is-current"
+              aria-current="page"
+            >
+              {pageNumber}
+            </span>
+          ) : (
+            <a
+              href={createPageHref(pageNumber)}
+              class="pagination-link"
+              aria-label={`${pageNumber}ページ目へ`}
+            >
+              {pageNumber}
+            </a>
+          )}
+        </li>
+      ))
+    }
 
-  <!-- 現在のページ -->
-  <span>
-    {currentPage}
-  </span>
-
-  <!-- 次のページ -->
-  {nextPage && <a href={`${baseUrl}/${nextPage}`}>次へ</a>}
-
-  <!-- 最後のページ -->
-  {currentPage < totalPages && <a href={`${baseUrl}/${totalPages}`}>最後</a>}
+    <li>
+      {
+        nextPage ? (
+          <a
+            href={createPageHref(nextPage)}
+            class="pagination-link"
+            aria-label="次のページへ"
+          >
+            ›
+          </a>
+        ) : (
+          <span
+            class="pagination-link is-disabled"
+            aria-hidden="true"
+          >
+            ›
+          </span>
+        )
+      }
+    </li>
+    <li>
+      {
+        currentPage < totalPages ? (
+          <a
+            href={createPageHref(totalPages)}
+            class="pagination-link"
+            aria-label="最後のページへ"
+          >
+            »
+          </a>
+        ) : (
+          <span
+            class="pagination-link is-disabled"
+            aria-hidden="true"
+          >
+            »
+          </span>
+        )
+      }
+    </li>
+  </ul>
 </nav>
 
-<div>
+<p class="pagination-caption">
   {totalPages} ページ中 {currentPage} ページ目
-</div>
+</p>
+
+<style>
+  .pagination-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: calc(var(--spacing-unit) * 2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pagination-link,
+  .pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: calc(var(--spacing-unit) * 8);
+    min-block-size: calc(var(--spacing-unit) * 8);
+    padding-inline: calc(var(--spacing-unit) * 2);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .pagination-link {
+    border: 1px solid var(--colors-gray-200);
+    color: var(--colors-gray-700);
+    background-color: var(--colors-white);
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .pagination-link:hover {
+    border-color: var(--colors-rose-pink-400);
+  }
+
+  .pagination-link.is-current {
+    border-color: var(--colors-rose-pink-600);
+    color: var(--colors-rose-pink-800);
+    background-color: var(--colors-rose-pink-100);
+  }
+
+  .pagination-link.is-disabled {
+    color: var(--colors-gray-400);
+    border-color: var(--colors-gray-200);
+    background-color: var(--colors-gray-100);
+  }
+
+  .pagination-ellipsis {
+    color: var(--colors-gray-600);
+  }
+
+  .pagination-caption {
+    margin-top: calc(var(--spacing-unit) * 3);
+    margin-bottom: 0;
+    text-align: center;
+    color: var(--colors-gray-600);
+    font-size: 0.9rem;
+  }
+</style>
