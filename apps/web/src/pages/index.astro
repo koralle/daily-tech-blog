@@ -132,7 +132,14 @@ const popularTagList = Array.from(tagCountMap.entries())
       }
     </section>
 
-    <section class={css({ display: 'grid', gap: 'calc(var(--spacing-unit) * 4)' })}>
+    <section
+      class={css({
+        display: 'grid',
+        gap: 'calc(var(--spacing-unit) * 4)',
+        marginTop: 'calc(var(--spacing-unit) * 4)',
+        marginBottom: 'calc(var(--spacing-unit) * 8)'
+      })}
+    >
       <h2
         class={css({
           color: 'gray.900',
@@ -147,9 +154,9 @@ const popularTagList = Array.from(tagCountMap.entries())
       <ul
         class={css({
           display: 'grid',
-          gap: 'calc(var(--spacing-unit) * 4)',
+          gap: 'calc(var(--spacing-unit) * 5)',
           md: {
-            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
+            gap: 'calc(var(--spacing-unit) * 6)'
           }
         })}
       >
