@@ -8,6 +8,7 @@ interface SocialLinkRootProps extends ComponentProps<'a'> {
 const Root = ({ children, ...rest }: SocialLinkRootProps) => (
   <a
     target="_blank"
+    rel="noopener noreferrer"
     class={css({
       color: 'gray.700',
       display: 'block grid',
@@ -31,6 +32,12 @@ const Root = ({ children, ...rest }: SocialLinkRootProps) => (
       },
       _hover: {
         color: 'gray.900'
+      },
+      _focusVisible: {
+        outlineStyle: 'solid',
+        outlineWidth: '2px',
+        outlineColor: 'rosePink.400',
+        outlineOffset: '3px'
       }
     })}
     {...rest}

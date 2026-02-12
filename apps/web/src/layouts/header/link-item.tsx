@@ -3,9 +3,10 @@ import { css } from '../../../styled-system/css';
 
 interface LinkItemRootProps extends ComponentProps<'a'> {
   children: ComponentChildren;
+  variant?: 'desktop' | 'mobile';
 }
 
-const Root = ({ children, ...rest }: LinkItemRootProps) => (
+const Root = ({ children, variant = 'desktop', ...rest }: LinkItemRootProps) => (
   <a
     class={css({
       color: 'gray.700',
@@ -15,10 +16,16 @@ const Root = ({ children, ...rest }: LinkItemRootProps) => (
       backgroundColor: 'white',
       gap: 'calc(var(--spacing-unit) * 4)',
       height: 'calc(var(--spacing-unit) * 14)',
-      paddingInlineStart: 'calc(var(--spacing-unit) * 8)',
+      paddingInlineStart: variant === 'mobile' ? 'calc(var(--spacing-unit) * 6)' : 'calc(var(--spacing-unit) * 8)',
       cursor: 'pointer',
       _hover: {
         backgroundColor: 'rosePink.100'
+      },
+      _focusVisible: {
+        outlineStyle: 'solid',
+        outlineWidth: '2px',
+        outlineColor: 'rosePink.400',
+        outlineOffset: variant === 'mobile' ? '-2px' : '2px'
       }
     })}
     {...rest}
