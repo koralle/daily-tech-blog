@@ -1,7 +1,5 @@
 ---
 import { css } from '../../styled-system/css';
-import { Drawer } from './header/drawer';
-import Menu from '../assets/images/menu.svg';
 import Logo from '../assets/images/logo.svg';
 import GitHubLogo from '../assets/images/github-logo.svg';
 import TwitterLogo from '../assets/images/twitter-logo.svg';
@@ -11,6 +9,7 @@ import Profile from '../assets/images/profile.svg';
 import { SITE_TITLE } from '../consts';
 import { SocialLink } from './header/social-link';
 import { LinkItem } from './header/link-item';
+import MobileNavDrawer from './header/mobile-nav-drawer.tsx';
 ---
 
 <header
@@ -81,9 +80,18 @@ import { LinkItem } from './header/link-item';
           {SITE_TITLE}
         </span>
       </div>
-      <Drawer.Trigger id="drawerTrigger">
-        <Menu />
-      </Drawer.Trigger>
+
+      <!-- Mobile Drawer Trigger - Only visible below lg breakpoint -->
+      <div
+        class={css({
+          display: 'grid',
+          lg: {
+            display: 'none'
+          }
+        })}
+      >
+        <MobileNavDrawer client:load />
+      </div>
     </div>
     <p
       class={css({
@@ -103,6 +111,8 @@ import { LinkItem } from './header/link-item';
       フロントエンドの波に浮かぶ<br />あざらしの技術ブログ
     </p>
   </div>
+
+  <!-- Desktop Navigation - Only visible at lg breakpoint and above -->
   <nav
     class={css({
       display: 'none',

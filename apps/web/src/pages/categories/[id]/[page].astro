@@ -4,6 +4,10 @@ import Layout from '../../../layouts/Layout.astro';
 import { getAllTagIds } from '../../../data/tags';
 import type { CollectionEntry } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
+import { getTagById } from '../../../data/tags';
+import { css } from '../../../../styled-system/css';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import Pagination from '../../../components/Pagination.astro';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const allArticles = await getCollection('articles');
@@ -16,73 +20,116 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   }
 
   for (const tagId of allTagIdSet.values()) {
-    const articlesFilteredByTagId = allArticles.filter((article) => article.data.tags.includes(tagId));
+    const articlesFilteredByTagId = allArticles
+      .filter((article) => article.data.tags.includes(tagId))
+      .sort((articleA, articleB) => articleB.data.publishedDate.getTime() - articleA.data.publishedDate.getTime());
+
     tagArticlesMap.set(tagId, articlesFilteredByTagId);
   }
 
   const result = tagArticlesMap.entries().flatMap(([tagId, articles]) => {
     const filteredArticlesByTagId = articles.filter((article) => article.data.tags.includes(tagId));
 
-    return paginate(filteredArticlesByTagId, { params: { id: tagId }, pageSize: 12 });
+    return paginate(filteredArticlesByTagId, { params: { id: tagId }, pageSize: 6 });
   });
 
   return Array.from(result);
 }
 
 const { page } = Astro.props;
+const currentTagId = Astro.params.id ?? '';
+const currentTag = getTagById(currentTagId);
 ---
 
-<Layout>
-  <article>
-    <header>
-      <h1>カテゴリー一覧</h1>
-    </header>
-    <p>
+<Layout title={`${currentTag?.displayName ?? 'カテゴリー'}の記事一覧`}>
+  <article
+    class={css({
+      display: 'grid',
+      gap: 'calc(var(--spacing-unit) * 6)',
+      md: { gap: 'calc(var(--spacing-unit) * 10)' }
+    })}
+  >
+    <header
+      class={css({
+        display: 'grid',
+        gap: 'calc(var(--spacing-unit) * 2)',
+        backgroundColor: 'white',
+        borderRadius: '12',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'gray.200',
+        padding: 'calc(var(--spacing-unit) * 5)'
+      })}
+    >
+      <h1
+        class={css({
+          color: 'gray.900',
+          fontSize: '24',
+          fontWeight: '700',
+          lineHeight: '150',
+          letterSpacing: '0.04em'
+        })}
+      >
+        {currentTag?.displayName ?? 'カテゴリー'}
+      </h1>
       {
-        page.data.map((collectionItem) => (
+        currentTag?.description ? (
+          <p
+            class={css({
+              color: 'gray.700',
+              fontSize: '16',
+              fontWeight: '400',
+              lineHeight: '170',
+              letterSpacing: '0.025em'
+            })}
+          >
+            {currentTag.description}
+          </p>
+        ) : null
+      }
+      <p
+        class={css({
+          color: 'gray.700',
+          fontSize: '16',
+          fontWeight: '400',
+          lineHeight: '170',
+          letterSpacing: '0.025em'
+        })}
+      >
+        このカテゴリの記事は全 {page.total} 件です。
+      </p>
+    </header>
+
+    <ul
+      class={css({
+        display: 'grid',
+        gap: 'calc(var(--spacing-unit) * 5)'
+      })}
+    >
+      {
+        page.data.map((article) => (
           <li>
-            <a href={`/articles/${collectionItem.id}`}>{collectionItem.data.title}</a>
+            <ArticleCard article={article} />
           </li>
         ))
       }
-    </p>
-    <footer>
-      {
-        page.currentPage === 1 ? (
-          // 最初のページ: 1 2 3 > >>
-          <>
-            <span>{page.currentPage}</span>
-            {page.lastPage >= 2 && <a href={`/categories/${Astro.params.id}/2`}>2</a>}
-            {page.lastPage >= 3 && <a href={`/categories/${Astro.params.id}/3`}>3</a>}
-            {page.url.next && <a href={page.url.next}>&gt;</a>}
-            {page.lastPage > 1 && <a href={page.url.last}>&gt;&gt;</a>}
-          </>
-        ) : page.currentPage === page.lastPage ? (
-          // 最後のページ: << < 8 9 10
-          <>
-            <a href={page.url.first}>&lt;&lt;</a>
-            <a href={page.url.prev}>&lt;</a>
-            {page.lastPage >= 3 && (
-              <a href={`/categories/${Astro.params.id}/${page.lastPage - 2}`}>{page.lastPage - 2}</a>
-            )}
-            {page.lastPage >= 2 && (
-              <a href={`/categories/${Astro.params.id}/${page.lastPage - 1}`}>{page.lastPage - 1}</a>
-            )}
-            <span>{page.currentPage}</span>
-          </>
-        ) : (
-          // それ以外: << < 4 5 6 > >>
-          <>
-            <a href={page.url.first}>&lt;&lt;</a>
-            <a href={page.url.prev}>&lt;</a>
-            <a href={`/categories/${Astro.params.id}/${page.currentPage - 1}`}>{page.currentPage - 1}</a>
-            <span>{page.currentPage}</span>
-            <a href={`/categories/${Astro.params.id}/${page.currentPage + 1}`}>{page.currentPage + 1}</a>
-            <a href={page.url.next}>&gt;</a>
-            <a href={page.url.last}>&gt;&gt;</a>
-          </>
-        )
-      }
+    </ul>
+
+    <footer
+      class={css({
+        backgroundColor: 'white',
+        borderRadius: '12',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'gray.200',
+        padding: 'calc(var(--spacing-unit) * 4)'
+      })}
+    >
+      <Pagination
+        currentPage={page.currentPage}
+        totalPages={page.lastPage}
+        baseUrl={`/categories/${currentTagId}`}
+      />
     </footer>
   </article>
 </Layout>

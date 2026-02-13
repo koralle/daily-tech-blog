@@ -1,64 +1,97 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { css } from '../../../styled-system/css';
 import type { GetStaticPathsOptions } from 'astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Pagination from '../../components/Pagination.astro';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const allArticles = await getCollection('articles');
+  const sortedArticles = allArticles.sort((articleA, articleB) => {
+    return articleB.data.publishedDate.getTime() - articleA.data.publishedDate.getTime();
+  });
 
-  return paginate(allArticles, { pageSize: 12 });
+  return paginate(sortedArticles, { pageSize: 6 });
 }
 
 const { page } = Astro.props;
 ---
 
-<Layout>
-  <article>
-    <header>
-      <h1>記事一覧</h1>
+<Layout title="記事一覧">
+  <article
+    class={css({
+      display: 'grid',
+      gap: 'calc(var(--spacing-unit) * 6)',
+      md: { gap: 'calc(var(--spacing-unit) * 10)' }
+    })}
+  >
+    <header
+      class={css({
+        display: 'grid',
+        gap: 'calc(var(--spacing-unit) * 2)',
+        backgroundColor: 'white',
+        borderRadius: '12',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'gray.200',
+        padding: 'calc(var(--spacing-unit) * 5)'
+      })}
+    >
+      <h1
+        class={css({
+          color: 'gray.900',
+          fontSize: '24',
+          fontWeight: '700',
+          lineHeight: '150',
+          letterSpacing: '0.04em'
+        })}
+      >
+        記事一覧
+      </h1>
+      <p
+        class={css({
+          color: 'gray.700',
+          fontSize: '16',
+          fontWeight: '400',
+          lineHeight: '170',
+          letterSpacing: '0.025em'
+        })}
+      >
+        全 {page.total} 件の記事を新しい順に表示しています。
+      </p>
     </header>
-    <p>
+
+    <ul
+      class={css({
+        display: 'grid',
+        gap: 'calc(var(--spacing-unit) * 5)'
+      })}
+    >
       {
-        page.data.map((collectionItem) => (
+        page.data.map((article) => (
           <li>
-            <a href={`/articles/${collectionItem.id}`}>{collectionItem.data.title}</a>
+            <ArticleCard article={article} />
           </li>
         ))
       }
-    </p>
-    <footer>
-      {
-        page.currentPage === 1 ? (
-          // 最初のページ: 1 2 3 > >>
-          <>
-            <span>{page.currentPage}</span>
-            {page.lastPage >= 2 && <a href={`/page/2`}>2</a>}
-            {page.lastPage >= 3 && <a href={`/page/3`}>3</a>}
-            {page.url.next && <a href={page.url.next}>&gt;</a>}
-            {page.lastPage > 1 && <a href={page.url.last}>&gt;&gt;</a>}
-          </>
-        ) : page.currentPage === page.lastPage ? (
-          // 最後のページ: << < 8 9 10
-          <>
-            <a href={page.url.first}>&lt;&lt;</a>
-            <a href={page.url.prev}>&lt;</a>
-            {page.lastPage >= 3 && <a href={`/page/${page.lastPage - 2}`}>{page.lastPage - 2}</a>}
-            {page.lastPage >= 2 && <a href={`/page/${page.lastPage - 1}`}>{page.lastPage - 1}</a>}
-            <span>{page.currentPage}</span>
-          </>
-        ) : (
-          // それ以外: << < 4 5 6 > >>
-          <>
-            <a href={page.url.first}>&lt;&lt;</a>
-            <a href={page.url.prev}>&lt;</a>
-            <a href={`/page/${page.currentPage - 1}`}>{page.currentPage - 1}</a>
-            <span>{page.currentPage}</span>
-            <a href={`/page/${page.currentPage + 1}`}>{page.currentPage + 1}</a>
-            <a href={page.url.next}>&gt;</a>
-            <a href={page.url.last}>&gt;&gt;</a>
-          </>
-        )
-      }
+    </ul>
+
+    <footer
+      class={css({
+        backgroundColor: 'white',
+        borderRadius: '12',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'gray.200',
+        padding: 'calc(var(--spacing-unit) * 4)'
+      })}
+    >
+      <Pagination
+        currentPage={page.currentPage}
+        totalPages={page.lastPage}
+        baseUrl="/page"
+      />
     </footer>
   </article>
 </Layout>
