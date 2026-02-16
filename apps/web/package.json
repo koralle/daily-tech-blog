@@ -26,7 +26,7 @@
     "@astrojs/mdx": "4.3.13",
     "@astrojs/rss": "4.0.14",
     "@astrojs/sitemap": "3.6.1",
-    "astro": "5.16.8",
+    "astro": "5.17.2",
     "dayjs": "1.11.18",
     "kiso.css": "1.2.2",
     "preact": "10.28.3",
