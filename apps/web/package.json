@@ -28,7 +28,7 @@
     "@astrojs/sitemap": "3.6.1",
     "astro": "5.16.8",
     "dayjs": "1.11.18",
-    "kiso.css": "1.2.2",
+    "kiso.css": "1.2.4",
     "preact": "10.28.3",
     "sharp": "0.34.3"
   },
