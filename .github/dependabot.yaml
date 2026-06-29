@@ -1,6 +1,28 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: weekly
+      interval: 'weekly'
+      day: 'monday'
+      time: '04:00'
+      timezone: 'Asia/Tokyo'
+    cooldown:
+      default-days: 3
+      include:
+        - '*'
+    assignees:
+      - 'koralle'
+    groups:
+      awesome-dependencies:
+        patterns:
+          - '*'
+        exclude-patterns:
+          - 'astro'
+      astro:
+        patterns:
+          - 'astro'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+    open-pull-requests-limit: 10
