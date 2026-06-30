@@ -1,9 +1,9 @@
 packages:
   - 'apps/*'
   - 'workers/*'
-
-onlyBuiltDependencies:
-  - esbuild
-  - lefthook
-  - sharp
-  - workerd
+saveExact: true
+allowBuilds:
+  esbuild: true
+  lefthook: true
+  sharp: true
+  workerd: true
