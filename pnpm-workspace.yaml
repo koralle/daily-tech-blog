@@ -20,7 +20,7 @@ catalogs:
     '@astrojs/rss': 4.0.18
     '@astrojs/sitemap': 3.7.2
     '@astrojs/ts-plugin': 1.10.9
-    astro: 6.3.6
+    astro: 6.4.8
   cli:
     npm-run-all2: 8.0.4
   css:
