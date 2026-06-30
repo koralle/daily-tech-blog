@@ -4,12 +4,16 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.9.0",
-  "scripts": {},
+  "scripts": {
+    "format:check": "prettier . --check",
+    "format": "prettier . --write"
+  },
   "devDependencies": {
     "@prettier/plugin-oxc": "catalog:format",
     "lefthook": "catalog:git",
     "npm-run-all2": "catalog:cli",
     "prettier": "catalog:format",
+    "prettier-plugin-astro": "catalog:format",
     "wrangler": "catalog:cloudflare"
   }
 }

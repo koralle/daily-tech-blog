@@ -3,7 +3,7 @@ name: Deploy to Cloudflare Workers (Web)
 on:
   pull_request:
     branches:
-      - "main"
+      - 'main'
     types: [closed]
 
 jobs:

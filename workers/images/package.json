@@ -7,8 +7,8 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "lint:check": "oxlint --config oxlintrc.json --tsconfig tsconfig.json",
-    "format:check": "prettier . -c --config .prettierrc.mjs",
-    "format:fix": "prettier . -w --config .prettierrc.mjs",
+    "format:check": "prettier . --check",
+    "format:fix": "prettier . --write",
     "format": "pnpm run format:fix",
     "cf-typegen": "wrangler types",
     "typecheck": "tsgo --noEmit",
@@ -19,6 +19,7 @@
     "@types/node": "catalog:runtime",
     "@typescript/native-preview": "catalog:runtime",
     "oxlint": "catalog:oxlint",
+    "prettier": "catalog:format",
     "typescript": "catalog:runtime"
   },
   "dependencies": {

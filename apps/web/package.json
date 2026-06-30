@@ -14,8 +14,8 @@
     "lint:check": "oxlint",
     "lint:fix": "oxlint --fix",
     "lint": "pnpm run lint:check",
-    "format:check": "prettier . -c --config .prettierrc.mjs",
-    "format:fix": "prettier . -w --config .prettierrc.mjs",
+    "format:check": "prettier . --check",
+    "format:fix": "prettier . --write",
     "format": "pnpm run format:fix",
     "typecheck": "astro check --tsconfig tsconfig.json",
     "check": "run-p typecheck format:check lint:check --aggregate-output -l",
@@ -43,7 +43,6 @@
     "@types/node": "catalog:runtime",
     "oxlint": "catalog:oxlint",
     "pnpm": "catalog:pnpm",
-    "prettier-plugin-astro": "catalog:format",
     "react": "catalog:react",
     "storybook": "catalog:storybook",
     "typescript": "catalog:runtime"
