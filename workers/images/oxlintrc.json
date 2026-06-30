@@ -27,7 +27,7 @@
       }
     },
     {
-      "files": ["src/index.ts"],
+      "files": ["src/index.ts", ".prettierrc.mjs"],
       "rules": {
         "import/no-default-export": "off"
       }
