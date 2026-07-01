@@ -1,30 +1,31 @@
 pre-commit:
   parallel: true
   jobs:
-    - name: Format with Prettier (Workers)
-      root: workers/images
+    - name: Format with Prettier
       glob:
-        - '**/*.ts'
-        - '.prettierrc.mjs'
+        # root (specific files to avoid pnpm-lock.yaml)
         - 'package.json'
-        - 'tsconfig.json'
-      run: |
-        pnpm prettier {staged_files} --write --config .prettierrc.mjs
-      stage_fixed: true
+        - 'opencode.jsonc'
+        - 'lefthook.yaml'
+        - 'pnpm-workspace.yaml'
+        - '*.md'
+        - '*.{ts,mts,mjs,cjs,js,css}'
 
-    - name: Format with Prettier (Web)
-      root: apps/web
-      glob:
-        - '**/*.ts'
-        - '**/*.tsx'
-        - '**/*.astro'
-        - '.prettierrc.mjs'
-        - 'package.json'
-        - 'tsconfig.json'
-        - 'astro.config.mts'
-        - 'eslint.config.mts'
-        - 'oxlintrc.json'
-        - 'wrangler.toml'
+        # .github
+        - '.github/**/*.{yaml,yml}'
+
+        # apps/web
+        - 'apps/web/*.{json,ts,mts,cjs}'
+        - 'apps/web/.storybook/*.{ts,tsx}'
+        - 'apps/web/panda/**/*.ts'
+        - 'apps/web/src/**/*.{ts,tsx,astro,js,jsx,mjs,cjs,css,md,mdx}'
+
+        # workers/images
+        - 'workers/images/*.{json,ts}'
+        - 'workers/images/src/**/*.{ts,js,mjs,cjs}'
+
+        # docs
+        - 'docs/**/*.md'
       run: |
-        pnpm prettier {staged_files} --write --config .prettierrc.mjs
+        pnpm prettier {staged_files} --write
       stage_fixed: true

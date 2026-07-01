@@ -8,8 +8,8 @@
 
 このプロジェクトはmonorepo構成になっています。
 
-* `apps/web`: 技術ブログの本体です。
-* `workers/images`: Cloudflare R2に保存した画像を取得してブログに渡すためのWorkerです。
+- `apps/web`: 技術ブログの本体です。
+- `workers/images`: Cloudflare R2に保存した画像を取得してブログに渡すためのWorkerです。
 
 ## Getting Started
 

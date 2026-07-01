@@ -1,10 +1,15 @@
-import PrettierConfig from '../../.prettierrc.mjs';
+import type { Config } from 'prettier';
 
-/* @type import("prettier").Config */
 export default {
-  ...PrettierConfig,
+  bracketSameLine: false,
+  printWidth: 120,
+  useTabs: false,
+  tabWidth: 2,
+  semi: true,
+  singleQuote: true,
+  singleAttributePerLine: true,
+  trailingComma: 'none',
 
-  // overrides
   overrides: [
     {
       files: ['**/*.{js,mjs,cjs,jsx}'],
@@ -28,4 +33,4 @@ export default {
       }
     }
   ]
-};
+} satisfies Config;

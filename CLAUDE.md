@@ -9,6 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### リポジトリ構造
 
 pnpm workspaces を使用したモノレポ構造:
+
 - `apps/web/` - メインのブログアプリケーション (Astro)
 - `workers/images/` - 画像処理用 Cloudflare Worker (Hono)
 
@@ -127,6 +128,7 @@ gemini -p <プロンプト>
 ### Images Worker
 
 `workers/images/` には画像処理用の Cloudflare Worker があります：
+
 - Hono フレームワークを使用
 - TypeScript で実装
 - 独立したデプロイメントが可能（`pnpm deploy` で実行）

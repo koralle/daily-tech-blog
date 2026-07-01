@@ -126,6 +126,9 @@ importers:
       prettier:
         specifier: catalog:format
         version: 3.6.2
+      prettier-plugin-astro:
+        specifier: catalog:format
+        version: 0.14.1
       wrangler:
         specifier: catalog:cloudflare
         version: 4.106.0
@@ -187,9 +190,6 @@ importers:
       pnpm:
         specifier: catalog:pnpm
         version: 10.29.2
-      prettier-plugin-astro:
-        specifier: catalog:format
-        version: 0.14.1
       react:
         specifier: catalog:react
         version: 19.2.4
@@ -218,6 +218,9 @@ importers:
       oxlint:
         specifier: catalog:oxlint
         version: 1.14.0
+      prettier:
+        specifier: catalog:format
+        version: 3.6.2
       typescript:
         specifier: catalog:runtime
         version: 5.8.3

@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Astro 5.16.8 → 6.3.6 にアップグレードし、関連する @astrojs/* パッケージも最新化する
+**Goal:** Astro 5.16.8 → 6.3.6 にアップグレードし、関連する @astrojs/\* パッケージも最新化する
 
 **Architecture:** Astro + Panda CSS + Preact + Cloudflare Pages。モノレポ（pnpm workspace）構成。主要な破壊的変更の影響範囲は限定的で、多くはパッケージバージョン更新のみで対応可能。
 
@@ -13,6 +13,7 @@
 ### Task 1: パッケージバージョン更新
 
 **Files:**
+
 - 修正: `apps/web/package.json`
 - 修正: `package.json`（ルート）
 
@@ -65,6 +66,7 @@ git commit -m "chore: bump astro to v6.3.6 and update integrations"
 ### Task 2: コンテンツコレクション型確認
 
 **Files:**
+
 - 確認: `apps/web/src/content/config.ts`
 - 確認: `apps/web/.astro/types.d.ts`（自動生成）
 
@@ -81,6 +83,7 @@ pnpm --filter @daily-tech-blog/web run typecheck
 ### Task 3: Markdown heading ID 確認
 
 **Files:**
+
 - 確認: `apps/web/src/content/articles/*.mdx`
 
 - [ ] **Step 1: 見出し内リンクを検索**
