@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { MAX_TAGS_PER_POST } from './consts';
 import { glob } from 'astro/loaders';
 import { isValidTagId } from './data/tags';
