@@ -12,7 +12,7 @@
     "format": "pnpm run format:fix",
     "cf-typegen": "wrangler types",
     "typecheck": "tsgo --noEmit",
-    "check": "run-p typecheck format:check --aggregate-output -l"
+    "check": "pnpm run typecheck && pnpm run format:check"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "catalog:cloudflare",
