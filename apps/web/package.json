@@ -18,7 +18,7 @@
     "format:fix": "prettier . --write",
     "format": "pnpm run format:fix",
     "typecheck": "astro check --tsconfig tsconfig.json",
-    "check": "run-p typecheck format:check lint:check --aggregate-output -l",
+    "check": "pnpm run typecheck && pnpm run format:check && pnpm run lint:check",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
