@@ -7,6 +7,8 @@ import cloudflare from '@astrojs/cloudflare';
 
 import preact from '@astrojs/preact';
 
+import { satteri } from '@astrojs/markdown-satteri';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
@@ -15,6 +17,7 @@ export default defineConfig({
     imageService: 'cloudflare'
   }),
   markdown: {
+    processor: satteri({}),
     shikiConfig: {
       theme: 'catppuccin-frappe'
     }

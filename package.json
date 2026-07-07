@@ -5,6 +5,13 @@
   "type": "module",
   "packageManager": "pnpm@11.9.0",
   "scripts": {
+    "web:dev": "pnpm run --filter=@daily-tech-blog/web dev",
+    "web:build": "pnpm run --filter=@daily-tech-blog/web build",
+    "web:deploy": "pnpm run --filter=@daily-tech-blog/web deploy",
+    "web:lint": "pnpm run --filter=@daily-tech-blog/web lint",
+    "web:format:check": "pnpm run --filter=@daily-tech-blog/web format:check",
+    "web:format": "pnpm run --filter=@daily-tech-blog/web format",
+    "web:typecheck": "pnpm run --filter=@daily-tech-blog/web typecheck",
     "format:check": "prettier . --check",
     "format": "prettier . --write"
   },
