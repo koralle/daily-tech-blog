@@ -1,22 +1,43 @@
 # AGENTS.md
 
-## プロジェクト概要
+## Summary
 
 [koralle](https://github.com/koralle)の技術ブログ。  
 [Astro](https://astro.build/) + [Panda CSS](https://panda-css.com/)で作っている。
 
-## 設計方針
+## Codebase structure
 
-- Astroの方針である**ゼロJS**を踏襲
-- PCでもモバイルでもブログ記事が読みやすいデザイン
+### Monorepo Overview
 
-## 開発コマンド
+This is a monorepo managed by pnpm, which includes websites and related workers.
 
-### `web`
+## Rules
 
-- `pnpm run dev` - 開発サーバーの起動
-- `pnpm run build` - 本番ビルド
+When performing one of the actions below, read the linked rule first.
 
-## 詳細ドキュメント
+- Creating branches:
+  - [Branch Rules](.agents/rules/branch.md)
+- Creating commits:
+  - [Commit Rules](.agents/rules/commit.md)
+  - [Pre-commit Hooks](.agents/references/pre-commit-hooks.md)
 
-- TBD
+```
+apps/
+└─ web/    # Websites
+workers/
+└─ images/ # T.B.D
+```
+
+### Package Shortcuts
+
+Shortcuts are defined in the root `package.json`.
+
+```bash
+pnpm web:<...>   # Forwards to apps/web
+pnpm images:<...> # Forwards to workers/images
+```
+
+## Common Commands
+
+- `pnpm run web:dev` - 開発サーバーの起動
+- `pnpm run web:build` - 本番ビルド
