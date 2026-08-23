@@ -13,47 +13,47 @@ catalogMode: strict
 
 catalogs:
   astro:
-    '@astrojs/check': 0.9.9
-    '@astrojs/cloudflare': 14.0.2
-    '@astrojs/mdx': 7.0.0
-    '@astrojs/preact': 6.0.0
+    '@astrojs/check': 0.9.10
+    '@astrojs/cloudflare': 14.2.3
+    '@astrojs/mdx': 7.0.7
+    '@astrojs/preact': 6.0.4
     '@astrojs/rss': 4.0.19
     '@astrojs/sitemap': 3.7.3
-    '@astrojs/ts-plugin': 1.10.9
+    '@astrojs/ts-plugin': 1.10.11
     astro: 7.0.5
   css:
-    '@pandacss/dev': 1.4.2
+    '@pandacss/dev': 1.12.0
     'kiso.css': 1.2.4
   format:
-    '@prettier/plugin-oxc': 0.0.4
-    prettier: 3.6.2
+    '@prettier/plugin-oxc': 0.2.2
+    prettier: 3.9.6
     prettier-plugin-astro: 0.14.1
   git:
-    lefthook: 1.13.0
+    lefthook: 1.13.6
   preact:
-    preact: 10.28.3
+    preact: 10.29.8
   runtime:
-    '@types/node': 24.0.10
-    typescript: 5.8.3
-    '@typescript/native-preview': 7.0.0-dev.20251017.1
+    '@types/node': 24.13.3
+    typescript: 5.9.3
+    '@typescript/native-preview': 7.0.0-dev.20260707.2
   cloudflare:
-    wrangler: 4.106.0
-    '@cloudflare/workers-types': 4.20250903.0
+    wrangler: 4.125.0
+    '@cloudflare/workers-types': 4.20260702.1
   storybook:
-    '@storybook/addon-a11y': 10.2.7
-    '@storybook/preact-vite': 10.2.7
-    storybook: 10.2.7
+    '@storybook/addon-a11y': 10.5.10
+    '@storybook/preact-vite': 10.5.10
+    storybook: 10.5.10
   react:
-    react: 19.2.4
+    react: 19.2.8
   oxlint:
-    oxlint: 1.14.0
+    oxlint: 1.79.0
   util:
-    dayjs: 1.11.18
-    sharp: 0.34.3
+    dayjs: 1.11.23
+    sharp: 0.35.3
   pnpm:
-    pnpm: 10.29.2
+    pnpm: 10.34.5
   hono:
-    hono: 4.10.0
+    hono: 4.13.3
 
 minimumReleaseAgeExclude:
   - '@astrojs/cloudflare@14.0.2'
